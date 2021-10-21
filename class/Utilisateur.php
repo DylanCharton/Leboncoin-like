@@ -11,16 +11,20 @@ class Utilisateur extends Database
         $this->username = $username;
         $this->password = $password;
         $this->mail = $mail;
+
     }
 
     public function addUser($username, $password, $mail){
-        $connexion = new Database();
         $newUsername = strip_tags($username);
         $newPassword = strip_tags($password);
         $newMail = strip_tags($mail);
 
-        $connexion->connect();
-        return $connexion;
+        $sql = $this->connect()->prepare("INSERT INTO user(name_user, pass_user, mail_user) VALUES (:name, :pass, :mail)");
+        $sql->bindValue(":name", $newUsername); 
+        $sql->bindValue(":pass", $newPassword); 
+        $sql->bindValue(":mail", $newMail); 
+        $sql->execute();
+        
     }
 }
 ?>

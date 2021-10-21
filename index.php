@@ -16,13 +16,14 @@
 
 <body>
 
-    <?php require_once("class/Utilisateur.php");
- $dylan = new Utilisateur("dylan", "frfe", "a@f.fr");
- $dylan->addUser("1", "2", "3");
+ <a href="php/new.annonce.php">Créer une annonce</a>
 
- ?>
+<?php 
+    require_once('class/Utilisateur.php');
 
-
+    
+   
+?>
 
  
 
