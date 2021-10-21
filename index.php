@@ -20,9 +20,7 @@
 
 <?php 
     require_once('class/Utilisateur.php');
-
-    
-   
+ 
 ?>
 
  

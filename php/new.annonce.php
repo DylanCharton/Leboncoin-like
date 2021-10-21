@@ -22,8 +22,13 @@
     </form>
 
     <?php
-    if(isset($_POST['vente_immobiliere']) && !empty($_POST['vente_immobiliere'])){
+    // When choosing the main category, the form associated will appear
+    if(isset($_POST['vente_immobiliere'])){
         require_once("vente_immobiliere.php");
+    } else if(isset($_POST['voitures'])){
+        require_once("voitures.php");
+    } else if(isset($_POST["multimedia"])){
+        require_once("multimedia.php");
     }
     ?>
 </body>
