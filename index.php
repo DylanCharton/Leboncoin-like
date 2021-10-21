@@ -20,8 +20,8 @@
 
 <?php 
     require_once('class/Utilisateur.php');
-
-    
+    require_once('fonction.php');
+    checkConnexion();
    
 ?>
 
