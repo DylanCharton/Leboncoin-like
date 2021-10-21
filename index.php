@@ -16,9 +16,16 @@
 
 <body>
 
-    <?php require_once("class/Database.php");
- $connect = new Database();
- $connect->connect();?>
+    <?php require_once("class/Utilisateur.php");
+ $dylan = new Utilisateur("dylan", "frfe", "a@f.fr");
+ $dylan->addUser("1", "2", "3");
+
+ ?>
+
+
+
+ 
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
         integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous">
