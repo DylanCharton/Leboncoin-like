@@ -3,6 +3,8 @@
 
 
 
+
+
 ?>
 
 
@@ -22,7 +24,11 @@
     <form class="row g-3">
         <div class="col-sm-1">
             <label for="inputUser" class="form-label">User</label>
-            <input type="user" class="form-control" id="inputUser">
+            <input type="text" class="form-control" id="inputUser">
+        </div>
+        <div class="col-sm-1">
+            <label for="inputMail" class="form-label">Mail</label>
+            <input type="mail" class="form-control" id="inputMail">
         </div>
         <div class="col-sm-1">
             <label for="inputPassword" class="form-label">Password</label>
