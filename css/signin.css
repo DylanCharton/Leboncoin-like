@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css?family=Numans');
+
+
+html,body
+{
+  padding: 30px;
+  background-color: #fcfcfc;
+  font-family: 'Numans', sans-serif;
+}
+
+
+.row,
+.g-3 {
+
+    margin: 200px auto;
+    width: 100px;
+    flex-direction: column;
+}
+.form-control{
+
+    width: 200px;
+}
+
