@@ -18,9 +18,21 @@ class Annonce extends Database
     }
 
     public function createAnnonce($title, $category, $description, $price, $localisation){
-        $query = "INSERT INTO annonces"
+        $create = "INSERT INTO annonces";
+        $params = array();
+        if($_POST['category'] == "Vente Immobilière")
+
+
+
+
         $sql = $this->connect()->prepare($query)
     }
+
+    /////////////////////--WHAT WE HAVE TO CREATE--///////////////////////
+    // A function to create an ad //
+    // A function to search for ads //
+    // A function so each user can delete his own ads //
+    // A function so any user can see the other's ads and send them a message (not the same function of course)//
 }
 
 ?>

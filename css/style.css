@@ -1,0 +1,7 @@
+form{
+    width: 30vw;
+}
+
+input, select{
+    margin-bottom : 1rem;
+}
