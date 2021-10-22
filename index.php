@@ -19,9 +19,18 @@
  <a href="php/new.annonce.php">Créer une annonce</a>
 
 <?php 
+
+session_start();
+
+
+
     require_once('class/Utilisateur.php');
-    require_once('fonction.php');
+    require_once('php/fonction.php');
     checkConnexion();
+
+
+    
+?>
    
 ?>
 

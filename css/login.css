@@ -1,86 +1,61 @@
 @import url('https://fonts.googleapis.com/css?family=Numans');
 
-html,body{
-background-image: url('');
-background-size: cover;
-background-repeat: no-repeat;
-height: 100%;
-font-family: 'Numans', sans-serif;
+
+
+body,
+html {
+    background-image: url('../assets/img/bg_login.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding: 30px;
+    font-family: 'Numans', sans-serif;
 }
 
-.container{
-height: 100%;
-align-content: center;
+#container {
+    width: 400px;
+    margin: 0 auto;
+    margin-top: 10%;
 }
 
-.card{
-margin-top: auto;
-margin-bottom: auto;
-width: 400px;
-background-color: rgba(0,0,0,0.5) !important;
+/* Bordered form */
+form {
+    width: 100%;
+    padding: 30px;
+    border: 1px solid #f1f1f1;
+    background: #fff;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 
-.social_icon span{
-font-size: 60px;
-margin-left: 10px;
-color: #FFC312;
+#container h1 {
+    width: 38%;
+    margin: 0 auto;
+    padding-bottom: 10px;
 }
 
-.social_icon span:hover{
-color: white;
-cursor: pointer;
+/* Full-width inputs */
+input[type=text],
+input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
 }
 
-.card-header h3{
-color: white;
+/* Set a style for all buttons */
+input[type=submit] {
+    background-color: #252525;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
 }
 
-.social_icon{
-position: absolute;
-right: 20px;
-top: -45px;
-}
-
-.input-group-prepend span{
-width: 50px;
-background-color: #FFC312;
-color: black;
-border:0 !important;
-}
-
-input:focus{
-outline: 0 0 0 0  !important;
-box-shadow: 0 0 0 0 !important;
-
-}
-
-.remember{
-color: white;
-}
-
-.remember input
-{
-width: 20px;
-height: 20px;
-margin-left: 15px;
-margin-right: 5px;
-}
-
-.login_btn{
-color: black;
-background-color: #FFC312;
-width: 100px;
-}
-
-.login_btn:hover{
-color: black;
-background-color: white;
-}
-
-.links{
-color: white;
-}
-
-.links a{
-margin-left: 4px;
+input[type=submit]:hover {
+    background-color: white;
+    color: #53af57;
+    border: 1px solid #53af57;
 }

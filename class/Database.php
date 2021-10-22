@@ -8,7 +8,7 @@ class Database
      try
      {
          $bdd = new PDO('mysql:host=localhost;dbname=leboncoin;port=3306;charset=utf8', 'root', '');
-         echo "Connected";
+        //  echo "Connected";
         return $bdd; 
       
      }

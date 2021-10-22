@@ -1,66 +1,80 @@
-<!DOCTYPE html>
 <html>
 
 <head>
-	<title>Login Page</title>
-	<!--Made with love by Mutiullah Samim -->
-
-	<!--Bootsrap 4 CDN-->
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-		integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-
-	<!--Fontawesome CDN-->
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
-		integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-
-	<!--Custom styles-->
-	<link rel="stylesheet" type="text/css" href="../css/login.css">
+    <meta charset="utf-8">
+    <!-- importer le fichier de style -->
+    <link rel="stylesheet" href="../css/login.css" media="screen" type="text/css" />
 </head>
 
 <body>
-	<div class="container">
-		<form method="POST" action="#">
-			<div class="d-flex justify-content-center h-100">
-				<div class="card">
-					<div class="card-header">
-						<h3></h3>
-						<!-- <div class="d-flex justify-content-end social_icon">
-					<span><i class="fab fa-facebook-square"></i></span>
-					<span><i class="fab fa-google-plus-square"></i></span>
-					<span><i class="fab fa-twitter-square"></i></span>
-				</div> -->
-					</div>
-					<div class="card-body">
-						<form>
-							<div class="input-group form-group">
-								<div class="input-group-prepend">
-									<span class="input-group-text"><i class="fas fa-user"></i></span>
-								</div>
-								<input type="text" class="form-control" name="username"placeholder="username">
+    <div id="container">
+        <!-- zone de connexion -->
 
-							</div>
-							<div class="input-group form-group">
-								<div class="input-group-prepend">
-									<span class="input-group-text"><i class="fas fa-key"></i></span>
-								</div>
-								<input type="password" class="form-control" name="password"placeholder="password">
-							</div>
-							<!-- <div class="row align-items-center remember">
-						<input type="checkbox">Remember Me
-					</div> -->
-							<div class="form-group">
-								<input type="submit" value="Login" class="btn float-right login_btn">
-							</div>
-						</form>
-					</div>
-					<div class="card-footer">
-						<div class="d-flex justify-content-center links">
-							Don't have an account?<a href="signin.php">Sign Up</a>
-						</div>
-					</div>
-				</div>
-			</div>
-	</div>
+        <form action="#" method="POST">
+            <h1>Connexion</h1>
+
+            <label><b>Nom d'utilisateur : </b></label>
+            <input type="text" placeholder="Entrer le nom d'utilisateur" name="username" required>
+
+            <label><b>Mot de passe : </b></label>
+            <input type="password" placeholder="Entrer le mot de passe" name="password" required>
+
+            <input type="submit" id='submit' value='LOGIN'>
+
+            <div class="d-flex justify-content-center links">
+            </br>Vous avez un compte  ?<a href="signin.php"></br></br>Inscrivez-vous !</a>
+		    </div>
+	
+        </form>     
+           
+        
+
+    </div>        
+            <?php 
+                
+
+                require_once("../class/Database.php");
+                $connection = new Database();
+                
+
+                if(isset($_POST['username']) && isset($_POST['password']) && (!empty($_POST['username'])) && (!empty($_POST['password']))){
+                    // Here I define my variables and secure them
+                    $username = strip_tags($_POST['username']);
+                    $password = strip_tags($_POST['password']);
+                    // Here I create the query
+                    $check = 'SELECT * FROM user WHERE name_user = :login';
+                    // I prepare the query
+                    $sql = $connection->connect()->prepare($check);
+                    // I bind the login param to my $username input field value
+                    $sql->bindValue(':login', $username, PDO::PARAM_STR);
+                
+                    $user= $sql->execute();
+                    // I put the result of the query in the $user variable
+                    $user = $sql->fetch(PDO::FETCH_ASSOC);
+                    
+                
+                    // Then I have to check if the username corresponds to what is in my DB
+                    // So I start by checking if it is different from a username in my DB
+                    if(!$user){
+                        echo '<div class="alert alert-danger text-center" role="alert">
+                        Cet utilisateur n\'existe pas.
+                                </div>';
+                        // If it is, do the "else" part and verify the password
+                    } else {
+                        if(password_verify($password, $user['pass_user'])){
+                            $_SESSION['goodcorner_connected']=true;
+                            header('location: ../index.php');
+                        } else {
+                            echo '<div class="alert alert-danger text-center" role="alert">
+                            Le mot de passe saisi est invalide.
+                                </div>';
+                        }
+                    }
+                }
+            ?>
+           
+    
+    
 </body>
 
 </html>
