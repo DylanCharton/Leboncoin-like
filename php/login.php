@@ -11,18 +11,19 @@
         <!-- zone de connexion -->
 
         <form action="#" method="POST">
-            <h1>Connexion</h1>
+            <h1>Connexion</h1></br>
 
             <label><b>Nom d'utilisateur : </b></label>
             <input type="text" placeholder="Entrer le nom d'utilisateur" name="username" required>
 
             <label><b>Mot de passe : </b></label>
+        
             <input type="password" placeholder="Entrer le mot de passe" name="password" required>
 
             <input type="submit" id='submit' value='LOGIN'>
 
             <div class="d-flex justify-content-center links">
-            </br>Vous avez un compte  ?<a href="signin.php"></br></br>Inscrivez-vous !</a>
+            </br> Avez-vous un compte  ?<a href="signin.php"></br></br>Inscrivez-vous !</a>
 		    </div>
 	
         </form>     
@@ -51,7 +52,6 @@
                     $user= $sql->execute();
                     // I put the result of the query in the $user variable
                     $user = $sql->fetch(PDO::FETCH_ASSOC);
-                    
                 
                     // Then I have to check if the username corresponds to what is in my DB
                     // So I start by checking if it is different from a username in my DB

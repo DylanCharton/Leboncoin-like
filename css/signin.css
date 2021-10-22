@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Numans');
 
 
-html,
+
 body {
   background-image: url('../assets/img/bg_login.jpg');
   background-size: cover;
@@ -23,12 +23,13 @@ form {
   border: 1px solid #f1f1f1;
   background: #fff;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  border-radius: 50px;
 }
 
 #container h1 {
-  width: 38%;
+  width: 66%;
   margin: 0 auto;
-  padding-bottom: 10px;
+  padding-bottom: 20px;
 }
 
 /* Full-width inputs */
@@ -37,10 +38,11 @@ input[type=password],
 input[type=mail] {
   width: 100%;
   padding: 12px 20px;
-  margin: 8px 0;
+  margin: 15px 0;
   display: inline-block;
   border: 1px solid #ccc;
   box-sizing: border-box;
+  border-radius: 10px;
 }
 
 /* Set a style for all buttons */
@@ -52,10 +54,11 @@ input[type=submit] {
   border: none;
   cursor: pointer;
   width: 100%;
+  border-radius: 20px;
 }
 
 input[type=submit]:hover {
   background-color: white;
-  color: #53af57;
-  border: 1px solid #53af57;
+  color: #000000;
+  border: 1px solid #2e302e;
 }
