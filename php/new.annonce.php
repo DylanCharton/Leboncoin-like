@@ -17,7 +17,7 @@
 <body>
     <section class="d-flex flex-column align-items-center">
         <!-- The big form that is going to be cut in my conditions -->
-        <form action="" method="POST" class="d-flex flex-column">
+        <form action="" method="POST" class="d-flex flex-column" id="create-ad-form">
             <label for="title">Titre</label>
             <input type="text" name="title" required>
             <label for="desc" required>Description</label>
@@ -29,7 +29,7 @@
             <label for="category">Catégorie de l'annonce</label>
             <select name="category" id="category" required>
                 <option value=""></option>
-                <option value="Vente Immobilière">Vente Immobilière</option>
+                <option value="Vente Immobilière" id="immobilier">Vente Immobilière</option>
                 <option value="Voitures">Voitures</option>
                 <option value="Multimedia">Multimedia</option>
             </select>
@@ -37,7 +37,7 @@
             <!-- End of the common part for all creations of form -->
 
             <!-- If the user chose Vente Immobilière -->
-            <div id="immobilier" class="d-none">
+            <div id="placeholder" class="d-none">
                 <label for="type_of_immo">Type de bien</label>
                 <select name="type_of_immo" id="type_of_immo">
                     <option value="maison">Maison</option>
