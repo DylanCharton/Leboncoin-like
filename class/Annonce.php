@@ -20,12 +20,23 @@ class Annonce extends Database
     public function createAnnonce($title, $category, $description, $price, $localisation){
         $create = "INSERT INTO annonces";
         $params = array();
-        if($_POST['category'] == "Vente Immobilière")
+        if(isset($_POST['submitImmo'])){
+
+
+        }
 
 
 
 
         $sql = $this->connect()->prepare($query)
+    }
+
+    public function displayAnnonce(){
+
+    }
+
+    public function deleteAnnonce(){
+        
     }
 
     /////////////////////--WHAT WE HAVE TO CREATE--///////////////////////

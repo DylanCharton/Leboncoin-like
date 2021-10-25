@@ -8,9 +8,7 @@ let selectMultimedia = document.querySelector("#multimedia-select")
 // Category generation script
 categories.addEventListener('change', ()=>{
     // The Divs with each part of the form
-    let multimedia = document.querySelector("#multimedia");
     let createForm = document.querySelector("#create-ad-form");
-    
 // If the user chose Vente Immobilière
     if(categories.value == "Vente Immobilière"){
         createForm.removeChild(createForm.lastChild);
@@ -46,6 +44,10 @@ categories.addEventListener('change', ()=>{
         roomsImmoLabel.setAttribute("for", "rooms");
         roomsImmoLabel.innerHTML = "Nombre de pièces"
 
+        let submitImmo = document.createElement("input");
+        submitImmo.setAttribute("name", "submitImmo");
+        submitImmo.setAttribute("type", "submit");
+
         // Appending the div into the form and then the inputs in the div
         createForm.appendChild(immobilier);
         immobilier.appendChild(selectTypeBienLabel);
@@ -54,6 +56,7 @@ categories.addEventListener('change', ()=>{
         immobilier.appendChild(surfaceImmo);
         immobilier.appendChild(roomsImmoLabel);
         immobilier.appendChild(roomsImmo);
+        immobilier.appendChild(submitImmo);
         immobilier.className = "d-flex flex-column immo-div";
         
 
@@ -142,6 +145,10 @@ categories.addEventListener('change', ()=>{
         seatsCarLabel.setAttribute("for", "seats-car");
         seatsCarLabel.innerHTML = "Nombre de sièges";
 
+        let submitCar = document.createElement("input");
+        submitCar.setAttribute("name", "submitCar");
+        submitCar.setAttribute("type", "submit");
+
         let voitures = document.createElement("div");
         createForm.appendChild(voitures);
         voitures.appendChild(brandCarLabel);
@@ -162,7 +169,9 @@ categories.addEventListener('change', ()=>{
         voitures.appendChild(puissanceCar);
         voitures.appendChild(seatsCarLabel);
         voitures.appendChild(seatsCar);
+        voitures.appendChild(submitCar);
         voitures.className = "d-flex flex-column voiture-div";
+
     } else if(categories.value == "Multimedia"){
         createForm.removeChild(createForm.lastChild);
         let multimediaDiv = document.createElement("div");
@@ -234,8 +243,13 @@ categories.addEventListener('change', ()=>{
                 etat.appendChild(etatOption4);
                 etat.appendChild(etatOption5);
 
+                let submitInfo = document.createElement("input");
+                submitInfo.setAttribute("name", "submitInfo");
+                submitInfo.setAttribute("type", "submit");
+
                 informatiqueDiv.appendChild(etatLabel);
                 informatiqueDiv.appendChild(etat);
+                informatiqueDiv.appendChild(submitInfo);
                 informatiqueDiv.classList = "d-flex flex-column";
 
             } else if(selectMultimedia.value == "Console"){
@@ -298,6 +312,10 @@ categories.addEventListener('change', ()=>{
                 etat.appendChild(etatOption3);
                 etat.appendChild(etatOption4);
                 etat.appendChild(etatOption5);
+
+                let submitGaming = document.createElement("input");
+                submitGaming.setAttribute("name", "submitGaming");
+                submitGaming.setAttribute("type", "submit");
                 // Append all elements to subCatDiv
                 subCatDiv.appendChild(gamingDiv);
                 gamingDiv.appendChild(typeGamingLabel);
@@ -308,6 +326,7 @@ categories.addEventListener('change', ()=>{
                 gamingDiv.appendChild(modelGaming);
                 gamingDiv.appendChild(etatLabel);
                 gamingDiv.appendChild(etat);
+                gamingDiv.appendChild(submitGaming);
                 gamingDiv.classList = "d-flex flex-column";
 
             } else if(selectMultimedia.value == "Téléphonie"){
@@ -372,6 +391,10 @@ categories.addEventListener('change', ()=>{
                 etat.appendChild(etatOption4);
                 etat.appendChild(etatOption5);
 
+                let submitTelephonie = document.createElement("input");
+                submitTelephonie.setAttribute("name", "submitTelephonie");
+                submitTelephonie.setAttribute("type", "submit");
+
                 telephonieDiv.appendChild(brandTelephonieLabel);
                 telephonieDiv.appendChild(brandTelephonie);
                 telephonieDiv.appendChild(modelTelephonieLabel);
@@ -382,6 +405,7 @@ categories.addEventListener('change', ()=>{
                 telephonieDiv.appendChild(storageTelephonie);
                 telephonieDiv.appendChild(etatLabel);
                 telephonieDiv.appendChild(etat);
+                telephonieDiv.appendChild(submitTelephonie);
                 telephonieDiv.classList = "d-flex flex-column";
             } else {
                 if(subCatDiv.hasChildNodes()){
