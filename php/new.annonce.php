@@ -17,11 +17,21 @@
 <body>
     <section class="d-flex flex-column align-items-center">
         <!-- The big form that is going to be cut in my conditions -->
-        <form action="" method="POST" class="d-flex flex-column" id="create-ad-form">
+        <form action="" method="POST" enctype="multipart/form-data" class="d-flex flex-column" id="create-ad-form">
             <label for="title">Titre</label>
             <input type="text" name="title" required>
             <label for="desc" required>Description</label>
             <textarea name="desc" id="desc" cols="30" rows="10" required></textarea>
+            <input type="file" name="upload" accept=".png,.gif,.jpg">
+            <?php
+                if(isset($_FILES['upload'])){
+                    require_once("../class/Database.php");
+                    $connexion = new Database();
+
+                    $sql = $connexion->connect()->prepare("INSERT INTO photos (name_photo, data_photo) VALUES (? , ?)");
+                    $sql->execute([$_FILES['upload']['name'], file_get_contents($_FILES['upload']['tmp_name'])]);
+                }
+            ?>
             <label for="price">Prix</label>
             <input type="number" name="price" required>
             <label for="localisation">Localisation</label>
@@ -33,11 +43,29 @@
                 <option value="Voitures">Voitures</option>
                 <option value="Multimedia">Multimedia</option>
             </select>
-            
+
             <!-- End of the common part for all creations of form -->
 
         </form>
     </section>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="../js/script.js"></script>
 </body>
 

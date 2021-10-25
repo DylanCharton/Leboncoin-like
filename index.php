@@ -20,7 +20,10 @@
 
 <?php 
     require_once('class/Utilisateur.php');
+    require_once('class/Annonce.php');
  
+    $allAds = new Annonce();
+    $allAds->displayAllAds();
 ?>
 
  
