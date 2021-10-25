@@ -202,7 +202,9 @@ categories.addEventListener('change', ()=>{
             let subCatDiv = document.querySelector("#sub-cat");
             
             if(selectMultimedia.value == "Informatique"){
-                //subCatDiv.removeChild(subCatDiv.lastChild);
+                if(subCatDiv.hasChildNodes()){
+                    subCatDiv.removeChild(subCatDiv.lastChild);
+                    }
                 let informatiqueDiv = document.createElement("div");
                 subCatDiv.appendChild(informatiqueDiv);
                 console.log(subCatDiv);
@@ -233,7 +235,11 @@ categories.addEventListener('change', ()=>{
                 informatiqueDiv.appendChild(etat);
 
             } else if(selectMultimedia.value == "Console"){
-
+                    if(subCatDiv.hasChildNodes()){
+                    subCatDiv.removeChild(subCatDiv.lastChild);
+                    }
+                let gamingDiv = document.createElement("div");
+                // Select the type of gaming
                 let typeGaming = document.createElement("select");
                 typeGaming.setAttribute("name", "type-gaming");
                 let typeGamingLabel = document.createElement("label");
@@ -247,6 +253,84 @@ categories.addEventListener('change', ()=>{
                 let typeGamingOption3 = document.createElement("option");
                 typeGamingOption3.setAttribute("value", "Accessoires");
                 typeGamingOption3.innerHTML = "Accessoires";
+                typeGaming.appendChild(typeGamingOption1);
+                typeGaming.appendChild(typeGamingOption2);
+                typeGaming.appendChild(typeGamingOption3);
+                // Brand of gaming
+                let brandGaming = document.createElement("input");
+                brandGaming.setAttribute("name", "brand-gaming");
+                brandGamingLabel = document.createElement("label");
+                brandGamingLabel.setAttribute("for", "brand-gaming");
+                brandGamingLabel.innerHTML = "Marque";
+                // Model of gaming
+                let modelGaming = document.createElement("input");
+                modelGaming.setAttribute("name", "model-gaming");
+                let modelGamingLabel = document.createElement("label");
+                modelGamingLabel.setAttribute("for", "model-gaming");
+                modelGamingLabel.innerHTML = "Modèle";
+                // State of product
+                let etat = document.createElement("select");
+                etat.setAttribute("name", "etat-select");
+                etatOption1 = document.createElement("option");
+                etatOption1.setAttribute("value", "Neuf");
+                etatOption1.innerHTML = "Neuf";
+                etatOption2 = document.createElement("option");
+                etatOption2.setAttribute("value", "Très bon");
+                etatOption2.innerHTML = "Très bon";
+                etatOption3 = document.createElement("option");
+                etatOption3.setAttribute("value", "Bon");
+                etatOption3.innerHTML = "Bon";
+                etatOption4 = document.createElement("option");
+                etatOption4.setAttribute("value", "Satisfaisant");
+                etatOption4.innerHTML = "Satisfaisant"
+                etatOption5 = document.createElement("option");
+                etatOption5.setAttribute("value", "Pour pièces");
+                etatOption5.innerHTML = "Pour pièces";
+                etat.appendChild(etatOption1);
+                etat.appendChild(etatOption2);
+                etat.appendChild(etatOption3);
+                etat.appendChild(etatOption4);
+                etat.appendChild(etatOption5);
+                // Append all elements to subCatDiv
+                subCatDiv.appendChild(gamingDiv);
+                gamingDiv.appendChild(typeGamingLabel);
+                gamingDiv.appendChild(typeGaming);
+                gamingDiv.appendChild(brandGamingLabel);
+                gamingDiv.appendChild(brandGaming);
+                gamingDiv.appendChild(modelGamingLabel);
+                gamingDiv.appendChild(modelGaming);
+                gamingDiv.appendChild(etat);
+
+            } else if(selectMultimedia.value == "Téléphonie"){
+                if(subCatDiv.hasChildNodes()){
+                    subCatDiv.removeChild(subCatDiv.lastChild);
+                    }
+                
+                let telephonieDiv = document.createElement("div");
+                subCatDiv.appendChild(telephonieDiv);
+
+                let brandTelephonie = document.createElement("input")
+                brandTelephonie.setAttribute("name", "brand-telephonie")
+                brandTelephonie.setAttribute("type", "text")
+                let brandTelephonieLabel = document.createElement("label")
+                brandTelephonieLabel.setAttribute("for", "brand-telephonie");
+                brandTelephonieLabel.innerHTML = "Marque"
+
+                let modelTelephonie = document.createElement("input")
+                modelTelephonie.setAttribute("name", "model-telephonie");
+                let modelTelephonieLabel = document.createElement("label")
+                modelTelephonieLabel.setAttribute("for", "model-telephonie");
+                modelTelephonieLabel.innerHTML = "Modèle";
+
+                let colorTelephonie = document.createElement("input")
+                colorTelephonie.setAttribute("name", "color-telephonie");
+                let colorTelephonieLabel = document.createElement("label")
+                colorTelephonie.setAttribute("for", "color-telephonie");
+                colorTelephonie.innerHTML = "Couleur";
+
+                let storageTelephonie = document.createElement("input")
+
+                let storageTelephonieLabel = document.createElement("label")
             }
         })
 
