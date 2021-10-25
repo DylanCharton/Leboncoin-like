@@ -2,22 +2,32 @@
 console.log("coucou");
 
 // Declaring the fields that are going to trigger my functions
-let immobilierOption = document.querySelector('#immobilier');
+let categories = document.querySelector('#category');
 let selectMultimedia = document.querySelector("#multimedia-select")
 
 // Category generation script
-immobilierOption.addEventListener('click', ()=>{
+categories.addEventListener('change', ()=>{
     // The Divs with each part of the form
-    
-    let voitures = document.querySelector("#voiture");
     let multimedia = document.querySelector("#multimedia");
     let createForm = document.querySelector("#create-ad-form");
+    
 // If the user chose Vente Immobilière
     if(categories.value == "Vente Immobilière"){
+        createForm.removeChild(createForm.lastChild);
         // I create the select for the type 
         let selectTypeBien = document.createElement("select");
+        selectTypeBien.setAttribute("name", "category-choice")
         let optionTypeBien1 = document.createElement("option");
         let optionTypeBien2 = document.createElement("option");
+        optionTypeBien1.innerHTML = "Appartement";
+        optionTypeBien2.innerHTML = "Maison";
+        // I append the options to the select
+        selectTypeBien.appendChild(optionTypeBien1);
+        selectTypeBien.appendChild(optionTypeBien2);
+        let selectTypeBienLabel = document.createElement("label")
+        selectTypeBienLabel.setAttribute("for", "category-choice")
+        selectTypeBienLabel.innerHTML = "Type de bien"
+        // I create the div for the immobilier inputs.
         let immobilier = document.createElement("div");
 
         // I create the surface input and bind parameters
@@ -32,48 +42,220 @@ immobilierOption.addEventListener('click', ()=>{
         let roomsImmo = document.createElement("input");
         roomsImmo.setAttribute("type", "number");
         roomsImmo.setAttribute("name", "rooms");
+        let roomsImmoLabel = document.createElement("label")
+        roomsImmoLabel.setAttribute("for", "rooms");
+        roomsImmoLabel.innerHTML = "Nombre de pièces"
+
+        // Appending the div into the form and then the inputs in the div
         createForm.appendChild(immobilier);
-        immobilier.appendChild(surfaceImmo);
+        immobilier.appendChild(selectTypeBienLabel);
+        immobilier.appendChild(selectTypeBien);
         immobilier.appendChild(surfaceImmoLabel);
-
-        console.log("coucou");
-    } else {
+        immobilier.appendChild(surfaceImmo);
+        immobilier.appendChild(roomsImmoLabel);
+        immobilier.appendChild(roomsImmo);
+        immobilier.className = "d-flex flex-column immo-div";
         
-    }
-    if(categories.value == "Voitures"){
-        voitures.classList.replace("d-none", "d-block");
-    } else {
-        voitures.classList.replace("d-block", "d-none");
-    }
 
-    if(categories.value == "Multimedia"){
-        multimedia.classList.replace("d-none", "d-block");
+        
+    } else if(categories.value == "Voitures"){
+        createForm.removeChild(createForm.lastChild);
+
+        let brandCar = document.createElement("input");
+        brandCar.setAttribute("name", "brand-car")
+        brandCar.setAttribute("type", "text")
+        let brandCarLabel = document.createElement("label");
+        brandCarLabel.setAttribute("for", "brand-car");
+        brandCarLabel.innerHTML = "Marque";
+
+        let modelCar = document.createElement("input");
+        modelCar.setAttribute("name", "model-car");
+        modelCar.setAttribute("type", "text");
+        let modelCarLabel = document.createElement("label");
+        modelCarLabel.setAttribute("for", "model-car");
+        modelCarLabel.innerHTML = "Modèle";
+
+        let kilometersCar = document.createElement("input");
+        kilometersCar.setAttribute("name", "kilometers-car");
+        kilometersCar.setAttribute("type", "number");
+        let kilometersCarLabel = document.createElement("label");
+        kilometersCarLabel.setAttribute("for", "kilometers-car");
+        kilometersCarLabel.innerHTML = "Kilométrage";
+
+        let carburantChoice = document.createElement("select");
+        carburantChoice.setAttribute("name", "carburant-choice");
+        let carburantChoiceLabel = document.createElement("label");
+        carburantChoiceLabel.setAttribute("for", "carburant-choice");
+        carburantChoiceLabel.innerHTML = "Carburant"
+        let carburantOption1 = document.createElement("option");
+        carburantOption1.setAttribute("value", "Diesel");
+        carburantOption1.innerHTML = "Diesel";
+        let carburantOption2 = document.createElement("option");
+        carburantOption2.setAttribute("value", "Essence");
+        carburantOption2.innerHTML = "Essence"
+        let carburantOption3 = document.createElement("option");
+        carburantOption3.setAttribute("value", "Électrique");
+        carburantOption3.innerHTML = "Électrique";
+        carburantChoice.appendChild(carburantOption1);
+        carburantChoice.appendChild(carburantOption2);
+        carburantChoice.appendChild(carburantOption3);
+
+        let gearboxChoice = document.createElement("select")
+        gearboxChoice.setAttribute("name", "gearbox-choice");
+        let gearboxChoiceLabel = document.createElement("label");
+        gearboxChoiceLabel.setAttribute("for", "gearbox-choice");
+        gearboxChoiceLabel.innerHTML = "Boîte de vitesse"
+        gearboxOption1 = document.createElement("option");
+        gearboxOption1.setAttribute("value", "Automatique");
+        gearboxOption1.innerHTML = "Automatique";
+        gearboxOption2 = document.createElement("option");
+        gearboxOption2.setAttribute("value", "Manuelle");
+        gearboxOption2.innerHTML = "Manuelle";
+        gearboxChoice.appendChild(gearboxOption1);
+        gearboxChoice.appendChild(gearboxOption2);
+
+        let colorCar = document.createElement("input");
+        colorCar.setAttribute("name", "color-car");
+        colorCar.setAttribute("type", "text");
+        let colorCarLabel = document.createElement("label");
+        colorCarLabel.setAttribute("for", "color-car");
+        colorCarLabel.innerHTML = "Couleur";
+
+        let portesCar = document.createElement("input");
+        portesCar.setAttribute("name", "portes-car");
+        portesCar.setAttribute("type", "number");
+        let portesCarLabel = document.createElement("label");
+        portesCarLabel.setAttribute("for", "portes-car");
+        portesCarLabel.innerHTML = "Nombre de portes"
+
+        let puissanceCar = document.createElement("input");
+        puissanceCar.setAttribute("name", "puissance-car");
+        puissanceCar.setAttribute("type", "number");
+        let puissanceCarLabel = document.createElement("label");
+        puissanceCarLabel.setAttribute("for", "puissance-car");
+        puissanceCarLabel.innerHTML = "Puissance DIN"
+
+        let seatsCar = document.createElement("input");
+        seatsCar.setAttribute("name", "seats-car");
+        seatsCar.setAttribute("type", "number");
+        let seatsCarLabel = document.createElement("label");
+        seatsCarLabel.setAttribute("for", "seats-car");
+        seatsCarLabel.innerHTML = "Nombre de sièges";
+
+        let voitures = document.createElement("div");
+        createForm.appendChild(voitures);
+        voitures.appendChild(brandCarLabel);
+        voitures.appendChild(brandCar);
+        voitures.appendChild(modelCarLabel);
+        voitures.appendChild(modelCar);
+        voitures.appendChild(kilometersCarLabel);
+        voitures.appendChild(kilometersCar);
+        voitures.appendChild(carburantChoiceLabel);
+        voitures.appendChild(carburantChoice);
+        voitures.appendChild(gearboxChoiceLabel);
+        voitures.appendChild(gearboxChoice);
+        voitures.appendChild(colorCarLabel);
+        voitures.appendChild(colorCar);
+        voitures.appendChild(portesCarLabel);
+        voitures.appendChild(portesCar);
+        voitures.appendChild(puissanceCarLabel);
+        voitures.appendChild(puissanceCar);
+        voitures.appendChild(seatsCarLabel);
+        voitures.appendChild(seatsCar);
+        voitures.className = "d-flex flex-column voiture-div";
+    } else if(categories.value == "Multimedia"){
+        createForm.removeChild(createForm.lastChild);
+        let multimediaDiv = document.createElement("div");
+        createForm.appendChild(multimediaDiv);
+
+        let selectMultimedia = document.createElement("select");
+        selectMultimedia.setAttribute("name", "select-multimedia");
+        let selectMultimediaLabel = document.createElement("label");
+        selectMultimediaLabel.setAttribute("for", "select-multimedia");
+        selectMultimediaLabel.innerHTML = "Sélectionnez une sous-catégorie";
+        let multimediaOption1 = document.createElement("option");
+        multimediaOption1.setAttribute("value", "");
+        multimediaOption1.innerHTML = "";
+        let multimediaOption2 = document.createElement("option");
+        multimediaOption2.setAttribute("value", "Informatique");
+        multimediaOption2.innerHTML = "Informatique";
+        let multimediaOption3 = document.createElement("option");
+        multimediaOption3.setAttribute("value", "Console");
+        multimediaOption3.innerHTML = "Console - Jeux vidéo";
+        let multimediaOption4 = document.createElement("option");
+        multimediaOption4.setAttribute("value", "Téléphonie");
+        multimediaOption4.innerHTML = "Téléphonie";
+
+        selectMultimedia.appendChild(multimediaOption1);
+        selectMultimedia.appendChild(multimediaOption2);
+        selectMultimedia.appendChild(multimediaOption3);
+        selectMultimedia.appendChild(multimediaOption4);
+        multimediaDiv.appendChild(selectMultimediaLabel);
+        multimediaDiv.appendChild(selectMultimedia);
+
+        let subCatDiv = document.createElement("div");
+        subCatDiv.setAttribute("id", "sub-cat")
+        multimediaDiv.appendChild(subCatDiv);
+        console.log(multimediaDiv);
+
+        selectMultimedia.addEventListener("change", ()=>{
+            let subCatDiv = document.querySelector("#sub-cat");
+            
+            if(selectMultimedia.value == "Informatique"){
+                //subCatDiv.removeChild(subCatDiv.lastChild);
+                let informatiqueDiv = document.createElement("div");
+                subCatDiv.appendChild(informatiqueDiv);
+                console.log(subCatDiv);
+
+                let etat = document.createElement("select");
+                etat.setAttribute("name", "etat-select");
+                etatOption1 = document.createElement("option");
+                etatOption1.setAttribute("value", "Neuf");
+                etatOption1.innerHTML = "Neuf";
+                etatOption2 = document.createElement("option");
+                etatOption2.setAttribute("value", "Très bon");
+                etatOption2.innerHTML = "Très bon";
+                etatOption3 = document.createElement("option");
+                etatOption3.setAttribute("value", "Bon");
+                etatOption3.innerHTML = "Bon";
+                etatOption4 = document.createElement("option");
+                etatOption4.setAttribute("value", "Satisfaisant");
+                etatOption4.innerHTML = "Satisfaisant"
+                etatOption5 = document.createElement("option");
+                etatOption5.setAttribute("value", "Pour pièces");
+                etatOption5.innerHTML = "Pour pièces";
+                etat.appendChild(etatOption1);
+                etat.appendChild(etatOption2);
+                etat.appendChild(etatOption3);
+                etat.appendChild(etatOption4);
+                etat.appendChild(etatOption5);
+                
+                informatiqueDiv.appendChild(etat);
+
+            } else if(selectMultimedia.value == "Console"){
+
+                let typeGaming = document.createElement("select");
+                typeGaming.setAttribute("name", "type-gaming");
+                let typeGamingLabel = document.createElement("label");
+                typeGamingLabel.setAttribute("for", "type-gaming");
+                let typeGamingOption1 = document.createElement("option");
+                typeGamingOption1.setAttribute("value", "Console");
+                typeGamingOption1.innerHTML = "Console";
+                let typeGamingOption2 = document.createElement("option");
+                typeGamingOption2.setAttribute("value", "Jeux")
+                typeGamingOption2.innerHTML = "Jeux";
+                let typeGamingOption3 = document.createElement("option");
+                typeGamingOption3.setAttribute("value", "Accessoires");
+                typeGamingOption3.innerHTML = "Accessoires";
+            }
+        })
+
+
     } else {
-        multimedia.classList.replace("d-block", "d-none");
+        createForm.removeChild(createForm.lastChild);
     }
 
     
 });
 
-selectMultimedia.addEventListener('click', ()=>{
-    let informatique = document.querySelector("#informatique");
-    let gaming = document.addEventListener("#gaming");
-    let telephonie = document.addEventListener("#telephonie");
 
-    if(selectMultimedia.value == "Informatique"){
-
-    } else {
-
-    }
-    if(selectMultimedia.value == "console-jv"){
-
-    } else {
-
-    }
-    if(selectMultimedia.value == "telephonie"){
-
-    } else {
-
-    }
-
-});

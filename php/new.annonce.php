@@ -37,17 +37,7 @@
             <!-- End of the common part for all creations of form -->
 
             <!-- If the user chose Vente Immobilière -->
-            <div id="placeholder" class="d-none">
-                <label for="type_of_immo">Type de bien</label>
-                <select name="type_of_immo" id="type_of_immo">
-                    <option value="maison">Maison</option>
-                    <option value="appartement">Appartement</option>
-                </select>
-                <label for="surface">Surface</label>
-                <input type="number" name="surface">m²
-                <label for="rooms">Nombre de pièces</label>
-                <input type="number" name="rooms">pièces
-            </div>
+            
             <!-- End if vente immobilière -->
             <!-- If the user chose Voitures -->
             <div id="voiture" class="d-none">
@@ -130,7 +120,7 @@
                     </select>
                 </div>
             </div>
-            <input type="submit" name="createad" value="Créer l'annonce">
+            <!-- <input type="submit" name="createad" value="Créer l'annonce"> -->
 
 
         </form>
