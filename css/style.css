@@ -1,7 +1,32 @@
+
+/* Form of the create ad page, careful to the others. */
 form{
     width: 30vw;
 }
 
 input, select{
     margin-bottom : 1rem;
+}
+
+/* Index elements */
+
+li{
+    list-style-type: none;
+}
+
+li > a {
+    text-decoration: none;
+    color: #fff;
+}
+li > a:hover {
+    
+    color: #fff;
+}
+
+nav {
+    background-color: rgb(65, 77, 95);
+}
+
+h1{
+    color: #fff;
 }

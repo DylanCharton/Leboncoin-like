@@ -1,6 +1,7 @@
 // Saying Hi is simply being polite
 console.log("coucou");
 
+
 // Declaring the fields that are going to trigger my functions
 let categories = document.querySelector('#category');
 let selectMultimedia = document.querySelector("#multimedia-select")
@@ -60,8 +61,9 @@ categories.addEventListener('change', ()=>{
         immobilier.className = "d-flex flex-column immo-div";
         
 
-        
+        // If it's voitures
     } else if(categories.value == "Voitures"){
+        // Start by removing the previous last child of the form
         createForm.removeChild(createForm.lastChild);
 
         let brandCar = document.createElement("input");
@@ -205,11 +207,12 @@ categories.addEventListener('change', ()=>{
         let subCatDiv = document.createElement("div");
         subCatDiv.setAttribute("id", "sub-cat")
         multimediaDiv.appendChild(subCatDiv);
+        // Now, multimedia has to let us choose between three other options, I'm using an other div that is going to be nested in the multimediaDiv
         
 
         selectMultimedia.addEventListener("change", ()=>{
             let subCatDiv = document.querySelector("#sub-cat");
-            
+            // A bit different here, an other condition is the easiest way to remove the child only if it is present, otherwise an error is returned since there is no child to remove. 
             if(selectMultimedia.value == "Informatique"){
                 if(subCatDiv.hasChildNodes()){
                     subCatDiv.removeChild(subCatDiv.lastChild);
@@ -416,10 +419,14 @@ categories.addEventListener('change', ()=>{
 
 
     } else {
+        // If the user choses the blank option, nothing appears.
         createForm.removeChild(createForm.lastChild);
     }
 
     
 });
+
+
+
 
 

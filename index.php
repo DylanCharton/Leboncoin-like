@@ -15,8 +15,25 @@
 </head>
 
 <body>
+    <?php require_once("php/navbar.php")
+    ?>
+    <section id="search-section">
+        <div id="search-engine">
+            Rechercher une annonce
+            <form action="" method="post" id="search-form">
+                <input type="text" name size="75">
+                <select name="category-search" id="category-search">
+                    <option value="Vente Immobilière">Vente Immobilière</option>
+                    <option value="Voitures">Voitures</option>
+                    <option value="Multimedia">Multimedia</option>
+                </select>
+            </form>
+        </div>
+    </section>
 
- <a href="php/new.annonce.php">Créer une annonce</a>
+
+
+
 
 <?php 
     require_once('class/Utilisateur.php');
@@ -32,6 +49,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
         integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous">
     </script>
+    <script src="js/index.js"></script>
 </body>
 
 </html>
