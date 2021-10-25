@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,31 +8,20 @@
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/signin.css">
     <title>Inscription</title>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script src="../js/mdp.js"></script>
 </head>
 
 <body>
-    <!-- <div id="container">
-        <form class="row g-3">
-            <div class="col-sm-1">
-                <label for="inputUser" class="form-label">User</label>
-                <input type="text" class="form-control" id="inputUser">
-            </div>
-            <div class="col-sm-1">
-                <label for="inputMail" class="form-label">Mail</label>
-                <input type="mail" class="form-control" id="inputMail">
-            </div>
-            <div class="col-sm-1">
-                <label for="inputPassword" class="form-label">Password</label>
-                <input type="password" class="form-control" id="inputPassword">
-            </div>
-            <div class="col-12">
-                <button type="submit" class="btn btn-primary">Sign in</button>
-            </div>
-        </form>
 
-    </div> -->
+    <script>
+        window.addEventListener('load', function () {
+            console.log('Cette fonction est exécutée une fois quand la page est chargée.');
+        });
+    </script>
 
     <div id="container">
+
         <!-- zone de connexion -->
 
         <form action="#" method="POST">
@@ -44,18 +31,27 @@
             <input type="text" placeholder="Entrer le nom d'utilisateur" name="username" required>
 
             <label><b>Mot de passe : </b></label>
-            <input type="password" placeholder="Entrer le mot de passe" name="password" required>
+            <input type="password" placeholder="Entrer le mot de passe" name="password" id="password" required title="Votre mot de passe doit contenir au moins :
 
-            <label><b>Email : </b></label>
+ 8 caractères minimum
+ 1 chiffre minimum
+ 1 lettre minuscule minimum
+ 1 lettre majuscule minimum
+ 50 caractères maximum">
+ 
+            <span id="affichageMessage"></span></br>
+
+
+            </br><label><b>Email : </b></label>
             <input type="mail" placeholder="Entrer votre adresse mail" name="mail" required>
 
             <input type="submit" id='submit' value="S'inscrire">
 
-            
-	
-        </form>     
-           
-        
+
+
+        </form>
+
+
 
     </div>
 
@@ -69,19 +65,26 @@
             $utilisateur->addUser($_POST ['username'] , $_POST['password'] , $_POST['mail']);
            
         // Here I define my variables and secure them
+
         // $username = strip_tags($_POST['username']);
         // $password = strip_tags($_POST['password']);
         // $password = password_hash($password, PASSWORD_DEFAULT);
         // $mail = strip_tags($_POST['mail']);
-        // // create my request
+
+        // create my request
+
         // $create_user = 'INSERT INTO `user`(`id_user`, `name_user`, `mail_user`, `pass_user`) VALUES (NULL,:username,:password,:mail)';
         // $sql = $connection->connect()->prepare($create_user);
-        // // bind the values
+
+        // bind the values
+
         // $sql->bindValue(':username', $username, PDO::PARAM_STR);
         // $sql->bindValue(':password', $password, PDO::PARAM_STR);
         // $sql->bindValue(':mail', $mail, PDO::PARAM_STR);
         // $sql->execute();
-        // //inform the user his account is created
+
+        //inform the user his account is created
+
         // echo '<div class"alert alert-success mt-3"role="alert">
         // Votre compte a bien été créé, vous pouvez désormais vous connecter.
         // </div>';
