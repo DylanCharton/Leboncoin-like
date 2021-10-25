@@ -196,7 +196,7 @@ categories.addEventListener('change', ()=>{
         let subCatDiv = document.createElement("div");
         subCatDiv.setAttribute("id", "sub-cat")
         multimediaDiv.appendChild(subCatDiv);
-        console.log(multimediaDiv);
+        
 
         selectMultimedia.addEventListener("change", ()=>{
             let subCatDiv = document.querySelector("#sub-cat");
@@ -207,9 +207,11 @@ categories.addEventListener('change', ()=>{
                     }
                 let informatiqueDiv = document.createElement("div");
                 subCatDiv.appendChild(informatiqueDiv);
-                console.log(subCatDiv);
 
                 let etat = document.createElement("select");
+                let etatLabel = document.createElement("label");
+                etatLabel.setAttribute("for", "etat-select");
+                etatLabel.innerHTML = "État du produit";
                 etat.setAttribute("name", "etat-select");
                 etatOption1 = document.createElement("option");
                 etatOption1.setAttribute("value", "Neuf");
@@ -231,8 +233,10 @@ categories.addEventListener('change', ()=>{
                 etat.appendChild(etatOption3);
                 etat.appendChild(etatOption4);
                 etat.appendChild(etatOption5);
-                
+
+                informatiqueDiv.appendChild(etatLabel);
                 informatiqueDiv.appendChild(etat);
+                informatiqueDiv.classList = "d-flex flex-column";
 
             } else if(selectMultimedia.value == "Console"){
                     if(subCatDiv.hasChildNodes()){
@@ -271,6 +275,9 @@ categories.addEventListener('change', ()=>{
                 // State of product
                 let etat = document.createElement("select");
                 etat.setAttribute("name", "etat-select");
+                let etatLabel = document.createElement("label");
+                etatLabel.setAttribute("for", "etat-select");
+                etatLabel.innerHTML = "État du produit";
                 etatOption1 = document.createElement("option");
                 etatOption1.setAttribute("value", "Neuf");
                 etatOption1.innerHTML = "Neuf";
@@ -299,7 +306,9 @@ categories.addEventListener('change', ()=>{
                 gamingDiv.appendChild(brandGaming);
                 gamingDiv.appendChild(modelGamingLabel);
                 gamingDiv.appendChild(modelGaming);
+                gamingDiv.appendChild(etatLabel);
                 gamingDiv.appendChild(etat);
+                gamingDiv.classList = "d-flex flex-column";
 
             } else if(selectMultimedia.value == "Téléphonie"){
                 if(subCatDiv.hasChildNodes()){
@@ -318,19 +327,66 @@ categories.addEventListener('change', ()=>{
 
                 let modelTelephonie = document.createElement("input")
                 modelTelephonie.setAttribute("name", "model-telephonie");
+                modelTelephonie.setAttribute("type", "text")
                 let modelTelephonieLabel = document.createElement("label")
                 modelTelephonieLabel.setAttribute("for", "model-telephonie");
                 modelTelephonieLabel.innerHTML = "Modèle";
 
                 let colorTelephonie = document.createElement("input")
                 colorTelephonie.setAttribute("name", "color-telephonie");
+                colorTelephonie.setAttribute("type", "text")
                 let colorTelephonieLabel = document.createElement("label")
-                colorTelephonie.setAttribute("for", "color-telephonie");
-                colorTelephonie.innerHTML = "Couleur";
+                colorTelephonieLabel.setAttribute("for", "color-telephonie");
+                colorTelephonieLabel.innerHTML = "Couleur";
 
                 let storageTelephonie = document.createElement("input")
+                storageTelephonie.setAttribute("name", "storage-telephonie");
+                storageTelephonie.setAttribute("type", "number");
+                let storageTelephonieLabel = document.createElement("label");
+                storageTelephonieLabel.setAttribute("for", "storage-telephonie");
+                storageTelephonieLabel.innerHTML = "Capacité de stockage";
 
-                let storageTelephonieLabel = document.createElement("label")
+                let etat = document.createElement("select");
+                etat.setAttribute("name", "etat-select");
+                let etatLabel = document.createElement("label");
+                etatLabel.setAttribute("for", "etat-select");
+                etatLabel.innerHTML = "État du produit";
+                etatOption1 = document.createElement("option");
+                etatOption1.setAttribute("value", "Neuf");
+                etatOption1.innerHTML = "Neuf";
+                etatOption2 = document.createElement("option");
+                etatOption2.setAttribute("value", "Très bon");
+                etatOption2.innerHTML = "Très bon";
+                etatOption3 = document.createElement("option");
+                etatOption3.setAttribute("value", "Bon");
+                etatOption3.innerHTML = "Bon";
+                etatOption4 = document.createElement("option");
+                etatOption4.setAttribute("value", "Satisfaisant");
+                etatOption4.innerHTML = "Satisfaisant"
+                etatOption5 = document.createElement("option");
+                etatOption5.setAttribute("value", "Pour pièces");
+                etatOption5.innerHTML = "Pour pièces";
+                etat.appendChild(etatOption1);
+                etat.appendChild(etatOption2);
+                etat.appendChild(etatOption3);
+                etat.appendChild(etatOption4);
+                etat.appendChild(etatOption5);
+
+                telephonieDiv.appendChild(brandTelephonieLabel);
+                telephonieDiv.appendChild(brandTelephonie);
+                telephonieDiv.appendChild(modelTelephonieLabel);
+                telephonieDiv.appendChild(modelTelephonie);
+                telephonieDiv.appendChild(colorTelephonieLabel);
+                telephonieDiv.appendChild(colorTelephonie);
+                telephonieDiv.appendChild(storageTelephonieLabel);
+                telephonieDiv.appendChild(storageTelephonie);
+                telephonieDiv.appendChild(etatLabel);
+                telephonieDiv.appendChild(etat);
+                telephonieDiv.classList = "d-flex flex-column";
+            } else {
+                if(subCatDiv.hasChildNodes()){
+                    subCatDiv.removeChild(subCatDiv.lastChild);
+                    }
             }
         })
 
