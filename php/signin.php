@@ -14,18 +14,13 @@
 
 <body>
 
-    <script>
-        window.addEventListener('load', function () {
-            console.log('Cette fonction est exécutée une fois quand la page est chargée.');
-        });
-    </script>
-
+    <?php  require_once("../class/Utilisateur.php");      ?>
     <div id="container">
 
         <!-- zone de connexion -->
 
         <form action="#" method="POST">
-            <h1>Connexion</h1>
+            <h1>Inscription</h1>
 
             <label><b>Nom d'utilisateur : </b></label>
             <input type="text" placeholder="Entrer le nom d'utilisateur" name="username" required>
@@ -37,8 +32,8 @@
  1 chiffre minimum
  1 lettre minuscule minimum
  1 lettre majuscule minimum
- 50 caractères maximum">
- 
+ (50 caractères maximum)">
+
             <span id="affichageMessage"></span></br>
 
 
@@ -47,6 +42,17 @@
 
             <input type="submit" id='submit' value="S'inscrire">
 
+            <?php
+        
+            require_once("../class/Utilisateur.php");
+        
+
+            if(isset($_POST['username']) && isset($_POST['password']) && isset($_POST['mail']) &&  (!empty($_POST['username'])) && (!empty($_POST['password'])) && (!empty($_POST['mail']))){
+             $utilisateur = new Utilisateur();
+             $utilisateur->addUser($_POST ['username'] , $_POST['password'] , $_POST['mail']);
+            }
+
+        ?>
 
 
         </form>
@@ -55,46 +61,8 @@
 
     </div>
 
-    <?php
-        
-        require_once("../class/Utilisateur.php");
-        
-
-        if(isset($_POST['username']) && isset($_POST['password']) && isset($_POST['mail']) &&  (!empty($_POST['username'])) && (!empty($_POST['password'])) && (!empty($_POST['mail']))){
-            $utilisateur = new Utilisateur();
-            $utilisateur->addUser($_POST ['username'] , $_POST['password'] , $_POST['mail']);
-           
-        // Here I define my variables and secure them
-
-        // $username = strip_tags($_POST['username']);
-        // $password = strip_tags($_POST['password']);
-        // $password = password_hash($password, PASSWORD_DEFAULT);
-        // $mail = strip_tags($_POST['mail']);
-
-        // create my request
-
-        // $create_user = 'INSERT INTO `user`(`id_user`, `name_user`, `mail_user`, `pass_user`) VALUES (NULL,:username,:password,:mail)';
-        // $sql = $connection->connect()->prepare($create_user);
-
-        // bind the values
-
-        // $sql->bindValue(':username', $username, PDO::PARAM_STR);
-        // $sql->bindValue(':password', $password, PDO::PARAM_STR);
-        // $sql->bindValue(':mail', $mail, PDO::PARAM_STR);
-        // $sql->execute();
-
-        //inform the user his account is created
-
-        // echo '<div class"alert alert-success mt-3"role="alert">
-        // Votre compte a bien été créé, vous pouvez désormais vous connecter.
-        // </div>';
-        // header('Refresh:2; url=../index.php');
-
-        
-
-
-    }
-    ?>
+    
+   
 
 </body>
 

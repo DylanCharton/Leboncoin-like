@@ -14,13 +14,23 @@ class Utilisateur extends Database
 
     // }
 
+    // (?=.[0-9])(?=.[A-Z]).{8,20}
 
     public function addUser($username, $password, $mail){
         $username = strip_tags($username);
         $password = strip_tags($password);
-        $password = password_hash($password, PASSWORD_DEFAULT);
         $mail = strip_tags($mail);
-        
+
+       
+
+        if (preg_match('/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!?@#$%^&*-])[\da-zA-Z!?@#$%^&*-]{8,50}$/', $password)){
+            echo 'Mot de passe conforme';
+            $password = password_hash($password, PASSWORD_DEFAULT);
+        }else {
+            echo 'Mot de passe non conforme';
+            die;  
+
+        }
 
         $sql = $this->connect()->prepare("INSERT INTO user(name_user, pass_user, mail_user) VALUES (:name, :pass, :mail)");
         $sql->bindValue(":name", $username); 
@@ -74,4 +84,20 @@ class Utilisateur extends Database
 
 }
 
+
+
+// (?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*-])[\da-zA-Z!@#$%^&*-]{8,50}
+        // $uppercase = preg_match('@[A-Z]@', $password);
+        // $lowercase = preg_match('@[a-z]@', $password);
+        // $number    = preg_match('@[0-9]@', $password);
+        // $specialChars = preg_match('@[^\w]@', $password);
+        // if(!$specialChars && !$uppercase && !$lowercase && !$number && strlen($password) < 8) {
+        //     
+
+        //     else {
+        //     echo 'Mot de passe non conforme';
+        //     die;   
+        // }
+        // /^(?=.[0-9])(?=.[A-Z])(?=.[a-z])(?=.[!@#$%^&*-]).{8,50}$/
+        // ^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$
 ?>

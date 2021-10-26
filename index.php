@@ -17,6 +17,7 @@
 <body>
  <a class='btn btn-danger'href="php/logout.php">Déconnexion</a>
  <a href="php/new.annonce.php">Créer une annonce</a>
+ <a href="php/profil.php">Profil</a>
 
 <?php 
 

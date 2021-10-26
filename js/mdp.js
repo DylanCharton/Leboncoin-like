@@ -8,7 +8,7 @@ $('#affichageMessage').html(checkStrength($('#password').val()))
 function checkStrength(password) 
 { 
 var strength = 0 
-if (password.length < 6) { 
+if (password.length < 8) { 
 $('#affichageMessage').removeClass() 
 $('#affichageMessage').addClass('short') 
 return "<font color='red' size='3'>Trop court</font>" 
