@@ -59,6 +59,10 @@
                 if(isset($_POST['submitImmo'])){
                     $annonce->createAnnonce($_POST['title'], $_POST['desc'], $_POST['price'], $_POST['localisation'], $_POST['category']);
                 }
+            
+                if(isset($_POST['submitCar'])){
+                    $annonce->createAnnonce($_POST['title'], $_POST['desc'], $_POST['price'], $_POST['localisation'], $_POST['category']);
+                }
             ?>
 
         </form>

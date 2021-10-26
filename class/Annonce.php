@@ -18,15 +18,14 @@ class Annonce extends Database
     // }
 
     public function createAnnonce($title, $description, $price, $localisation, $category){
-        $create = "INSERT INTO annonces";
+        $create = "INSERT INTO annonces (title_annonce, desc_annonce, prix_annonce, loc_annonce, categorie_annonce, id_user, ";
 
         if(isset($_POST['submitImmo'])){
           $typeImmo = strip_tags($_POST['type-choice']);
           $surface = strip_tags($_POST['surface']);
           $rooms = strip_tags($_POST['rooms']);
 
-
-          $create .= "(title_annonce, desc_annonce, prix_annonce, loc_annonce, categorie_annonce, type_immo, surface_immo, rooms_immo) VALUES (:titre, :desc, :price, :localisation, :categorie, :typeimmo, :surface, :rooms)";
+          $create .= " type_immo, surface_immo, rooms_immo, id_user) VALUES (:titre, :desc, :price, :localisation, :categorie, 2, :typeimmo, :surface, :rooms)";
 
           $sql = $this->connect()->prepare($create);
           $sql->bindValue(":titre", $title);
@@ -37,11 +36,43 @@ class Annonce extends Database
           $sql->bindValue(":typeimmo", $typeImmo);
           $sql->bindValue(":surface", $surface);
           $sql->bindValue(":rooms", $rooms);
-          $sql->execute();
-          var_dump($sql);
-          
-          echo $title, $description, $price, $localisation, $category, $typeImmo, $surface, $rooms;
-          
+          $insert = $sql->execute(); 
+        }
+        if(isset($_POST['submitCar'])){
+          $brandCar = strip_tags($_POST['brand-car']);
+          $modelCar = strip_tags($_POST['model-car']);
+          $kilometers = strip_tags($_POST['kilometers-car']);
+          $carburant = strip_tags($_POST['carburant-choice']);
+          $gearbox = strip_tags($_POST['gearbox-choice']);
+          $color = strip_tags($_POST['color-car']);
+          $portes = strip_tags($_POST['portes-car']);
+          $puissance = strip_tags($_POST['puissance-car']);
+          $seats = strip_tags($_POST['seats-car']);
+
+          $create.=" brand_car, model_car, kilometers_car, carburant_car, geartype_car, color_car, doors_car, din_car, seats_car) VALUES (:titre, :desc, :price, :localisation, :categorie, 2, :marque, :modele, :kilometres, :carburant, :geartype, :color, :doors, :din, :seats)";
+
+          $sql = $this->connect()->prepare($create);
+          $sql->bindValue(":titre", $title);
+          $sql->bindValue(":desc", $description);
+          $sql->bindValue(":price", $price);
+          $sql->bindValue(":localisation", $localisation);
+          $sql->bindValue(":categorie", $category);
+          $sql->bindValue(":marque", $brandCar);
+          $sql->bindValue(":modele", $modelCar);
+          $sql->bindValue(":kilometres", $kilometers);
+          $sql->bindValue(":carburant", $carburant);
+          $sql->bindValue(":geartype", $gearbox);
+          $sql->bindValue(":color", $color);
+          $sql->bindValue(":doors", $portes);
+          $sql->bindValue(":din", $puissance);
+          $sql->bindValue(":seats", $seats);
+          $insert = $sql->execute();
+        }
+
+        if(isset($_POST['submitInfo'])){
+          $etat = strip_tags($_POST['etat-select']);
+
+          $create.= ""
         }
 
     }
