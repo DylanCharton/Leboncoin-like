@@ -15,7 +15,7 @@ categories.addEventListener('change', ()=>{
         createForm.removeChild(createForm.lastChild);
         // I create the select for the type 
         let selectTypeBien = document.createElement("select");
-        selectTypeBien.setAttribute("name", "category-choice")
+        selectTypeBien.setAttribute("name", "type-choice")
         let optionTypeBien1 = document.createElement("option");
         let optionTypeBien2 = document.createElement("option");
         optionTypeBien1.innerHTML = "Appartement";
@@ -24,7 +24,7 @@ categories.addEventListener('change', ()=>{
         selectTypeBien.appendChild(optionTypeBien1);
         selectTypeBien.appendChild(optionTypeBien2);
         let selectTypeBienLabel = document.createElement("label")
-        selectTypeBienLabel.setAttribute("for", "category-choice")
+        selectTypeBienLabel.setAttribute("for", "type-choice")
         selectTypeBienLabel.innerHTML = "Type de bien"
         // I create the div for the immobilier inputs.
         let immobilier = document.createElement("div");

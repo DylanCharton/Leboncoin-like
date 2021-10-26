@@ -15,23 +15,30 @@
 </head>
 
 <body>
+    <?php
+    // I need to require my class to use my conditions later on
+        require_once("../class/Annonce.php");
+    ?>
+
     <section class="d-flex flex-column align-items-center">
         <!-- The big form that is going to be cut in my conditions -->
         <form action="" method="POST" enctype="multipart/form-data" class="d-flex flex-column" id="create-ad-form">
             <label for="title">Titre</label>
             <input type="text" name="title" required>
             <label for="desc" required>Description</label>
+            <!-- This is a try for the picture upload -->
             <textarea name="desc" id="desc" cols="30" rows="10" required></textarea>
-            <input type="file" name="upload" accept=".png,.gif,.jpg">
+            <!-- <input type="file" name="upload" accept=".png,.gif,.jpg"> -->
             <?php
-                if(isset($_FILES['upload'])){
-                    require_once("../class/Database.php");
-                    $connexion = new Database();
+                // if(isset($_FILES['upload'])){
+                //     require_once("../class/Database.php");
+                //     $connexion = new Database();
 
-                    $sql = $connexion->connect()->prepare("INSERT INTO photos (name_photo, data_photo) VALUES (? , ?)");
-                    $sql->execute([$_FILES['upload']['name'], file_get_contents($_FILES['upload']['tmp_name'])]);
-                }
+                //     $sql = $connexion->connect()->prepare("INSERT INTO photos (name_photo, data_photo) VALUES (? , ?)");
+                //     $sql->execute([$_FILES['upload']['name'], file_get_contents($_FILES['upload']['tmp_name'])]);
+                // }
             ?>
+            <!-- End of the try for the picture upload -->
             <label for="price">Prix</label>
             <input type="number" name="price" required>
             <label for="localisation">Localisation</label>
@@ -45,6 +52,14 @@
             </select>
 
             <!-- End of the common part for all creations of form -->
+
+            <?php
+            // Now, I am setting the conditions to execute the methods in my Utilisateur class.
+            $annonce = new Annonce();
+                if(isset($_POST['submitImmo'])){
+                    $annonce->createAnnonce($_POST['title'], $_POST['desc'], $_POST['price'], $_POST['localisation'], $_POST['category']);
+                }
+            ?>
 
         </form>
     </section>

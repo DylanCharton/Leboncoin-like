@@ -17,18 +17,33 @@ class Annonce extends Database
     //     $this->localisation = $localisation;
     // }
 
-    public function createAnnonce($title, $category, $description, $price, $localisation){
+    public function createAnnonce($title, $description, $price, $localisation, $category){
         $create = "INSERT INTO annonces";
-        $params = array();
+
         if(isset($_POST['submitImmo'])){
+          $typeImmo = strip_tags($_POST['type-choice']);
+          $surface = strip_tags($_POST['surface']);
+          $rooms = strip_tags($_POST['rooms']);
 
 
+          $create .= "(title_annonce, desc_annonce, prix_annonce, loc_annonce, categorie_annonce, type_immo, surface_immo, rooms_immo) VALUES (:titre, :desc, :price, :localisation, :categorie, :typeimmo, :surface, :rooms)";
+
+          $sql = $this->connect()->prepare($create);
+          $sql->bindValue(":titre", $title);
+          $sql->bindValue(":desc", $description);
+          $sql->bindValue(":price", $price);
+          $sql->bindValue(":localisation", $localisation);
+          $sql->bindValue(":categorie", $category);
+          $sql->bindValue(":typeimmo", $typeImmo);
+          $sql->bindValue(":surface", $surface);
+          $sql->bindValue(":rooms", $rooms);
+          $sql->execute();
+          var_dump($sql);
+          
+          echo $title, $description, $price, $localisation, $category, $typeImmo, $surface, $rooms;
+          
         }
 
-
-
-
-        $sql = $this->connect()->prepare($query);
     }
 
     public function displayAllAds(){

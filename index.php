@@ -17,11 +17,12 @@
 <body>
     <?php require_once("php/navbar.php")
     ?>
-    <section id="search-section">
-        <div id="search-engine">
-            Rechercher une annonce
+    <section id="search-section" class="w-100 d-flex justify-content-center">
+        <div id="search-engine" class="px-5 py-3 mt-5">
+            <h2>Rechercher</h2>
             <form action="" method="post" id="search-form">
-                <input type="text" name size="75">
+                <label for="keyword-field">Mot-clefs de l'annonce</label>
+                <input type="text" name="keyword-field" size="75">
                 <select name="category-search" id="category-search">
                     <option value="Vente Immobilière">Vente Immobilière</option>
                     <option value="Voitures">Voitures</option>
@@ -30,18 +31,23 @@
             </form>
         </div>
     </section>
-
-
-
-
-
-<?php 
+    
+    <?php 
     require_once('class/Utilisateur.php');
     require_once('class/Annonce.php');
  
-    $allAds = new Annonce();
-    $allAds->displayAllAds();
+    $allAds = new Annonce(); 
 ?>
+
+    <section class="mt-3">
+        <h2>Nos dernières annonces...</h2>
+        <div class="mx-4">
+            <?php $allAds->displayAllAds();
+            ?>
+        </div>
+
+    </section>
+
 
  
 
