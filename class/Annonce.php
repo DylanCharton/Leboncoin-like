@@ -125,30 +125,49 @@ class Annonce extends Database
         echo '<div class="alert alert-success">Votre annonce a bien été créée, je vous ramène à l\'accueil</div>';
     }
 
-    public function displayAllAds(){
-        $sql=$this->connect()->prepare("SELECT * FROM annonces ORDER BY id_annonce");
-        $sql->execute();
-        $results = $sql->fetchAll(PDO::FETCH_ASSOC);
-
-        foreach($results as $ad)
+    public function display($ads){
+        foreach($ads as $ad)
         echo ' <div class="card mx-3 pb-3 my-2" style="width: 20rem;">
-        <img src="https://via.placeholder.com/400x300.png" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">'.$ad['title_annonce'].'</h5>
-          <p class="card-text mb-0">'.$ad['loc_annonce'].'</p>
-          <p class="card-text text-black-50">'.$ad['desc_annonce'].'</p>
-          <div class="d-flex justify-content-evenly pt-5 card-bottom">
-          <h5>'.$ad['prix_annonce'].'€</h5>
-            <a href="#" class="btn btn-success">Voir</a>
-          </div>
-        </div>
-      </div>';
+                <img src="https://via.placeholder.com/400x300.png" class="card-img-top" alt="main image of the ad">
+                <div class="card-body">
+                  <h5 class="card-title">'.$ad['title_annonce'].'</h5>
+                  <p class="card-text mb-0">'.$ad['loc_annonce'].'</p>
+                  <p class="card-text text-black-50">'.$ad['desc_annonce'].'</p>
+                  <div class="d-flex justify-content-evenly pt-5 card-bottom">
+                  <h5>'.$ad['prix_annonce'].'€</h5>
+                    <a href="../php/annonce.php" class="btn btn-success">Voir</a>
+                  </div>
+                </div>
+              </div>';
 
-        return $results;
+    }
+    public function allAds(){
+      $sql=$this->connect()->prepare("SELECT * FROM annonces ORDER BY id_annonce");
+      $sql->execute();
+      $results = $sql->fetchAll(PDO::FETCH_ASSOC);
+      return $results;
 
     }
 
-    public function searchAnnonce(){
+    public function searchAnnonce($keywords, $category){
+      $select = "SELECT * FROM annonces WHERE 1=1";
+      $param = array();
+
+      if(!empty($category)){
+  
+        $select .= " && categorie_annonce = ?";
+        array_push($param, $category);
+      }
+      if(!empty($keywords)){
+    
+        $select .= " && title_annonce LIKE ?";
+        array_push($param, '%'.$keywords.'%');
+      }
+      $sql = $this->connect()->prepare($select);
+      $sql->execute($param);
+      $result = $sql->fetchAll(PDO::FETCH_ASSOC);
+      
+      return $result;
 
 
     }

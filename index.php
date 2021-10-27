@@ -24,6 +24,7 @@
                 <label for="keyword-field">Mot-clefs de l'annonce</label>
                 <input type="text" name="keyword-field" size="75">
                 <select name="category-search" id="category-search">
+                    <option value=""></option>
                     <option value="Vente Immobilière">Vente Immobilière</option>
                     <option value="Voitures">Voitures</option>
                     <option value="Multimedia">Multimedia</option>
@@ -42,8 +43,16 @@
 
     <section class="mt-3">
         <h2 class="ms-3">Nos dernières annonces...</h2>
-        <div class="mx-4 d-flex justify-content-center flex-wrap">
-            <?php $allAds->displayAllAds();
+        <div class="mx-4 d-flex flex-wrap justify-content-center">
+            <?php 
+            if(isset($_POST['search-submit'])){
+                $allAds->display($allAds->searchAnnonce($_POST['keyword-field'], $_POST['category-search']));
+
+            } else {
+            
+            $allAds->display($allAds->allAds());
+
+            }
             ?>
         </div>
 
