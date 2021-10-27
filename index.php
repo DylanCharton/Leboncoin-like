@@ -15,7 +15,8 @@
 </head>
 
 <body>
-    <?php require_once("php/navbar.php")
+    <?php session_start();  
+    require_once("php/navbar.php")
     ?>
     <section id="search-section" class="w-100 d-flex justify-content-center">
         <div id="search-engine" class="px-5 py-3 mt-5">
@@ -47,7 +48,9 @@
     <?php 
     require_once('class/Utilisateur.php');
     require_once('class/Annonce.php');
- 
+    
+    $user = new Utilisateur();
+    $user->checkConnexion();
     $allAds = new Annonce(); 
 ?>
 
