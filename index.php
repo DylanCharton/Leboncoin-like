@@ -21,14 +21,24 @@
         <div id="search-engine" class="px-5 py-3 mt-5">
             <h2>Rechercher</h2>
             <form action="" method="post" id="search-form">
-                <label for="keyword-field">Mot-clefs de l'annonce</label>
-                <input type="text" name="keyword-field" size="75">
-                <select name="category-search" id="category-search">
-                    <option value=""></option>
-                    <option value="Vente Immobilière">Vente Immobilière</option>
-                    <option value="Voitures">Voitures</option>
-                    <option value="Multimedia">Multimedia</option>
-                </select>
+                <div class="d-inline-flex flex-column">
+                    <label for="keyword-field">Mot-clefs de l'annonce</label>
+                    <input type="text" name="keyword-field">
+                </div>
+                <div class="d-inline-flex flex-column">
+                    <label for="localisation-search">Lieu</label>
+                    <input type="text" name="localisation-search">
+                </div>
+                <div class="d-inline-flex flex-column">
+                    <label for="category-search">Catégorie</label>
+                    <select name="category-search" id="category-search">
+                        <option value=""></option>
+                        <option value="Vente Immobilière">Vente Immobilière</option>
+                        <option value="Voitures">Voitures</option>
+                        <option value="Multimedia">Multimedia</option>
+                    </select>
+                </div>
+                <br>
                 <input type="submit" name="search-submit" value="Rechercher" class="btn btn-success">
             </form>
         </div>
@@ -46,7 +56,7 @@
         <div class="mx-4 d-flex flex-wrap justify-content-center">
             <?php 
             if(isset($_POST['search-submit'])){
-                $allAds->display($allAds->searchAnnonce($_POST['keyword-field'], $_POST['category-search']));
+                $allAds->display($allAds->searchAnnonce($_POST['keyword-field'], $_POST['category-search'], $_POST['localisation-search']));
 
             } else {
             

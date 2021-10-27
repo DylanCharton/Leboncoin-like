@@ -149,19 +149,21 @@ class Annonce extends Database
 
     }
 
-    public function searchAnnonce($keywords, $category){
+    public function searchAnnonce($keywords, $category, $localisation){
       $select = "SELECT * FROM annonces WHERE 1=1";
       $param = array();
 
       if(!empty($category)){
-  
         $select .= " && categorie_annonce = ?";
         array_push($param, $category);
       }
       if(!empty($keywords)){
-    
         $select .= " && title_annonce LIKE ?";
         array_push($param, '%'.$keywords.'%');
+      }
+      if(!empty($localisation)){
+        $select.= " && loc_annonce LIKE ?";
+        array_push($param, '%'.$localisation.'%');
       }
       $sql = $this->connect()->prepare($select);
       $sql->execute($param);
