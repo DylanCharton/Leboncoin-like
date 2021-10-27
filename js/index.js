@@ -36,5 +36,6 @@ searchEngine.addEventListener("change", ()=>{
     } else {
         let subCatDivSearch = document.querySelector(".subcatdiv");
         searchForm.removeChild(subCatDivSearch);
+       
     }
 })

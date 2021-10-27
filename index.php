@@ -28,6 +28,7 @@
                     <option value="Voitures">Voitures</option>
                     <option value="Multimedia">Multimedia</option>
                 </select>
+                <input type="submit" name="search-submit" value="Rechercher" class="btn btn-success">
             </form>
         </div>
     </section>
@@ -40,8 +41,8 @@
 ?>
 
     <section class="mt-3">
-        <h2>Nos dernières annonces...</h2>
-        <div class="mx-4">
+        <h2 class="ms-3">Nos dernières annonces...</h2>
+        <div class="mx-4 d-flex justify-content-center flex-wrap">
             <?php $allAds->displayAllAds();
             ?>
         </div>

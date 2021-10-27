@@ -18,11 +18,13 @@
     <?php
     // I need to require my class to use my conditions later on
         require_once("../class/Annonce.php");
+        require_once("navbar.php");
     ?>
 
     <section class="d-flex flex-column align-items-center">
         <!-- The big form that is going to be cut in my conditions -->
-        <form action="" method="POST" enctype="multipart/form-data" class="d-flex flex-column" id="create-ad-form">
+        <form action="" method="POST" enctype="multipart/form-data" class="d-flex flex-column mt-5" id="create-ad-form">
+        <h2>Créer une annonce</h2>
             <label for="title">Titre</label>
             <input type="text" name="title" required>
             <label for="desc" required>Description</label>
@@ -63,11 +65,22 @@
                 if(isset($_POST['submitCar'])){
                     $annonce->createAnnonce($_POST['title'], $_POST['desc'], $_POST['price'], $_POST['localisation'], $_POST['category']);
                 }
+                if(isset($_POST['submitInfo'])){
+                    $annonce->createAnnonce($_POST['title'], $_POST['desc'], $_POST['price'], $_POST['localisation'], $_POST['category']);
+                }
+                if(isset($_POST['submitGaming'])){
+                    $annonce->createAnnonce($_POST['title'], $_POST['desc'], $_POST['price'], $_POST['localisation'], $_POST['category']);
+                }
+                if(isset($_POST['submitTelephonie'])){
+                    $annonce->createAnnonce($_POST['title'], $_POST['desc'], $_POST['price'], $_POST['localisation'], $_POST['category']);
+                }
+                
             ?>
 
         </form>
     </section>
 
+    <!-- That modal will appear to indicate what mean the values in the état field -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">

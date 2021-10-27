@@ -9,14 +9,6 @@ class Annonce extends Database
     private $price;
     private $localisation;
 
-    // public function __construct($title, $category, $description, $price, $localisation){
-    //     $this->title = $title;
-    //     $this->category = $category;
-    //     $this->description = $description;
-    //     $this->price = $price;
-    //     $this->localisation = $localisation;
-    // }
-
     public function createAnnonce($title, $description, $price, $localisation, $category){
         $create = "INSERT INTO annonces (title_annonce, desc_annonce, prix_annonce, loc_annonce, categorie_annonce, id_user, ";
 
@@ -36,7 +28,7 @@ class Annonce extends Database
           $sql->bindValue(":typeimmo", $typeImmo);
           $sql->bindValue(":surface", $surface);
           $sql->bindValue(":rooms", $rooms);
-          $insert = $sql->execute(); 
+          $sql->execute(); 
         }
         if(isset($_POST['submitCar'])){
           $brandCar = strip_tags($_POST['brand-car']);
@@ -66,15 +58,71 @@ class Annonce extends Database
           $sql->bindValue(":doors", $portes);
           $sql->bindValue(":din", $puissance);
           $sql->bindValue(":seats", $seats);
-          $insert = $sql->execute();
+          $sql->execute();
         }
 
         if(isset($_POST['submitInfo'])){
           $etat = strip_tags($_POST['etat-select']);
 
-          $create.= ""
+          $create.= "etat_multimedia) VALUES (:titre, :desc, :price, :localisation, :categorie, 2, :etat)";
+
+          $sql = $this->connect()->prepare($create);
+          $sql->bindValue(":titre", $title);
+          $sql->bindValue(":desc", $description);
+          $sql->bindValue(":price", $price);
+          $sql->bindValue(":localisation", $localisation);
+          $sql->bindValue(":categorie", $category);
+          $sql->bindValue(":etat", $etat);
+          $sql->execute();
+
         }
 
+        if(isset($_POST['submitGaming'])){
+          $type = strip_tags($_POST['type-gaming']);
+          $brand = strip_tags($_POST['brand-gaming']);
+          $model = strip_tags($_POST['model-gaming']);
+          $etat = strip_tags($_POST['etat-select']);
+
+          $create .= "type_gaming, brand_gaming, model_gaming, etat_multimedia) VALUES (:titre, :desc, :price, :localisation, :categorie, 2, :type, :marque, :modele, :etat)";
+
+          $sql = $this->connect()->prepare($create);
+          $sql->bindValue(":titre", $title);
+          $sql->bindValue(":desc", $description);
+          $sql->bindValue(":price", $price);
+          $sql->bindValue(":localisation", $localisation);
+          $sql->bindValue(":categorie", $category);
+          $sql->bindValue(":type", $type);
+          $sql->bindValue(":marque", $brand);
+          $sql->bindValue(":modele", $model);
+          $sql->bindValue(":etat", $etat);
+          $sql->execute();
+        }
+
+        if(isset($_POST['submitTelephonie'])){
+          $brand = strip_tags($_POST['brand-telephonie']);
+          $model = strip_tags($_POST['model-telephonie']);
+          $color = strip_tags($_POST['color_telephonie']);
+          $storage = strip_tags($_POST['storage-telephonie']);
+          $etat = strip_tags($_POST['etat-select']);
+
+          $create .= " brand_phone, model_phone, color_phone, storage_phone) VALUES (:titre, :desc, :price, :localisation, :categorie, 2,:marque, :model, :color, :storage, :etat)";
+
+          $sql = $this->connect()->prepare($create);
+          $sql->bindValue(":titre", $title);
+          $sql->bindValue(":desc", $description);
+          $sql->bindValue(":price", $price);
+          $sql->bindValue(":localisation", $localisation);
+          $sql->bindValue(":categorie", $category);
+          $sql->bindValue(":marque", $brand);
+          $sql->bindValue(":model", $model);
+          $sql->bindValue(":color", $color);
+          $sql->bindValue(":storage", $storage);
+          $sql->bindValue(":etat", $etat);
+          $sql->execute();
+
+        }
+        header('Refresh: 2; ../index.php');
+        echo '<div class="alert alert-success">Votre annonce a bien été créée, je vous ramène à l\'accueil</div>';
     }
 
     public function displayAllAds(){
@@ -83,12 +131,16 @@ class Annonce extends Database
         $results = $sql->fetchAll(PDO::FETCH_ASSOC);
 
         foreach($results as $ad)
-        echo ' <div class="card" style="width: 18rem;">
-        <img src="..." class="card-img-top" alt="...">
+        echo ' <div class="card mx-3 pb-3 my-2" style="width: 20rem;">
+        <img src="https://via.placeholder.com/400x300.png" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title">'.$ad['title_annonce'].'</h5>
-          <p class="card-text">'.$ad['desc_annonce'].'</p>
-          <a href="#" class="btn btn-primary">Voir</a>
+          <p class="card-text mb-0">'.$ad['loc_annonce'].'</p>
+          <p class="card-text text-black-50">'.$ad['desc_annonce'].'</p>
+          <div class="d-flex justify-content-evenly pt-5 card-bottom">
+          <h5>'.$ad['prix_annonce'].'€</h5>
+            <a href="#" class="btn btn-success">Voir</a>
+          </div>
         </div>
       </div>';
 
@@ -96,9 +148,12 @@ class Annonce extends Database
 
     }
 
-    public function deleteAnnonce(){
+    public function searchAnnonce(){
+
 
     }
+
+
     /////////////////////--WHAT WE HAVE TO CREATE--///////////////////////
     // A function to create an ad //
     // A function to search for ads //
