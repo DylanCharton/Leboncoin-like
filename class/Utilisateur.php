@@ -14,7 +14,7 @@ class Utilisateur extends Database
 
     // }
 
-    // (?=.[0-9])(?=.[A-Z]).{8,20}
+    
 
     public function addUser($username, $password, $mail){
         $username = strip_tags($username);
