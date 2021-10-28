@@ -19,7 +19,7 @@
     ?>
     <section id="search-section" class="w-100 d-flex justify-content-center">
         <div id="search-engine" class="px-5 py-3 mt-5">
-            <h2>Rechercher</h2>
+            <h2 class="text-grey">Rechercher</h2>
             <form action="" method="post" id="search-form">
                 <div class="d-inline-flex flex-column">
                     <label for="keyword-field">Mot-clefs de l'annonce</label>
@@ -29,7 +29,7 @@
                     <label for="localisation-search">Lieu</label>
                     <input type="text" name="localisation-search">
                 </div>
-                <div class="d-inline-flex flex-column">
+                <div class="d-inline-flex flex-column" id="category-select">
                     <label for="category-search">Catégorie</label>
                     <select name="category-search" id="category-search">
                         <option value=""></option>
@@ -37,8 +37,58 @@
                         <option value="Voitures">Voitures</option>
                         <option value="Multimedia">Multimedia</option>
                     </select>
+                    <div class="subcatdiv d-flex flex-column d-none">
+                        <label for="select-multimedia">Sous-catégorie</label>
+                        <select name="select-multimedia" id="subcat-selector">
+                            <option value=""></option>
+                            <option value="Informatique">Informatique</option>
+                            <option value="Console">Console</option>
+                            <option value="Téléphonie">Téléphonie</option>
+                        </select>
+                    </div>
                 </div>
                 <br>
+                <!-- I will use that div to generate the buttons of criteria when the user choses a category -->
+                <div id="criteria-selector" class="d-flex flex-wrap">
+                    <input type="button" name="price-search" value="Prix" class="btn btn-outline-secondary" id="price-search">
+                    <!-- Buttons for immobilier -->
+                    <input type="button" name="type-immo-search" class="btn btn-outline-secondary d-none" id="type-immo-search" value="Type de bien">
+                    <input type="button" name="surface-immo-search" class="btn btn-outline-secondary d-none" id="surface-immo-search" value="Surface">
+                    <input type="button" name="rooms-immo-search" class="btn btn-outline-secondary d-none" id="rooms-immo-search" value="Pièces">
+                    <!-- Buttons for voitures -->
+                    <input type="button" name="brand-car-search" class="btn btn-outline-secondary d-none" id="brand-car-search" value="Marque">
+                    <input type="button" name="modele-car-search" class="btn btn-outline-secondary d-none" id="modele-car-search" value="Modèle">
+                    <input type="button" name="kilometres-car-search" class="btn btn-outline-secondary d-none" id="kilometre-car-search" value="Kilométrage">
+                    <input type="button" name="carburant-car-search" class="btn btn-outline-secondary d-none" id="carburant-car-search" value="Carburant">
+                    <input type="button" name="gearbox-car-search" class="btn btn-outline-secondary d-none" id="gearbox-car-search" value="Boîte de vitesse">
+                    <input type="button" name="color-car-search" class="btn btn-outline-secondary d-none" id="color-car-search" value="Couleur">
+                    <input type="button" name="doors-car-search" class="btn btn-outline-secondary d-none" id="doors-car-search" value="Nombre de portes">
+                    <input type="button" name="din-car-search" class="btn btn-outline-secondary d-none" id="din-car-search" value="Puissance DIN">
+                    <input type="button" name="seats-car-search" class="btn btn-outline-secondary d-none" id="seats-car-search" value="Nombre de sièges">
+                    <!-- Buttons for multimedia (that stays for all the sub-categories) -->
+                    <input type="button" name="state-multimedia-search" class="btn btn-outline-secondary d-none" id="state-multimedia-search" value="État">
+                    <!-- Buttons for gaming -->
+                    <input type="button" name="type-gaming-search" class="btn btn-outline-secondary d-none" id="type-gaming-search" value="Type">
+                    <input type="button" name="brand-gaming-search" class="btn btn-outline-secondary d-none" id="brand-gaming-search" value="Marque">
+                    <input type="button" name="model-gaming-search" class="btn btn-outline-secondary d-none" id="model-gaming-search" value="Modèle">
+                    <!-- Buttons for telephonie -->
+                    <input type="button" name="marque-telephonie-search" class="btn btn-outline-secondary d-none" id="marque-telephonie-search" value="Marque">
+                    <input type="button" name="model-telephonie-search" class="btn btn-outline-secondary d-none" id="model-telephonie-search" value="Modèle">
+                    <input type="button" name="color-telephonie-search" class="btn btn-outline-secondary d-none" id="color-telephonie-search" value="Couleur">
+                    <input type="button" name="storage-telephonie-search" class="btn btn-outline-secondary d-none" id="storage-telephonie-search" value="Stockage">
+
+                </div>
+                <!-- And in that div, it's the forms that are going to be generated -->
+                <div id="display-criteria">
+                    <!-- Price -->
+                    <div id="price-search-div" class="d-none">
+                        <label for="minprice">Prix entre</label>
+                        <input type="number" name="minprice" min="0"> et
+                        <input type="number" name="maxprice" min="0">€
+                    </div>
+                    <!--  -->
+                </div>
+                <br/>
                 <input type="submit" name="search-submit" value="Rechercher" class="btn btn-success">
             </form>
         </div>
@@ -52,7 +102,7 @@
 ?>
 
     <section class="mt-3">
-        <h2 class="ms-3">Nos dernières annonces...</h2>
+        <h2 class="ms-3 text-grey">Nos dernières annonces...</h2>
         <div class="mx-4 d-flex flex-wrap justify-content-center">
             <?php 
             if(isset($_POST['search-submit'])){
