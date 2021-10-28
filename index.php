@@ -20,7 +20,7 @@
     ?>
     <section id="search-section" class="w-100 d-flex justify-content-center">
         <div id="search-engine" class="px-5 py-3 mt-5">
-            <h2>Rechercher</h2>
+            <h2 style="margin-bottom:10px;">Rechercher</h2>
             <form action="" method="post" id="search-form">
                 <div class="d-inline-flex flex-column">
                     <label for="keyword-field">Mot-clefs de l'annonce</label>
@@ -32,7 +32,7 @@
                 </div>
                 <div class="d-inline-flex flex-column">
                     <label for="category-search">Catégorie</label>
-                    <select name="category-search" id="category-search">
+                    <select name="category-search" id="category-search" style="padding-bottom:5px">
                         <option value=""></option>
                         <option value="Vente Immobilière">Vente Immobilière</option>
                         <option value="Voitures">Voitures</option>
