@@ -142,7 +142,7 @@ class Annonce extends Database
 
     }
     public function allAds(){
-      $sql=$this->connect()->prepare("SELECT * FROM annonces ORDER BY id_annonce");
+      $sql=$this->connect()->prepare("SELECT * FROM annonces ORDER BY id_annonce DESC");
       $sql->execute();
       $results = $sql->fetchAll(PDO::FETCH_ASSOC);
       return $results;
@@ -176,10 +176,9 @@ class Annonce extends Database
 
 
     /////////////////////--WHAT WE HAVE TO CREATE--///////////////////////
-    // A function to create an ad //
-    // A function to search for ads //
+ 
     // A function so each user can delete his own ads //
-    // A function so any user can see the other's ads and send them a message (not the same function of course)//
+
 }
 
 ?>

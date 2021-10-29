@@ -50,9 +50,13 @@ h1{
 }
 
 
-
-input[name="minprice"], input[name="maxprice"]{
+/* Number inputs */
+input[name="minprice"], input[name="maxprice"], input[name="minsurface"], input[name="maxsurface"], input[name="kilometres-car"], input[name="din-car"], input[name="doors-car"], input[name="seats-car"], input[name="storage-telephonie"]{
     width:5rem;
+}
+/* Text-inputs */
+input[name="brand-car"], input[name="model-car"], input[name="color-car"], input[name="brand-gaming"], input[name="model-gaming"], input[name="brand-telephonie"], input[name="model-telephonie"], input[name="color-telephonie"], select[name="state-multimedia"]{
+    width: 7rem;
 }
 
 input[name='keyword-field']{
