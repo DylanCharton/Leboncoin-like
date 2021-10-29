@@ -57,7 +57,7 @@ class Utilisateur extends Database
 
         $username = strip_tags($username);
         $password = strip_tags($password);
-
+       
 
         $check = 'SELECT * FROM user WHERE name_user = :login';
 
@@ -74,8 +74,11 @@ class Utilisateur extends Database
                     </div>';
             // If it is, do the "else" part and verify the password
         } else {
-            if(password_verify($password, $user['pass_user'])){
+            if(password_verify($password, $user ['pass_user'])){
                 $_SESSION['goodcorner_connected']=true;
+                $_SESSION['my_profil']=$user['name_user'];
+                $_SESSION['my_mail']=$user['mail_user'];
+                // print_r($user);
                 header('location:../index.php');
             } else {
                 echo '<div class="alert alert-danger text-center" role="alert">

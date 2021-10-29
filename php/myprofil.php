@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
   <meta charset="UTF-8">
@@ -14,7 +14,7 @@
   <link rel="stylesheet" href="../css/profil.css">
 
   <link rel="stylesheet" href="../css/style.css">
-  
+
   <title>Compte</title>
 
 </head>
@@ -22,16 +22,17 @@
 <body>
 
   <?php
+    session_start();
     require_once("navbar.php")
   ?>
 
-  <section id="search-section" class="w-100 d-flex justify-content-center">
+  <section id="search-section" class="img w-100 d-flex justify-content-center">
 
-    <div id="search-engine" class="px-5 py-3 mt-5">
+    <div id="search-engine" class=" px-5 py-3 mt-4">
 
       <div class="profile">
 
-        <div class="profileHero">
+        <div class="center profileHero">
 
           <div class="content">
 
@@ -45,7 +46,23 @@
 
               <div class="pseudo">
 
-                <h3 class="all">Buer</h3>
+                <h3 class="all">
+
+                  <?php 
+
+                    echo $_SESSION['my_profil'];
+                    
+                  ?>
+                  </br>
+
+                  <!-- <php 
+
+                  echo $_SESSION['my_mail'];
+                  ?> -->
+                  
+                </h3>
+
+                
 
               </div>
 
@@ -55,31 +72,28 @@
 
         </div>
 
-        <div class="toNoAds noAds"> 
+        <div class="toNoAds noAds">
+          </br>
+          <a href="contact.php">CONTACT</a>
 
           <div class="noOwnAd">
 
             <p class="txt">Vous n'avez pas d'annonces en ligne</p>
 
-            <p class="txt2">Vendre, gagner de l'argent, tout ça simplement en déposant une annonce sur The Good Corner</p>
+            <p class="txt2">Vendre, gagner de l'argent, tout ça simplement en déposant une annonce sur The Good Corner
+            </p>
 
             <a type="button" class="btn btn-outline-secondary" href="new.annonce.php">Déposer une annonce</a>
 
           </div>
 
+
+
         </div>
 
       </div>
 
-      <!-- <form action="" method="post" id="search-form">
-        <label for="keyword-field">Mot-clefs de l'annonce</label>
-        <input type="text" name="keyword-field" size="75">
-        <select name="category-search" id="category-search">
-          <option value="Vente Immobilière">Vente Immobilière</option>
-          <option value="Voitures">Voitures</option>
-          <option value="Multimedia">Multimedia</option>
-        </select>
-      </form> -->
+    </div>
 
     </div>
 
