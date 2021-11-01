@@ -1,3 +1,4 @@
+<?php session_start();?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -15,7 +16,13 @@
 </head>
 
 <body>
-    <?php require_once("php/navbar.php")
+    <?php 
+    require_once("class/Utilisateur.php");
+    require_once("class/Annonce.php");
+    $user = new Utilisateur();
+    $allAds = new Annonce(); 
+
+    require_once('php/navbar.php');
     ?>
     <section id="search-section" class="w-100 d-flex justify-content-center">
         <div id="search-engine" class="px-5 py-3 mt-5">
@@ -49,7 +56,7 @@
                 </div>
                 <br>
                 <!-- I will use that div to generate the buttons of criteria when the user choses a category -->
-                <p>Recherche avancée</p>
+               <p>Recherche avancée</p>
                 <div id="criteria-selector" class="d-flex flex-wrap">
                 
                     <input type="button" name="price-search" value="Prix" class="btn btn-outline-secondary"
@@ -143,13 +150,6 @@
             </form>
         </div>
     </section>
-
-    <?php 
-    require_once('class/Utilisateur.php');
-    require_once('class/Annonce.php');
- 
-    $allAds = new Annonce(); 
-?>
 
     <section class="mt-3">
         <h2 class="ms-3 text-grey">Nos dernières annonces...</h2>
