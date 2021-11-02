@@ -15,7 +15,8 @@
 </head>
 
 <body>
-    <?php
+    <?php session_start();
+    echo $_SESSION['id_user'];
     // I need to require my class to use my conditions later on
         require_once("../class/Annonce.php");
         require_once("navbar.php");
@@ -47,20 +48,20 @@
             // Now, I am setting the conditions to execute the methods in my Utilisateur class.
             $annonce = new Annonce();
                 if(isset($_POST['submitImmo'])){
-                    $annonce->createAnnonce($_POST['title'], $_POST['desc'], $_POST['price'], $_POST['localisation'], $_POST['category']);
+                    $annonce->createAnnonce($_POST['title'], $_POST['desc'], $_POST['price'], $_POST['localisation'], $_POST['category'], $_SESSION['id_user']);
                 }
             
                 if(isset($_POST['submitCar'])){
-                    $annonce->createAnnonce($_POST['title'], $_POST['desc'], $_POST['price'], $_POST['localisation'], $_POST['category']);
+                    $annonce->createAnnonce($_POST['title'], $_POST['desc'], $_POST['price'], $_POST['localisation'], $_POST['category'], $_SESSION['id_user']);
                 }
                 if(isset($_POST['submitInfo'])){
-                    $annonce->createAnnonce($_POST['title'], $_POST['desc'], $_POST['price'], $_POST['localisation'], $_POST['category']);
+                    $annonce->createAnnonce($_POST['title'], $_POST['desc'], $_POST['price'], $_POST['localisation'], $_POST['category'], $_SESSION['id_user']);
                 }
                 if(isset($_POST['submitGaming'])){
-                    $annonce->createAnnonce($_POST['title'], $_POST['desc'], $_POST['price'], $_POST['localisation'], $_POST['category']);
+                    $annonce->createAnnonce($_POST['title'], $_POST['desc'], $_POST['price'], $_POST['localisation'], $_POST['category'], $_SESSION['id_user']);
                 }
                 if(isset($_POST['submitTelephonie'])){
-                    $annonce->createAnnonce($_POST['title'], $_POST['desc'], $_POST['price'], $_POST['localisation'], $_POST['category']);
+                    $annonce->createAnnonce($_POST['title'], $_POST['desc'], $_POST['price'], $_POST['localisation'], $_POST['category'], $_SESSION['id_user']);
                 }
                 
             ?>

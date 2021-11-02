@@ -7,29 +7,14 @@ class Utilisateur extends Database
     private $password;
     private $mail;
 
-    // public function __construct($username, $password, $mail){
-    //     $this->username = $username;
-    //     $this->password = $password;
-    //     $this->mail = $mail;
-
-    // }
-
-    function checkConnexion(){
-    
-        if(isset($_SESSION['goodcorner_connected'])){
-            // echo 'Bonjour '.$_SESSION['firstname'].' '.$_SESSION['lastname'].'';
-        } else {
-            header("Location: php/login.php");
-        }
-    }    
-
     public function addUser($username, $password, $mail){
+        // The strip_tags method helps me secure my fields by removing the script and html tags.
         $username = strip_tags($username);
         $password = strip_tags($password);
         $mail = strip_tags($mail);
 
        
-
+        // Regex to check the format of the password
         if (preg_match('/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!?@#$%^&*-])[\da-zA-Z!?@#$%^&*-]{8,50}$/', $password)){
             echo 'Mot de passe conforme';
             $password = password_hash($password, PASSWORD_DEFAULT);
@@ -47,7 +32,8 @@ class Utilisateur extends Database
         echo '<div class"alert alert-success mt-3"role="alert">
         Votre compte a bien été créé, vous pouvez désormais vous connecter.
         </div>';
-        header('Refresh:2; url=../index.php');
+        header('Refresh:2; url=../php/login.php');
+        // If the user is created, redirect them to the login
 
     }
 
@@ -75,10 +61,12 @@ class Utilisateur extends Database
             // If it is, do the "else" part and verify the password
         } else {
             if(password_verify($password, $user ['pass_user'])){
+                // If the password is verified, I create session variable to get the name, the mail and the id of the user so I can use them.
                 $_SESSION['goodcorner_connected']=true;
                 $_SESSION['my_profil']=$user['name_user'];
                 $_SESSION['my_mail']=$user['mail_user'];
-                // print_r($user);
+                $_SESSION['id_user']=$user['id_user'];
+                
                 header('location:../index.php');
             } else {
                 echo '<div class="alert alert-danger text-center" role="alert">

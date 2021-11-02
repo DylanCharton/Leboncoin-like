@@ -1,17 +1,21 @@
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <!-- importer le fichier de style -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS & BOOTSTRAP -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="../css/login.css" media="screen" type="text/css" />
+    <title>The Good Corner - Connexion</title>
 </head>
-
+    
 <body>
     <div id="container">
         <!-- zone de connexion -->
 
-        <form action="#" method="POST">
-            <h1>Connexion</h1></br>
+        <form action="#" method="POST" class="d-flex justify-content-center flex-column align-items-center">
+            <h1 class="pb-2">Connexion</h1>
 
             <label><b>Nom d'utilisateur : </b></label>
             <input type="text" placeholder="Entrer le nom d'utilisateur" name="username" required>
@@ -20,10 +24,11 @@
         
             <input type="password" placeholder="Entrer le mot de passe" name="password" required>
 
-            <input type="submit" id='submit' value='LOGIN'>
+            <input type="submit" id='submit' value='Se connecter' class="px-3 py-2">
 
-            <div class="d-flex justify-content-center links">
-            </br> Avez-vous un compte  ?<a href="signin.php"></br></br>Inscrivez-vous !</a>
+            <div class="d-flex justify-content-center links flex-column">
+            <p class="pt-3 pb-0">Vous n'avez pas de compte ?</p>
+            <a href="signin.php">Inscrivez-vous</a>
 		    </div>
 	
         </form>     
@@ -31,62 +36,13 @@
         
 
     </div>        
-            <?php 
-                
-                
-                session_start();
-                require_once("../class/Utilisateur.php");
+<?php session_start();
+                require_once "../class/Utilisateur.php";
                 
 
                 if(isset($_POST['username']) && isset($_POST['password']) && (!empty($_POST['username'])) && (!empty($_POST['password']))){
                     $utilisateur = new Utilisateur();
                     $utilisateur->login($_POST ['username'] , $_POST['password']);
+                };
 
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    // Here I define my variables and secure them
-                    // $username = strip_tags($_POST['username']);
-                    // $password = strip_tags($_POST['password']);
-                    // // Here I create the query
-                    // $check = 'SELECT * FROM user WHERE name_user = :login';
-                    // // I prepare the query
-                    // $sql = $connection->connect()->prepare($check);
-                    // // I bind the login param to my $username input field value
-                    // $sql->bindValue(':login', $username, PDO::PARAM_STR);
-                
-                    // $user= $sql->execute();
-                    // // I put the result of the query in the $user variable
-                    // $user = $sql->fetch(PDO::FETCH_ASSOC);
-                
-                    // // Then I have to check if the username corresponds to what is in my DB
-                    // // So I start by checking if it is different from a username in my DB
-                    // if(!$user){
-                    //     echo '<div class="alert alert-danger text-center" role="alert">
-                    //     Cet utilisateur n\'existe pas.
-                    //             </div>';
-                    //     // If it is, do the "else" part and verify the password
-                    // } else {
-                    //     if(password_verify($password, $user['pass_user'])){
-                    //         $_SESSION['goodcorner_connected']=true;
-                    //         header('location:../index.php');
-                    //     } else {
-                    //         echo '<div class="alert alert-danger text-center" role="alert">
-                    //         Le mot de passe saisi est invalide.
-                    //             </div>';
-                    //     }
-                    // }
-                }
-            ?>
-           
-    
-    
-</body>
-
-</html>
+                    ?>

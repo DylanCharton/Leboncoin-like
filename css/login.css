@@ -3,8 +3,6 @@
 body {
 
     background-image: url('../assets/img/backg.png');
-    background-size: cover;
-    background-repeat: no-repeat;
     padding: 30px;
     font-family: 'Numans', sans-serif;
 }
@@ -28,16 +26,10 @@ form {
 
 }
 
-#container h1 {
-
-    width: 38%;
-    margin: 0 auto;
-    padding-bottom: 10px;
-}
 
 /* Full-width inputs */
 input[type=text],
-input[type=password] {
+input[type=password], input[type=mail] {
 
     width: 100%;
     padding: 12px 20px;
@@ -53,12 +45,14 @@ input[type=submit] {
 
     background-color: #252525;
     color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
+    
+    
     border: none;
     cursor: pointer;
-    width: 100%;
+    width: fit-content;
     border-radius: 20px;
+    border: 1px solid #2e302e;
+    transition: 0.3s;
 }
 
 input[type=submit]:hover {
@@ -66,4 +60,5 @@ input[type=submit]:hover {
     background-color: white;
     color: #000000;
     border: 1px solid #2e302e;
+    transition : 0.3s;
 }

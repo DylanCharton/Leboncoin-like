@@ -9,7 +9,7 @@ class Annonce extends Database
     private $price;
     private $localisation;
 
-    public function createAnnonce($title, $description, $price, $localisation, $category){
+    public function createAnnonce($title, $description, $price, $localisation, $category, $id){
         $create = "INSERT INTO annonces (title_annonce, desc_annonce, prix_annonce, loc_annonce, categorie_annonce, id_user, ";
 
         if(isset($_POST['submitImmo'])){
@@ -17,7 +17,7 @@ class Annonce extends Database
           $surface = strip_tags($_POST['surface']);
           $rooms = strip_tags($_POST['rooms']);
 
-          $create .= " type_immo, surface_immo, rooms_immo, id_user) VALUES (:titre, :desc, :price, :localisation, :categorie, 2, :typeimmo, :surface, :rooms)";
+          $create .= " type_immo, surface_immo, rooms_immo, id_user) VALUES (:titre, :desc, :price, :localisation, :categorie, :user , :typeimmo, :surface, :rooms)";
 
           $sql = $this->connect()->prepare($create);
           $sql->bindValue(":titre", $title);
@@ -25,6 +25,7 @@ class Annonce extends Database
           $sql->bindValue(":price", $price);
           $sql->bindValue(":localisation", $localisation);
           $sql->bindValue(":categorie", $category);
+          $sql->bindValue(":user", $id);
           $sql->bindValue(":typeimmo", $typeImmo);
           $sql->bindValue(":surface", $surface);
           $sql->bindValue(":rooms", $rooms);
@@ -121,7 +122,7 @@ class Annonce extends Database
           $sql->execute();
 
         }
-        header('Refresh: 2; ../index.php');
+        //header('Refresh: 2; ../index.php');
         echo '<div class="alert alert-success">Votre annonce a bien été créée, je vous ramène à l\'accueil</div>';
     }
 
