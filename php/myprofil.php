@@ -28,7 +28,7 @@
 
   <section id="search-section" class="img w-100 d-flex justify-content-center">
 
-    <div id="search-engine" class=" px-5 py-3 mt-4">
+    <div id="user-engine" class=" px-5 py-3 mt-4">
 
       <div class="profile">
 

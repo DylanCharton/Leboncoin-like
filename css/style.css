@@ -5,27 +5,33 @@
     font-family: 'roboto';
 }
 
+.text-grey {
+    color: rgb(65, 77, 95)
+}
+
 /* Form of the create ad page, careful to the others. */
-form{
+form {
     width: 30vw;
 }
 
-input, select{
-    margin-bottom : 1rem;
+input,
+select {
+    margin-bottom: 1rem;
 }
 
 /* Index elements */
 
-li{
+li {
     list-style-type: none;
 }
 
-li > a {
+li>a {
     text-decoration: none;
     color: #fff;
 }
-li > a:hover {
-    
+
+li>a:hover {
+
     color: #fff;
 }
 
@@ -33,60 +39,128 @@ nav {
     background-color: rgb(65, 77, 95);
 }
 
-h1{
+h1 {
     color: #fff;
 }
 
 /* search engine */
 
-
-
-#search-form{
-    width:fit-content;
-    
+#search-engine {
+    width: 56vw;
+    border-radius: 1rem;
+    filter: drop-shadow(2 px 4 px 6 px rgb(77, 77, 77));
+   
 }
 
-/* input[name='keyword-field']{
-    width: 20rem;
-} */
+#search-form {
+    width: fit-content;
 
-.btn-success{
+}
+
+
+/* Number inputs */
+input[name="minprice"],
+input[name="maxprice"],
+input[name="minsurface"],
+input[name="maxsurface"],
+input[name="kilometres-car"],
+input[name="din-car"],
+input[name="doors-car"],
+input[name="seats-car"],
+input[name="storage-telephonie"] {
+    width: 5rem;
+}
+
+/* Text-inputs */
+input[name="brand-car"],
+input[name="model-car"],
+input[name="color-car"],
+input[name="brand-gaming"],
+input[name="model-gaming"],
+input[name="brand-telephonie"],
+input[name="model-telephonie"],
+input[name="color-telephonie"],
+select[name="state-multimedia"] {
+    width: 7rem;
+}
+
+input[name='keyword-field'] {
+    width: 26vw;
+}
+
+.btn-success {
     background-color: rgb(65, 77, 95);
-    border : 1px solid rgb(65, 77, 95);
+    border: 1px solid rgb(65, 77, 95);
 }
-.btn-success:hover, .btn-success:active{
+
+.btn-success:hover,
+.btn-success:active {
     background-color: rgb(42, 52, 66);
-    border : 1px solid rgb(42, 52, 66);
+    border: 1px solid rgb(42, 52, 66);
 }
-.btn-success:focus{
+
+.btn-success:focus {
     background-color: rgb(42, 52, 66);
-    border : 1px solid rgb(42, 52, 66);
+    border: 1px solid rgb(42, 52, 66);
+    box-shadow: 0 0 0 0.25rem rgb(65 77 95 / 50%);
+}
+
+.btn-success:active {
     box-shadow: 0 0 0 0.25rem rgb(65 77 95 / 50%);
 }
 
 /* Form to create an ad */
 
-#create-ad-form{
+#create-ad-form {
     border-radius: 0.5rem;
     padding: 2rem;
     box-shadow: 0px 0px 15px -8px rgb(133, 133, 133);
 }
 
-.card{
+input[name="modal-trigger"] {
+    width: fit-content;
+    border-radius: 2rem;
+    margin: 0;
+    margin-left: 0.5rem;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    border: 1px solid rgb(65, 77, 95);
+    color: rgb(65, 77, 95);
+
+
+}
+
+input[name="modal-trigger"]:hover {
+    background-color: rgb(65, 77, 95);
+    border: 1px solid rgb(65, 77, 95);
+}
+
+input[name="modal-trigger"]:focus,
+input[name="modal-trigger"]:active {
+    box-shadow: 0 0 0 0.25rem rgb(65 77 95 / 50%);
+}
+
+/* index */
+
+.card {
     box-shadow: 0px 0px 15px -8px rgb(133, 133, 133);
     border: none;
-    position:relative;
+    position: relative;
     height: 30rem;
 }
 
-.card-bottom{
-    position : absolute;
-    bottom : 15px;
-    width : 100%
-}
-.card-bottom a{
-    right : 5px;
+.card-bottom {
+    position: absolute;
+    bottom: 15px;
+    width: 100%
 }
 
+.card-bottom a {
+    right: 5px;
+}
 
-
+.btn-outline-secondary {
+    border-radius: 1rem;
+    margin-left: 0.3rem;
+    margin-right: 0.3rem;
+}

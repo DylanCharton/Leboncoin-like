@@ -32,6 +32,7 @@ categories.addEventListener('change', ()=>{
         // I create the surface input and bind parameters
         let surfaceImmo = document.createElement("input");
         surfaceImmo.setAttribute("type", "number");
+        surfaceImmo.setAttribute("min", "0");
         surfaceImmo.setAttribute("name", "surface");
         // The label for surface
         let surfaceImmoLabel = document.createElement("label");
@@ -40,6 +41,7 @@ categories.addEventListener('change', ()=>{
         // Input for the numbers of rooms
         let roomsImmo = document.createElement("input");
         roomsImmo.setAttribute("type", "number");
+        roomsImmo.setAttribute("min", "0");
         roomsImmo.setAttribute("name", "rooms");
         let roomsImmoLabel = document.createElement("label")
         roomsImmoLabel.setAttribute("for", "rooms");
@@ -48,6 +50,8 @@ categories.addEventListener('change', ()=>{
         let submitImmo = document.createElement("input");
         submitImmo.setAttribute("name", "submitImmo");
         submitImmo.setAttribute("type", "submit");
+        submitImmo.className = "btn btn-success"
+        submitImmo.style = "width:fit-content; margin:auto;"
 
         // Appending the div into the form and then the inputs in the div
         createForm.appendChild(immobilier);
@@ -83,6 +87,7 @@ categories.addEventListener('change', ()=>{
         let kilometersCar = document.createElement("input");
         kilometersCar.setAttribute("name", "kilometers-car");
         kilometersCar.setAttribute("type", "number");
+        kilometersCar.setAttribute("min", "0");
         let kilometersCarLabel = document.createElement("label");
         kilometersCarLabel.setAttribute("for", "kilometers-car");
         kilometersCarLabel.innerHTML = "Kilométrage";
@@ -129,6 +134,7 @@ categories.addEventListener('change', ()=>{
         let portesCar = document.createElement("input");
         portesCar.setAttribute("name", "portes-car");
         portesCar.setAttribute("type", "number");
+        portesCar.setAttribute("min", "0");
         let portesCarLabel = document.createElement("label");
         portesCarLabel.setAttribute("for", "portes-car");
         portesCarLabel.innerHTML = "Nombre de portes"
@@ -136,6 +142,7 @@ categories.addEventListener('change', ()=>{
         let puissanceCar = document.createElement("input");
         puissanceCar.setAttribute("name", "puissance-car");
         puissanceCar.setAttribute("type", "number");
+        puissanceCar.setAttribute("min", "0");
         let puissanceCarLabel = document.createElement("label");
         puissanceCarLabel.setAttribute("for", "puissance-car");
         puissanceCarLabel.innerHTML = "Puissance DIN"
@@ -143,6 +150,7 @@ categories.addEventListener('change', ()=>{
         let seatsCar = document.createElement("input");
         seatsCar.setAttribute("name", "seats-car");
         seatsCar.setAttribute("type", "number");
+        seatsCar.setAttribute("min", "0");
         let seatsCarLabel = document.createElement("label");
         seatsCarLabel.setAttribute("for", "seats-car");
         seatsCarLabel.innerHTML = "Nombre de sièges";
@@ -150,6 +158,8 @@ categories.addEventListener('change', ()=>{
         let submitCar = document.createElement("input");
         submitCar.setAttribute("name", "submitCar");
         submitCar.setAttribute("type", "submit");
+        submitCar.className = "btn btn-success"
+        submitCar.style = "width:fit-content; margin:auto;"
 
         let voitures = document.createElement("div");
         createForm.appendChild(voitures);
@@ -183,7 +193,8 @@ categories.addEventListener('change', ()=>{
         selectMultimedia.setAttribute("name", "select-multimedia");
         let selectMultimediaLabel = document.createElement("label");
         selectMultimediaLabel.setAttribute("for", "select-multimedia");
-        selectMultimediaLabel.innerHTML = "Sélectionnez une sous-catégorie";
+        selectMultimediaLabel.innerHTML = "Sélectionnez une sous-catégorie ";
+        selectMultimediaLabel.className = "me-2"
         let multimediaOption1 = document.createElement("option");
         multimediaOption1.setAttribute("value", "");
         multimediaOption1.innerHTML = "";
@@ -224,6 +235,7 @@ categories.addEventListener('change', ()=>{
                 let etatLabel = document.createElement("label");
                 etatLabel.setAttribute("for", "etat-select");
                 etatLabel.innerHTML = "État du produit";
+                etatLabel.className = "mb-2"
                 etat.setAttribute("name", "etat-select");
                 etatOption1 = document.createElement("option");
                 etatOption1.setAttribute("value", "Neuf");
@@ -249,9 +261,21 @@ categories.addEventListener('change', ()=>{
                 let submitInfo = document.createElement("input");
                 submitInfo.setAttribute("name", "submitInfo");
                 submitInfo.setAttribute("type", "submit");
+                submitInfo.className = "btn btn-success"
+                submitInfo.style = "width:fit-content; margin:auto;"
+
+                // Here I create the link that will open the model to inform on the state of the product
+                let stateModalBtn = document.createElement("input");
+                stateModalBtn.setAttribute("type", "button");
+                stateModalBtn.setAttribute("name", "modal-trigger");
+                stateModalBtn.setAttribute("value", "?")
+                stateModalBtn.setAttribute("data-bs-toggle", "modal")
+                stateModalBtn.setAttribute("data-bs-target", "#exampleModal")
+                stateModalBtn.className = "btn btn-outline-success"
 
                 informatiqueDiv.appendChild(etatLabel);
                 informatiqueDiv.appendChild(etat);
+                etatLabel.appendChild(stateModalBtn);
                 informatiqueDiv.appendChild(submitInfo);
                 informatiqueDiv.classList = "d-flex flex-column";
 
@@ -295,6 +319,7 @@ categories.addEventListener('change', ()=>{
                 let etatLabel = document.createElement("label");
                 etatLabel.setAttribute("for", "etat-select");
                 etatLabel.innerHTML = "État du produit";
+                etatLabel.className = "mb-2"
                 etatOption1 = document.createElement("option");
                 etatOption1.setAttribute("value", "Neuf");
                 etatOption1.innerHTML = "Neuf";
@@ -316,9 +341,19 @@ categories.addEventListener('change', ()=>{
                 etat.appendChild(etatOption4);
                 etat.appendChild(etatOption5);
 
+                let stateModalBtn = document.createElement("input");
+                stateModalBtn.setAttribute("type", "button");
+                stateModalBtn.setAttribute("name", "modal-trigger");
+                stateModalBtn.setAttribute("value", "?")
+                stateModalBtn.setAttribute("data-bs-toggle", "modal")
+                stateModalBtn.setAttribute("data-bs-target", "#exampleModal")
+                stateModalBtn.className = "btn btn-outline-success"
+
                 let submitGaming = document.createElement("input");
                 submitGaming.setAttribute("name", "submitGaming");
                 submitGaming.setAttribute("type", "submit");
+                submitGaming.className = "btn btn-success"
+                submitGaming.style = "width:fit-content; margin:auto;"
                 // Append all elements to subCatDiv
                 subCatDiv.appendChild(gamingDiv);
                 gamingDiv.appendChild(typeGamingLabel);
@@ -329,6 +364,7 @@ categories.addEventListener('change', ()=>{
                 gamingDiv.appendChild(modelGaming);
                 gamingDiv.appendChild(etatLabel);
                 gamingDiv.appendChild(etat);
+                etatLabel.appendChild(stateModalBtn);
                 gamingDiv.appendChild(submitGaming);
                 gamingDiv.classList = "d-flex flex-column";
 
@@ -364,6 +400,7 @@ categories.addEventListener('change', ()=>{
                 let storageTelephonie = document.createElement("input")
                 storageTelephonie.setAttribute("name", "storage-telephonie");
                 storageTelephonie.setAttribute("type", "number");
+                storageTelephonie.setAttribute("min", "0");
                 let storageTelephonieLabel = document.createElement("label");
                 storageTelephonieLabel.setAttribute("for", "storage-telephonie");
                 storageTelephonieLabel.innerHTML = "Capacité de stockage";
@@ -373,6 +410,7 @@ categories.addEventListener('change', ()=>{
                 let etatLabel = document.createElement("label");
                 etatLabel.setAttribute("for", "etat-select");
                 etatLabel.innerHTML = "État du produit";
+                etatLabel.className = "mb-2"
                 etatOption1 = document.createElement("option");
                 etatOption1.setAttribute("value", "Neuf");
                 etatOption1.innerHTML = "Neuf";
@@ -394,9 +432,19 @@ categories.addEventListener('change', ()=>{
                 etat.appendChild(etatOption4);
                 etat.appendChild(etatOption5);
 
+                let stateModalBtn = document.createElement("input");
+                stateModalBtn.setAttribute("type", "button");
+                stateModalBtn.setAttribute("name", "modal-trigger");
+                stateModalBtn.setAttribute("value", "?")
+                stateModalBtn.setAttribute("data-bs-toggle", "modal")
+                stateModalBtn.setAttribute("data-bs-target", "#exampleModal")
+                stateModalBtn.className = "btn btn-outline-success"
+
                 let submitTelephonie = document.createElement("input");
                 submitTelephonie.setAttribute("name", "submitTelephonie");
                 submitTelephonie.setAttribute("type", "submit");
+                submitTelephonie.className = "btn btn-success"
+                submitTelephonie.style = "width:fit-content; margin:auto;"
 
                 telephonieDiv.appendChild(brandTelephonieLabel);
                 telephonieDiv.appendChild(brandTelephonie);
@@ -408,6 +456,7 @@ categories.addEventListener('change', ()=>{
                 telephonieDiv.appendChild(storageTelephonie);
                 telephonieDiv.appendChild(etatLabel);
                 telephonieDiv.appendChild(etat);
+                etatLabel.appendChild(stateModalBtn);
                 telephonieDiv.appendChild(submitTelephonie);
                 telephonieDiv.classList = "d-flex flex-column";
             } else {

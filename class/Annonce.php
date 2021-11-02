@@ -130,11 +130,11 @@ class Annonce extends Database
         echo ' <div class="card mx-3 pb-3 my-2" style="width: 20rem;">
                 <img src="https://via.placeholder.com/400x300.png" class="card-img-top" alt="main image of the ad">
                 <div class="card-body">
-                  <h5 class="card-title">'.$ad['title_annonce'].'</h5>
-                  <p class="card-text mb-0">'.$ad['loc_annonce'].'</p>
+                  <h5 class="card-title text-grey">'.$ad['title_annonce'].'</h5>
+                  <p class="card-text mb-0 text-grey">'.$ad['loc_annonce'].'</p>
                   <p class="card-text text-black-50">'.$ad['desc_annonce'].'</p>
                   <div class="d-flex justify-content-evenly pt-5 card-bottom">
-                  <h5>'.$ad['prix_annonce'].'€</h5>
+                  <h5 class="text-grey">'.$ad['prix_annonce'].'€</h5>
                     <a href="../php/annonce.php" class="btn btn-success">Voir</a>
                   </div>
                 </div>
@@ -142,7 +142,7 @@ class Annonce extends Database
 
     }
     public function allAds(){
-      $sql=$this->connect()->prepare("SELECT * FROM annonces ORDER BY id_annonce");
+      $sql=$this->connect()->prepare("SELECT * FROM annonces ORDER BY id_annonce DESC");
       $sql->execute();
       $results = $sql->fetchAll(PDO::FETCH_ASSOC);
       return $results;
@@ -176,10 +176,9 @@ class Annonce extends Database
 
 
     /////////////////////--WHAT WE HAVE TO CREATE--///////////////////////
-    // A function to create an ad //
-    // A function to search for ads //
+ 
     // A function so each user can delete his own ads //
-    // A function so any user can see the other's ads and send them a message (not the same function of course)//
+
 }
 
 ?>
