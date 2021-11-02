@@ -17,7 +17,7 @@ class Annonce extends Database
           $surface = strip_tags($_POST['surface']);
           $rooms = strip_tags($_POST['rooms']);
 
-          $create .= " type_immo, surface_immo, rooms_immo, id_user) VALUES (:titre, :desc, :price, :localisation, :categorie, :user , :typeimmo, :surface, :rooms)";
+          $create .= " type_immo, surface_immo, rooms_immo) VALUES (:titre, :desc, :price, :localisation, :categorie, :user , :typeimmo, :surface, :rooms)";
 
           $sql = $this->connect()->prepare($create);
           $sql->bindValue(":titre", $title);
@@ -42,7 +42,7 @@ class Annonce extends Database
           $puissance = strip_tags($_POST['puissance-car']);
           $seats = strip_tags($_POST['seats-car']);
 
-          $create.=" brand_car, model_car, kilometers_car, carburant_car, geartype_car, color_car, doors_car, din_car, seats_car) VALUES (:titre, :desc, :price, :localisation, :categorie, 2, :marque, :modele, :kilometres, :carburant, :geartype, :color, :doors, :din, :seats)";
+          $create.=" brand_car, model_car, kilometers_car, carburant_car, geartype_car, color_car, doors_car, din_car, seats_car) VALUES (:titre, :desc, :price, :localisation, :categorie, :user, :marque, :modele, :kilometres, :carburant, :geartype, :color, :doors, :din, :seats)";
 
           $sql = $this->connect()->prepare($create);
           $sql->bindValue(":titre", $title);
@@ -50,6 +50,7 @@ class Annonce extends Database
           $sql->bindValue(":price", $price);
           $sql->bindValue(":localisation", $localisation);
           $sql->bindValue(":categorie", $category);
+          $sql->bindValue(":user", $id);
           $sql->bindValue(":marque", $brandCar);
           $sql->bindValue(":modele", $modelCar);
           $sql->bindValue(":kilometres", $kilometers);
@@ -64,8 +65,9 @@ class Annonce extends Database
 
         if(isset($_POST['submitInfo'])){
           $etat = strip_tags($_POST['etat-select']);
+          $subcat = strip_tags($_POST['select-multimedia']);
 
-          $create.= "etat_multimedia) VALUES (:titre, :desc, :price, :localisation, :categorie, 2, :etat)";
+          $create.= "souscat_annonce , etat_multimedia) VALUES (:titre, :desc, :price, :localisation, :categorie, :user, :subcat, :etat)";
 
           $sql = $this->connect()->prepare($create);
           $sql->bindValue(":titre", $title);
@@ -73,6 +75,8 @@ class Annonce extends Database
           $sql->bindValue(":price", $price);
           $sql->bindValue(":localisation", $localisation);
           $sql->bindValue(":categorie", $category);
+          $sql->bindValue(":subcat", $subcat);
+          $sql->bindValue(":user", $id);
           $sql->bindValue(":etat", $etat);
           $sql->execute();
 
@@ -83,8 +87,9 @@ class Annonce extends Database
           $brand = strip_tags($_POST['brand-gaming']);
           $model = strip_tags($_POST['model-gaming']);
           $etat = strip_tags($_POST['etat-select']);
+          $subcat = strip_tags($_POST['select-multimedia']);
 
-          $create .= "type_gaming, brand_gaming, model_gaming, etat_multimedia) VALUES (:titre, :desc, :price, :localisation, :categorie, 2, :type, :marque, :modele, :etat)";
+          $create .= "souscat_annonce, type_gaming, brand_gaming, model_gaming, etat_multimedia) VALUES (:titre, :desc, :price, :localisation, :categorie, :user, :subcat, :type, :marque, :modele, :etat)";
 
           $sql = $this->connect()->prepare($create);
           $sql->bindValue(":titre", $title);
@@ -92,6 +97,8 @@ class Annonce extends Database
           $sql->bindValue(":price", $price);
           $sql->bindValue(":localisation", $localisation);
           $sql->bindValue(":categorie", $category);
+          $sql->bindValue(":subcat", $subcat);
+          $sql->bindValue(":user", $id);
           $sql->bindValue(":type", $type);
           $sql->bindValue(":marque", $brand);
           $sql->bindValue(":modele", $model);
@@ -102,11 +109,12 @@ class Annonce extends Database
         if(isset($_POST['submitTelephonie'])){
           $brand = strip_tags($_POST['brand-telephonie']);
           $model = strip_tags($_POST['model-telephonie']);
-          $color = strip_tags($_POST['color_telephonie']);
+          $color = strip_tags($_POST['color-telephonie']);
           $storage = strip_tags($_POST['storage-telephonie']);
           $etat = strip_tags($_POST['etat-select']);
+          $subcat = strip_tags($_POST['select-multimedia']);
 
-          $create .= " brand_phone, model_phone, color_phone, storage_phone) VALUES (:titre, :desc, :price, :localisation, :categorie, 2,:marque, :model, :color, :storage, :etat)";
+          $create .= "souscat_annonce, brand_phone, model_phone, color_phone, storage_phone, etat_multimedia) VALUES (:titre, :desc, :price, :localisation, :categorie, :user, :subcat, :marque, :model, :color, :storage, :etat)";
 
           $sql = $this->connect()->prepare($create);
           $sql->bindValue(":titre", $title);
@@ -114,6 +122,8 @@ class Annonce extends Database
           $sql->bindValue(":price", $price);
           $sql->bindValue(":localisation", $localisation);
           $sql->bindValue(":categorie", $category);
+          $sql->bindValue(":subcat", $subcat);
+          $sql->bindValue(":user", $id);
           $sql->bindValue(":marque", $brand);
           $sql->bindValue(":model", $model);
           $sql->bindValue(":color", $color);
@@ -136,7 +146,7 @@ class Annonce extends Database
                   <p class="card-text text-black-50">'.$ad['desc_annonce'].'</p>
                   <div class="d-flex justify-content-evenly pt-5 card-bottom">
                   <h5 class="text-grey">'.$ad['prix_annonce'].'€</h5>
-                    <a href="../php/annonce.php" class="btn btn-success">Voir</a>
+                    <a href="../php/annonce.php?id='.$ad['id_annonce'].'" class="btn btn-success">Voir</a>
                   </div>
                 </div>
               </div>';
@@ -153,10 +163,162 @@ class Annonce extends Database
     public function searchAnnonce($keywords, $category, $localisation){
       $select = "SELECT * FROM annonces WHERE 1=1";
       $param = array();
-
+// If my two prices fields aren't empty, I'll trigger a research between the first and the second input
+      if(!empty($_POST['minprice']) && (!empty($_POST['maxprice']))){
+        $min = $_POST['minprice'];
+        $max = $_POST['maxprice'];
+        $select .= "&& prix_annonce BETWEEN ? AND ?";
+        array_push($param, $min);
+        array_push($param, $max);
+      }
+      // The next 3 fields are the main fields
       if(!empty($category)){
         $select .= " && categorie_annonce = ?";
         array_push($param, $category);
+
+        // Vente Immobilières category
+        if(!empty($_POST['appartement'])){
+          $appartement = $_POST['appartement'];
+          $select .= " && type_immo = ?";
+          array_push($param, $appartement);
+        
+        }
+        if(!empty($_POST['maison'])){
+          $maison = $_POST['maison'];
+          $select .= " && type_immo = ?";
+          array_push($param, $maison);
+
+        }
+        if(!empty($_POST['minsurface']) && !empty($_POST['maxsurface'])){
+          $minsurface = $_POST['minsurface'];
+          $maxsurface = $_POST['maxsurface'];
+          $select .= " && surface_immo BETWEEN ? AND ?";
+          array_push($param, $minsurface);
+          array_push($param, $maxsurface);
+        }
+        if(!empty($_POST['minrooms']) && !empty($_POST['maxrooms'])){
+          $minrooms = $_POST['minrooms'];
+          $maxrooms = $_POST['maxrooms'];
+          $select .= " && rooms_immo BETWEEN ? AND ?";
+          array_push($param, $minrooms);
+          array_push($param, $maxrooms);
+        }
+        // Voitures category
+        if(!empty($_POST['brand-car'])){
+          $brandCar = $_POST['brand-car'];
+          $select .= " && brand_car LIKE ?";
+          array_push($param, '%'.$brandCar.'%');
+        }
+        if(!empty($_POST['model-car'])){
+          $modelCar = $_POST['model-car'];
+          $select .= " && model_car LIKE ?";
+          array_push($param, '%'.$modelCar.'%');
+        }
+        if(!empty($_POST['minkilometres']) && !empty($_POST['maxkilometres'])){
+          $minkilometres = $_POST['minkilometres'];
+          $maxkilometres = $_POST['maxkilometres'];
+          $select .= " && kilometers_car BETWEEN ? AND ?";
+          array_push($param, $minkilometres);
+          array_push($param, $maxkilometres);
+        }
+        
+
+        if(!empty($_POST['diesel'])){
+          $diesel = $_POST['diesel'];
+          $select .= " && carburant_car = ?";
+          array_push($param, $diesel);
+
+        }
+        if(!empty($_POST['essence'])){
+          $essence = $_POST['essence'];
+          $select .= " && carburant_car = ?";
+          array_push($param, $essence);
+        }
+        if(!empty($_POST['electrique'])){
+          $electrique = $_POST['electrique'];
+          $select .= " && carburant_car = ?";
+          array_push($param, $electrique);
+        }
+        if(!empty($_POST['automatique'])){
+          $automatique = $_POST['automatique'];
+          $select .= " && geartype_car = ?";
+          array_push($param, $automatique);
+        }
+        if(!empty($_POST['manuelle'])){
+          $automatique = $_POST['manuelle'];
+          $select .= " && geartype_car = ?";
+          array_push($param, $manuelle);
+        }
+        if(!empty($_POST['color-car'])){
+          $colorCar = $_POST['color-car'];
+          $select .= " && color_car LIKE ?";
+          array_push($param, '%'.$colorCar.'%');
+        }
+        if(!empty($_POST['doors-car'])){
+          $doorsCar = $_POST['doors-car'];
+          $select .= " && doors_car = ?";
+          array_push($param, $doorsCar);
+        }
+        if(!empty($_POST['mindin']) && !empty($_POST['maxdin'])){
+          $mindin = $_POST['mindin'];
+          $maxdin = $_POST['maxdin'];
+          $select .= " && din_car BETWEEN ? AND ?";
+          array_push($param, $mindin);
+          array_push($param, $maxdin);
+        }
+        if(!empty($_POST['seats-car'])){
+          $seatsCar = $_POST['seats-car'];
+          $select .= " && seats_car = ?";
+          array_push($param, $seatsCar);
+        }
+        // Restriction of sub-category
+        if(!empty($_POST['select-multimedia'])){
+          $souscat = $_POST['select-multimedia'];
+          $select .= " && souscat_annonce = ?";
+          array_push($param, $souscat);
+        }
+        // Multimedia category 
+        if(!empty($_POST['type-gaming'])){
+          $typeGaming = $_POST['type-gaming'];
+          $select .= " && type_gaming = ?";
+          array_push($param, $typeGaming);
+        }
+        if(!empty($_POST['model-gaming'])){
+          $modelGaming = $_POST['model-gaming'];
+          $select .= " && model_gaming LIKE ?";
+          array_push($param, '%'.$modelGaming.'%');
+        }
+        if(!empty($_POST['brand-gaming'])){
+          $brandGaming = $_POST['brand-gaming'];
+          $select .= " && brand_gaming LIKE ?";
+          array_push($param, '%'.$brandGaming.'%');
+        }
+        if(!empty($_POST['model-telephonie'])){
+          $modelTelephonie = $_POST['model-telephonie'];
+          $select .= " && model_phone LIKE ?";
+          array_push($param, '%'.$modelTelephonie.'%');
+        }
+        if(!empty($_POST['brand-telephonie'])){
+          $brandTelephonie = $_POST['brand-telephonie'];
+          $select .= " && brand_phone LIKE ?";
+          array_push($param, '%'.$brandTelephonie.'%');
+        }
+        if(!empty($_POST['color-telephonie'])){
+          $colorTelephonie = $_POST['color-telephonie'];
+          $select .= " && color_phone LIKE ?";
+          array_push($param, '%'.$colorTelephonie.'%');
+        }
+        if(!empty($_POST['storage-telephonie'])){
+          $storageTelephonie = $_POST['storage-telephonie'];
+          $select .= " && storage_phone LIKE ?";
+          array_push($param, '%'.$storageTelephonie.'%');
+        }
+        if(!empty($_POST['state-multimedia'])){
+          $etatMultimedia = $_POST['state-multimedia'];
+          $select .= " && etat_multimedia = ?";
+          array_push($param, $etatMultimedia);
+        }
+        
       }
       if(!empty($keywords)){
         $select .= " && title_annonce LIKE ?";
@@ -166,6 +328,8 @@ class Annonce extends Database
         $select.= " && loc_annonce LIKE ?";
         array_push($param, '%'.$localisation.'%');
       }
+      // Now I start the advanced search engine
+      
       $sql = $this->connect()->prepare($select);
       $sql->execute($param);
       $result = $sql->fetchAll(PDO::FETCH_ASSOC);

@@ -15,7 +15,7 @@
         content="Quoi que vous cherchiez, vous le trouverez sur notre site web. Notre communauté grandit de jour en jour et donc le choix d'objets disponibles aussi.">
 </head>
 
-<body>
+<body id="annonce-page">
     <?php 
     require_once("class/Utilisateur.php");
     require_once("class/Annonce.php");
@@ -125,7 +125,7 @@
                     <!-- Advanced Research VOITURES -->
                     <div id="brand-car-div" class="d-flex flex-column"></div>
                     <div id="model-car-div" class="d-flex flex-column"></div>
-                    <div id="kilometres-car-div" class="d-flex flex-column"></div>
+                    <div id="kilometres-car-div"></div>
                     <div id="carburant-car-div"></div>
                     <div id="gearbox-car-div"></div>
                     <div id="color-car-div" class="d-flex flex-column"></div>

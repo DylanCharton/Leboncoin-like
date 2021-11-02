@@ -14,9 +14,9 @@
         content="Quoi que vous cherchiez, vous le trouverez sur notre site web. Notre communauté grandit de jour en jour et donc le choix d'objets disponibles aussi.">
 </head>
 
-<body>
+<body id="annonce-page">
     <?php session_start();
-    echo $_SESSION['id_user'];
+    
     // I need to require my class to use my conditions later on
         require_once("../class/Annonce.php");
         require_once("navbar.php");

@@ -151,7 +151,7 @@ let typeImmoDiv = document.querySelector('#type-of-immo-div');
 typeImmoSearch.addEventListener("click", ()=>{
     
     if (typeImmoDiv.innerHTML == ""){
-        typeImmoDiv.innerHTML = '<p>Type de bien :</p><div><input type="checkbox" name="typeimmo"><label for="appartement">Appartement</label></div><div><input type="checkbox" name="typeimmo"><label for="appartement">Maison</label></div>'
+        typeImmoDiv.innerHTML = '<p>Type de bien :</p><div><input type="checkbox" name="appartement" value="Appartement"><label for="appartement">Appartement</label></div><div><input type="checkbox" name="maison" value="Maison"><label for="maison">Maison</label></div>'
     } else {
         typeImmoDiv.innerHTML = "";
     }
@@ -194,7 +194,7 @@ modelCarSearch.addEventListener("click", ()=>{
 let kilometresCarDiv = document.querySelector('#kilometres-car-div');
 kilometreCarSearch.addEventListener("click", ()=>{
     if(kilometresCarDiv.innerHTML == ""){
-        kilometresCarDiv.innerHTML = '<label for="kilometres-car">Kilométrage</label><input type="number" name="kilometres-car" min="0">';
+        kilometresCarDiv.innerHTML = '<p>Kilométrage</p><label for="minkilometres">Entre</label><input type="number" name="minkilometres" min="0"> et <input type="number" name="maxkilometres" min="0" >km';
     } else {
         kilometresCarDiv.innerHTML = "";
     }
@@ -202,7 +202,7 @@ kilometreCarSearch.addEventListener("click", ()=>{
 let carburantCarDiv = document.querySelector('#carburant-car-div');
 carburantCarSearch.addEventListener("click", ()=>{
     if(carburantCarDiv.innerHTML == ""){
-        carburantCarDiv.innerHTML = '<p>Carburant :</p><div><input type="checkbox" name="carburant"><label for="carburant">Diesel</label></div><div><input type="checkbox" name="carburant"><label for="carburant">Essence</label></div><div><input type="checkbox" name="carburant"><label for="carburant">Électrique</label></div>';
+        carburantCarDiv.innerHTML = '<p>Carburant :</p><div><input type="checkbox" name="diesel" value="Diesel"><label for="diesel">Diesel</label></div><div><input type="checkbox" name="essence" value="Essence"><label for="carburant">Essence</label></div><div><input type="checkbox" name="electrique" value="Électrique"><label for="carburant">Électrique</label></div>';
     } else {
         carburantCarDiv.innerHTML= "";
     }
@@ -210,7 +210,7 @@ carburantCarSearch.addEventListener("click", ()=>{
 let gearboxCarDiv = document.querySelector('#gearbox-car-div');
 gearboxCarSearch.addEventListener('click', ()=>{
     if(gearboxCarDiv.innerHTML == ""){
-        gearboxCarDiv.innerHTML = '<p>Boîte de vitesse :</p><div><input type="checkbox" name="gearbox"><label for="gearbox">Automatique</label></div><div><input type="checkbox" name="gearbox"><label for="gearbox">Manuelle</label></div>';
+        gearboxCarDiv.innerHTML = '<p>Boîte de vitesse :</p><div><input type="checkbox" name="automatique"><label for="gearbox">Automatique</label></div><div><input type="checkbox" name="manuelle"><label for="gearbox">Manuelle</label></div>';
     } else {
         gearboxCarDiv.innerHTML = "";
     }
@@ -234,7 +234,7 @@ doorsCarSearch.addEventListener('click', ()=>{
 let dinCarDiv = document.querySelector('#din-car-div');
 dinCarSearch.addEventListener('click', ()=>{
     if(dinCarDiv.innerHTML == ""){
-        dinCarDiv.innerHTML = '<label for="din-car">Puissance DIN</label><input type="number" name="din-car" min="0">';
+        dinCarDiv.innerHTML = '<p>Puissance DIN</p><label for="mindin">Entre</label><input type="number" name="mindin" min="0"> et <input type="number" name="maxdin" min="0" >ch';
     } else {
         dinCarDiv.innerHTML = "";
     }
@@ -251,7 +251,7 @@ seatsCarSearch.addEventListener('click', ()=>{
 let typeGamingDiv = document.querySelector('#type-console-div');
 typeGamingSearch.addEventListener('click', ()=>{
     if(typeGamingDiv.innerHTML == ""){
-        typeGamingDiv.innerHTML = '<p>Type :</p><div><input type="checkbox" name="type-console"><label for="">Console</label></div><div><input type="checkbox" name="type-console"><label for="">Jeux vidéo</label></div><div><input type="checkbox" name="type-console"><label for="">Accessoires</label></div>'
+        typeGamingDiv.innerHTML = '<label for="type-gaming">Type :</label><select name="type-gaming"><option value=""></option><option value="Console">Console</option><option value="Jeux">Jeux</option><option value="Accessoires">Accessoires</option></select>'
     } else {
         typeGamingDiv.innerHTML = "";
     }

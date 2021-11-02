@@ -7,6 +7,9 @@
 form{
     width: 30vw;
 }
+/* div{
+    border: 1px red solid;
+} */
 
 input, select{
     margin-bottom : 1rem;
@@ -42,6 +45,7 @@ h1{
     /* border: 1px solid rgb(165, 165, 165); */
     border-radius: 1rem;
     box-shadow: 0px 0px 15px -8px rgb(133, 133, 133);
+    background-color: #fff;
 }
 
 #search-form{
@@ -51,7 +55,7 @@ h1{
 
 
 /* Number inputs */
-input[name="minprice"], input[name="maxprice"], input[name="minsurface"], input[name="maxsurface"], input[name="kilometres-car"], input[name="din-car"], input[name="doors-car"], input[name="seats-car"], input[name="storage-telephonie"]{
+input[name="minprice"], input[name="maxprice"], input[name="minsurface"], input[name="maxsurface"], input[name="kilometres-car"], input[name="din-car"], input[name="doors-car"], input[name="seats-car"], input[name="storage-telephonie"], input[name="minkilometres"], input[name="maxkilometres"]{
     width:5rem;
 }
 /* Text-inputs */
@@ -86,6 +90,7 @@ input[name='keyword-field']{
     border-radius: 0.5rem;
     padding: 2rem;
     box-shadow: 0px 0px 15px -8px rgb(133, 133, 133);
+    background-color: #fff;
 }
 
 input[name="modal-trigger"]{
@@ -134,4 +139,20 @@ input[name="modal-trigger"]:focus, input[name="modal-trigger"]:active{
 }
 
 
+/* Page annonces */
 
+#img-wrapper{
+    width: 40rem;
+    height: 30rem;
+}
+#seller-info{
+    height : 10rem;
+    border-radius: 2rem;
+    box-shadow: 0 0 15px -5px #000;
+    background-color: rgb(236, 236, 236);
+}
+
+#annonce-page{
+    background-image: url(../assets/img/bg3.jpg);
+    background-position: center;
+}
