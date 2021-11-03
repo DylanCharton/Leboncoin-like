@@ -165,9 +165,10 @@
             }
             ?>
         </div>
-
+        
     </section>
-
+    
+    <a href="upload.php">Upload</a>
 
 
 
@@ -176,6 +177,7 @@
         integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous">
     </script>
     <script src="js/index.js"></script>
+    <!-- <img src="uploads/IMG-61815a85d70e29.84943549.jpg" alt=""> -->
 </body>
 
 </html>

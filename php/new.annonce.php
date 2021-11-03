@@ -16,7 +16,8 @@
 
 <body>
     <?php session_start();
-    echo $_SESSION['id_user'];
+    // echo $_SESSION['id_user'];
+
     // I need to require my class to use my conditions later on
         require_once("../class/Annonce.php");
         require_once("navbar.php");
@@ -41,8 +42,30 @@
                 <option value="Voitures">Voitures</option>
                 <option value="Multimedia">Multimedia</option>
             </select>
-
+            <form method="post" enctype="multipart/form-data">
+                Choisissez l'image à télécharger :
+                <input type="file" name="upload" id="upload" accept=".png,.gif,.jpg" required>
+                <input type="submit" name="submit" id="upload" value="Télécharger">
+            </form>
             <!-- End of the common part for all creations of form -->
+            
+            <?php
+            
+
+                if (isset($_FILES['upload'])) {
+                    try{
+                        require_once "../class/Database.php";
+                        $bdd = new Database();
+                        $stmt = $bdd->connect()->prepare("INSERT INTO photos (name_photo, data_photo) VALUES (? , ?) ");
+                        $stmt->execute([$_FILES['upload']['name'], file_get_contents($_FILES['upload']['tmp_name'])]);
+                        echo "OK";
+                    }catch (Exception $ex) {
+                    echo $ex->getMessage();
+                    }
+                }
+                
+
+            ?>
 
             <?php
             // Now, I am setting the conditions to execute the methods in my Utilisateur class.
@@ -80,19 +103,19 @@
                 <div class="modal-body">
                     <h5>État neuf</h5>
                     <p>Bien non-utilisé, complet, avec emballage non ouvert et notice(s) d’utilisation.</p>
-                    
+
                     <h5>Très bon état</h5>
                     <p>Bien pas ou peu utilisé, sans aucun défaut ni rayure, complet et en parfait état de
-                    fonctionnement.</p>
-                    
+                        fonctionnement.</p>
+
                     <h5>Bon état</h5>
                     <p>Bien en parfait état de fonctionnement, comportant quelques petits défauts (mentionnés
-                    dans l’annonce et visibles sur les photos).</p> 
+                        dans l’annonce et visibles sur les photos).</p>
                     <h5>État satisfaisant</h5>
                     <p>Bien en état de fonctionnement correct, comportant des défauts et signes d’usure
-                    manifestes (mentionnés dans l’annonce et visibles sur les photos).</p> 
+                        manifestes (mentionnés dans l’annonce et visibles sur les photos).</p>
                     <h5>Pour pièces</h5>
-                    <p>Bien non fonctionnel, pour restauration complète ou récupération de pièces détachées.</p> 
+                    <p>Bien non fonctionnel, pour restauration complète ou récupération de pièces détachées.</p>
 
                 </div>
                 <div class="modal-footer">
