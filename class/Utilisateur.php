@@ -77,5 +77,13 @@ class Utilisateur extends Database
 
 
     }
+    function fetchOneUser($user){
+        $sql = $this->connect()->prepare("SELECT * FROM user WHERE id_user = :user");
+        $sql->bindValue(':user', $user);
+        $sql->execute();
+        $result = $sql->fetch(PDO::FETCH_ASSOC);
+    
+        return $result;
+    }
 }
 ?>

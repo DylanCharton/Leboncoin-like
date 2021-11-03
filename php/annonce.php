@@ -13,53 +13,122 @@
     <meta name="description"
         content="Quoi que vous cherchiez, vous le trouverez sur notre site web. Notre communauté grandit de jour en jour et donc le choix d'objets disponibles aussi.">
 </head>
+
 <body id="annonce-page">
     <?php session_start();
-    require_once('navbar.php');
     require_once('../class/Annonce.php');
+    require_once('../class/Utilisateur.php');
+    $ad = new Annonce();
+    $adInfo = $ad->fetchOneAd($_GET['id']);
+    $user = new Utilisateur();
+    $userInfo = $user->fetchOneUser($_GET['user']);
     ?>
-
-    <section class="container">
-    <?php 
-        
-        function fetchOneAd($id){
-            $annonce = new Annonce();
-            $sql = $annonce->connect()->prepare("SELECT * FROM annonces WHERE id_annonce = :id");
-            $sql->bindValue(':id', $id);
-            $sql->execute();
-            $result = $sql->fetch(PDO::FETCH_ASSOC);
-
-            return $result;
+    <nav class="d-flex justify-content-evenly align-items-center">
+        <a href="../index.php" class="site-name">The Good Corner</a>
+        <ul class="d-flex align-items-center mt-3">
+            <li class="mx-3"><a href=<?php if(isset($_SESSION['goodcorner_connected'])){echo './new.annonce.php';} else {echo './login.php';} ?>>Créer une annonce</a></li>
             
-        }
-        $ad = fetchOneAd($_GET['id']);
-        ?>
-        <div class="d-flex justify-content-between">
-            <div id="img-wrapper">
-                <img src="" alt="">
+            <?php 
+            if(isset($_SESSION['goodcorner_connected'])){
+                echo '<li class="mx-3"><a href="">Mon Compte</a></li>';
+                echo '<li><a class="btn btn-danger mx-3" href="./logout.php">Déconnexion</a></li>';
+                } else {
+                 echo '<li><a href="./login.php">Se connecter</a></li>';
+                 }
+                  ?>
+            
+            
+            
+        </ul>
+    </nav>
+
+    <section class="container mt-5">
+        <div class="d-flex justify-content-between mb-3">
+            <div id="img-wrapper" class="justify-content-center d-flex flex-column p-3">
+                <img src="https://via.placeholder.com/600x400.png" alt="" class="img-fluid">
+                <div>
+                    <h1 class="main-color"><?php echo $adInfo['title_annonce']; ?></h1>
+                    <p class="main-color"><?php echo ''.$adInfo['prix_annonce'].'€ TTC'?></p>
+                </div>
             </div>
             <div>
-                <aside id="seller-info">
-                [Photo du vendeur]Nom du vendeur
-                Contacter le vendeur
+                <aside id="seller-info" class="p-3">
+                    <p class="mb-0 main-color">Ce produit vous est proposé par</p>
+                    <a href="#" class="user-link"><?php echo $userInfo['name_user']?></a>
+                    <hr>
+                    <div class="justify-content-center d-flex">
+                        <p class="main-color">S'il vous intéresse n'hésitez pas à le contacter</p>
+                        <input type="button" value="Contacter" class="btn btn-success">
+                    </div>
+                    <div class="d-flex flex-column">
+                        <form action="" method="post" class="d-flex flex-column contact-form">
+                            <label for="mail">Votre mail</label>
+                            <input type="mail" name="mail" value="<?php if(isset($_POST['mail'])){echo $_POST['mail'];} ?>" required>
+                            <label for="message">Votre message</label>
+                            <textarea name="message" cols="30" rows="10" required><?php if(isset($_POST['message'])) { echo $_POST['message']; } ?></textarea>
+                            <input type="submit" name="send-message" value="Envoyer" class="btn btn-success mt-3">
+                            
+                        </form>
+                    </div>
                 </aside>
             </div>
         </div>
-        
+
         <!-- Div infos of the product -->
-        <div id="info-ads">
-            <h2>Description</h2>
-            <p><?php echo $ad['desc_annonce']?></p>
+        <div class="caracteristics-div p-4 d-flex justify-content-around main-color">
+            <div id="info-ads" class="col-4">
+                <h2>Description</h2>
+                <p><?php echo $adInfo['desc_annonce']?></p>
 
 
-        </div> 
-        <div>
-            <h2>Caractéristiques</h2>
+            </div>
+            <div>
+                <h2>Caractéristiques</h2>
+                <ul class="ps-0">
+                    <?php
+                $ad->displayCarac($adInfo);
+                ?>
+                </ul>
+            </div>
+
         </div>
 
         <!-- aside for the seller's informations -->
-        
+
     </section>
 </body>
-</html>
 
+</html>
+<?php
+if(isset($_POST['send-message'])){
+    if(!empty($_POST['mail']) && !empty($_POST['message'])){
+        $header="MIME-Version: 1.0\r\n";
+        $header.='From:"nom_d\'expediteur"<votre@mail.com>'."\n";
+        $header.='Content-Type:text/html; charset="uft-8"'."\n";
+        $header.='Content-Transfer-Encoding: 8bit';
+        $message='
+        <html>
+            <body>
+                <div align="center">
+            
+                
+                <u>Mail de l\'expéditeur :</u>'.$_POST['mail'].'<br />
+                <br />
+                '.nl2br($_POST['message']).'
+            
+                </div>
+            </body>
+        </html>
+        ';
+        mail("d.charton@codeur.online", "Quelqu'un vous contacte sur The Good Corner", $message, $header);
+        $msg="Votre message a bien été envoyé !";
+    } else {
+        $msg="Tous les champs doivent être complétés !";
+    }
+}
+?>
+<?php if(isset($msg)) {
+                                echo $msg;
+                                 }
+                                 var_dump($userInfo['mail_user']);
+                            ?>

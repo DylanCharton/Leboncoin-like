@@ -146,7 +146,7 @@ class Annonce extends Database
                   <p class="card-text text-black-50">'.$ad['desc_annonce'].'</p>
                   <div class="d-flex justify-content-evenly pt-5 card-bottom">
                   <h5 class="text-grey">'.$ad['prix_annonce'].'€</h5>
-                    <a href="../php/annonce.php?id='.$ad['id_annonce'].'" class="btn btn-success">Voir</a>
+                    <a href="./php/annonce.php?id='.$ad['id_annonce'].'&user='.$ad['id_user'].'" class="btn btn-success">Voir</a>
                   </div>
                 </div>
               </div>';
@@ -158,6 +158,13 @@ class Annonce extends Database
       $results = $sql->fetchAll(PDO::FETCH_ASSOC);
       return $results;
 
+    }
+    public function myAds($id){
+      $sql=$this->connect()->prepare("SELECT * FROM annonces WHERE id_user = :id");
+      $sql->bindValue(":id", $id);
+      $sql->execute();
+      $results = $sql->fetchAll(PDO::FETCH_ASSOC);
+      return $results;
     }
 
     public function searchAnnonce($keywords, $category, $localisation){
@@ -339,6 +346,83 @@ class Annonce extends Database
 
     }
 
+    public function fetchOneAd($id){
+      
+      $sql = $this->connect()->prepare("SELECT * FROM annonces WHERE id_annonce = :id");
+      $sql->bindValue(':id', $id);
+      $sql->execute();
+      $result = $sql->fetch(PDO::FETCH_ASSOC);
+
+      return $result;
+      
+  }
+  
+  public function displayCarac($ad){
+    echo '<li> Catégorie : '.$ad['categorie_annonce'].'';
+            if($ad['souscat_annonce'] !== null){
+                echo '<li> Sous-catégorie : '.$ad['souscat_annonce'].'';
+            }
+            if($ad['type_immo'] !== null){
+                echo '<li> Type de bien : '.$ad['type_immo'].'';
+            }
+            if($ad['surface_immo'] !== null){
+                echo '<li> Surface : '.$ad['surface_immo'].'';
+            }
+            if($ad['rooms_immo'] !== null){
+                echo '<li> Pièces : '.$ad['rooms_immo'].'';
+            }
+            if($ad['brand_car'] !== null){
+                echo '<li> Marque : '.$ad['brand_car'].'';
+            }
+            if($ad['model_car'] !== null){
+                echo '<li> Modèle : '.$ad['model_car'].'';
+            }
+            if($ad['kilometers_car'] !== null){
+                echo '<li> Kilométrage : '.$ad['kilometers_car'].'';
+            }
+            if($ad['carburant_car'] !== null){
+                echo '<li> Carburant : '.$ad['carburant_car'].'';
+            }
+            if($ad['geartype_car'] !== null){
+                echo '<li> Boîte de vitesse : '.$ad['geartype_car'].'';
+            }
+            if($ad['color_car'] !== null){
+                echo '<li> Couleur : '.$ad['color_car'].'';
+            }
+            if($ad['doors_car'] !== null){
+                echo '<li> Portes : '.$ad['doors_car'].'';
+            }
+            if($ad['din_car'] !== null){
+                echo '<li> Puissance DIN : '.$ad['din_car'].'';
+            }
+            if($ad['seats_car'] !== null){
+                echo '<li> Sièges : '.$ad['seats_car'].'';
+            }
+            if($ad['etat_multimedia'] !== null){
+                echo '<li> État : '.$ad['etat_multimedia'].'';
+            }
+            if($ad['type_gaming'] !== null){
+                echo '<li> Type : '.$ad['type_gaming'].'';
+            }
+            if($ad['brand_gaming'] !== null){
+                echo '<li> Marque : '.$ad['brand_gaming'].'';
+            }
+            if($ad['model_gaming'] !== null){
+                echo '<li> Modèle : '.$ad['model_gaming'].'';
+            }
+            if($ad['brand_phone'] !== null){
+                echo '<li> Marque : '.$ad['brand_phone'].'';
+            }
+            if($ad['model_phone'] !== null){
+                echo '<li> Modèle : '.$ad['model_phone'].'';
+            }
+            if($ad['color_phone'] !== null){
+                echo '<li> Couleur : '.$ad['color_phone'].'';
+            }
+            if($ad['storage_phone'] !== null){
+                echo '<li> Capacité de stockage : '.$ad['storage_phone'].'';
+            }
+  }
 
     /////////////////////--WHAT WE HAVE TO CREATE--///////////////////////
  

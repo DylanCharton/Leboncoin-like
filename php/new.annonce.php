@@ -19,8 +19,26 @@
     
     // I need to require my class to use my conditions later on
         require_once("../class/Annonce.php");
-        require_once("navbar.php");
+        
     ?>
+    <nav class="d-flex justify-content-evenly align-items-center">
+        <a href="../index.php" class="site-name">The Good Corner</a>
+        <ul class="d-flex align-items-center mt-3">
+            <li class="mx-3"><a href=<?php if(isset($_SESSION['goodcorner_connected'])){echo './new.annonce.php';} else {echo './login.php';} ?>>Créer une annonce</a></li>
+            
+            <?php 
+            if(isset($_SESSION['goodcorner_connected'])){
+                echo '<li class="mx-3"><a href="">Mon Compte</a></li>';
+                echo '<li><a class="btn btn-danger mx-3" href="./logout.php">Déconnexion</a></li>';
+                } else {
+                 echo '<li><a href="./login.php">Se connecter</a></li>';
+                 }
+                  ?>
+            
+            
+            
+        </ul>
+    </nav>
 
     <section class="d-flex flex-column align-items-center text-grey">
         <!-- The big form that is going to be cut in my conditions -->
