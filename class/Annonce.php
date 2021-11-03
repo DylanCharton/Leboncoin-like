@@ -132,7 +132,7 @@ class Annonce extends Database
           $sql->execute();
 
         }
-        //header('Refresh: 2; ../index.php');
+        header('Refresh: 2; ../index.php');
         echo '<div class="alert alert-success">Votre annonce a bien été créée, je vous ramène à l\'accueil</div>';
     }
 
@@ -152,6 +152,27 @@ class Annonce extends Database
               </div>';
 
     }
+    public function displayMyAds($ads){
+      foreach($ads as $ad)
+        echo ' <div class="card mx-3 pb-3 my-2" style="width: 20rem;">
+                <img src="https://via.placeholder.com/400x300.png" class="card-img-top" alt="main image of the ad">
+                <div class="card-body">
+                  <h5 class="card-title text-grey">'.$ad['title_annonce'].'</h5>
+                  <p class="card-text mb-0 text-grey">'.$ad['loc_annonce'].'</p>
+                  <p class="card-text text-black-50">'.$ad['desc_annonce'].'</p>
+                  <div class="d-flex justify-content-evenly pt-5 card-bottom">
+                  <h5 class="text-grey">'.$ad['prix_annonce'].'€</h5>
+                  <div class="mx-3">
+                    <a href="./annonce.php?id='.$ad['id_annonce'].'&user='.$ad['id_user'].'" class="btn btn-success">Voir</a>
+                  </div>
+                    <form method="get">
+                    <input type="submit" value="Supprimer" class="btn btn-danger">
+                    <input type="hidden" name="supprId" value="'.$ad['id_annonce'].'">
+                    </form>
+                  </div>
+                </div>
+              </div>';
+    }
     public function allAds(){
       $sql=$this->connect()->prepare("SELECT * FROM annonces ORDER BY id_annonce DESC");
       $sql->execute();
@@ -165,6 +186,13 @@ class Annonce extends Database
       $sql->execute();
       $results = $sql->fetchAll(PDO::FETCH_ASSOC);
       return $results;
+    }
+    public function deleteAd($id){
+      $del = $this->connect()->prepare("DELETE FROM annonces WHERE id_annonce = :id");
+      $del->bindParam(':id', $id);
+      $del-> execute();
+      header('Location: myaccount.php');
+      
     }
 
     public function searchAnnonce($keywords, $category, $localisation){
@@ -184,17 +212,11 @@ class Annonce extends Database
         array_push($param, $category);
 
         // Vente Immobilières category
-        if(!empty($_POST['appartement'])){
-          $appartement = $_POST['appartement'];
+        if(!empty($_POST['type-immo'])){
+          $type = $_POST['type-immo'];
           $select .= " && type_immo = ?";
-          array_push($param, $appartement);
+          array_push($param, $type);
         
-        }
-        if(!empty($_POST['maison'])){
-          $maison = $_POST['maison'];
-          $select .= " && type_immo = ?";
-          array_push($param, $maison);
-
         }
         if(!empty($_POST['minsurface']) && !empty($_POST['maxsurface'])){
           $minsurface = $_POST['minsurface'];
@@ -230,32 +252,18 @@ class Annonce extends Database
         }
         
 
-        if(!empty($_POST['diesel'])){
-          $diesel = $_POST['diesel'];
+        if(!empty($_POST['carburant'])){
+          $carburant = $_POST['carburant'];
           $select .= " && carburant_car = ?";
-          array_push($param, $diesel);
+          array_push($param, $carburant);
 
         }
-        if(!empty($_POST['essence'])){
-          $essence = $_POST['essence'];
-          $select .= " && carburant_car = ?";
-          array_push($param, $essence);
-        }
-        if(!empty($_POST['electrique'])){
-          $electrique = $_POST['electrique'];
-          $select .= " && carburant_car = ?";
-          array_push($param, $electrique);
-        }
-        if(!empty($_POST['automatique'])){
-          $automatique = $_POST['automatique'];
+        if(!empty($_POST['gearbox'])){
+          $gearbox = $_POST['gearbox'];
           $select .= " && geartype_car = ?";
-          array_push($param, $automatique);
+          array_push($param, $gearbox);
         }
-        if(!empty($_POST['manuelle'])){
-          $automatique = $_POST['manuelle'];
-          $select .= " && geartype_car = ?";
-          array_push($param, $manuelle);
-        }
+        
         if(!empty($_POST['color-car'])){
           $colorCar = $_POST['color-car'];
           $select .= " && color_car LIKE ?";
@@ -378,7 +386,7 @@ class Annonce extends Database
                 echo '<li> Modèle : '.$ad['model_car'].'';
             }
             if($ad['kilometers_car'] !== null){
-                echo '<li> Kilométrage : '.$ad['kilometers_car'].'';
+                echo '<li> Kilométrage : '.$ad['kilometers_car'].'km';
             }
             if($ad['carburant_car'] !== null){
                 echo '<li> Carburant : '.$ad['carburant_car'].'';
@@ -393,7 +401,7 @@ class Annonce extends Database
                 echo '<li> Portes : '.$ad['doors_car'].'';
             }
             if($ad['din_car'] !== null){
-                echo '<li> Puissance DIN : '.$ad['din_car'].'';
+                echo '<li> Puissance DIN : '.$ad['din_car'].'ch.';
             }
             if($ad['seats_car'] !== null){
                 echo '<li> Sièges : '.$ad['seats_car'].'';
@@ -420,7 +428,7 @@ class Annonce extends Database
                 echo '<li> Couleur : '.$ad['color_phone'].'';
             }
             if($ad['storage_phone'] !== null){
-                echo '<li> Capacité de stockage : '.$ad['storage_phone'].'';
+                echo '<li> Capacité de stockage : '.$ad['storage_phone'].'Go';
             }
   }
 

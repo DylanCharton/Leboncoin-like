@@ -13,34 +13,37 @@
     <meta name="description"
         content="Quoi que vous cherchiez, vous le trouverez sur notre site web. Notre communauté grandit de jour en jour et donc le choix d'objets disponibles aussi.">
 </head>
-<?php session_start();?>
+<?php session_start();
+require_once("../class/Annonce.php");
+require_once("../class/Utilisateur.php");
+?>
 <body id="annonce-page">
     <nav class="d-flex justify-content-evenly align-items-center">
-        <a href="#" class="site-name">The Good Corner</a>
+        <a href="../index.php" class="site-name">The Good Corner</a>
         <ul class="d-flex align-items-center mt-3">
-            <li class="mx-3"><a href=<?php if(isset($_SESSION['goodcorner_connected'])){echo './php/new.annonce.php';} else {echo './php/login.php';} ?>>Créer une annonce</a></li>
+            <li class="mx-3"><a href=<?php if(isset($_SESSION['goodcorner_connected'])){echo './new.annonce.php';} else {echo './login.php';} ?>>Créer une annonce</a></li>
             
             <?php 
             if(isset($_SESSION['goodcorner_connected'])){
                 echo '<li class="mx-3"><a href="">Mon Compte</a></li>';
-                echo '<li><a class="btn btn-danger mx-3" href="php/logout.php">Déconnexion</a></li>';
+                echo '<li><a class="btn btn-danger mx-3" href="./logout.php">Déconnexion</a></li>';
                 } else {
-                 echo '<li><a href="./php/login.php">Se connecter</a></li>';
+                 echo '<li><a href="./login.php">Se connecter</a></li>';
                  }
                   ?>
         </ul>
     </nav>
-    <section>
-        <?php 
-        require_once("../class/Annonce.php");
-        require_once("../class/Utilisateur.php");
-        ?>
-        <div>
+    <section class="container">
+    <h1 class="main-color">Mes annonces</h1>
+        <div class="d-flex">
             <?php 
             $myAds = new Annonce();
-            $test = $myAds->display($myAds->myAds($_SESSION['id_user']));
+            $myAds->displayMyAds($myAds->myAds($_SESSION["id_user"]));
+            if(isset($_GET["supprId"])){
+                $myAds->deleteAd($_GET["supprId"]);
+            }
 
-            echo $test
+            
             ?>
 
         </div>

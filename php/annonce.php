@@ -26,19 +26,18 @@
     <nav class="d-flex justify-content-evenly align-items-center">
         <a href="../index.php" class="site-name">The Good Corner</a>
         <ul class="d-flex align-items-center mt-3">
-            <li class="mx-3"><a href=<?php if(isset($_SESSION['goodcorner_connected'])){echo './new.annonce.php';} else {echo './login.php';} ?>>Créer une annonce</a></li>
-            
+            <li class="mx-3"><a
+                    href=<?php if(isset($_SESSION['goodcorner_connected'])){echo './new.annonce.php';} else {echo './login.php';} ?>>Créer
+                    une annonce</a></li>
+
             <?php 
             if(isset($_SESSION['goodcorner_connected'])){
-                echo '<li class="mx-3"><a href="">Mon Compte</a></li>';
+                echo '<li class="mx-3"><a href="myaccount.php">Mon Compte</a></li>';
                 echo '<li><a class="btn btn-danger mx-3" href="./logout.php">Déconnexion</a></li>';
                 } else {
                  echo '<li><a href="./login.php">Se connecter</a></li>';
                  }
                   ?>
-            
-            
-            
         </ul>
     </nav>
 
@@ -63,11 +62,17 @@
                     <div class="d-flex flex-column">
                         <form action="" method="post" class="d-flex flex-column contact-form">
                             <label for="mail">Votre mail</label>
-                            <input type="mail" name="mail" value="<?php if(isset($_POST['mail'])){echo $_POST['mail'];} ?>" required>
+                            <input type="mail" name="mail"
+                                value="<?php if(isset($_SESSION['goodcorner_connected'])){echo $_SESSION['my_mail'];} if(isset($_POST['mail'])){echo $_POST['mail'];} ?>"
+                                required>
                             <label for="message">Votre message</label>
-                            <textarea name="message" cols="30" rows="10" required><?php if(isset($_POST['message'])) { echo $_POST['message']; } ?></textarea>
+                            <textarea name="message" cols="30" rows="10"
+                                required><?php if(isset($_POST['message'])) { echo $_POST['message']; } ?></textarea>
                             <input type="submit" name="send-message" value="Envoyer" class="btn btn-success mt-3">
-                            
+                            <?php if(isset($msg)) {
+                                echo $msg;
+                                 }
+                            ?>
                         </form>
                     </div>
                 </aside>
@@ -127,8 +132,3 @@ if(isset($_POST['send-message'])){
     }
 }
 ?>
-<?php if(isset($msg)) {
-                                echo $msg;
-                                 }
-                                 var_dump($userInfo['mail_user']);
-                            ?>

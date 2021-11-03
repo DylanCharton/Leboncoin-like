@@ -28,7 +28,7 @@
             
             <?php 
             if(isset($_SESSION['goodcorner_connected'])){
-                echo '<li class="mx-3"><a href="">Mon Compte</a></li>';
+                echo '<li class="mx-3"><a href="myaccount.php">Mon Compte</a></li>';
                 echo '<li><a class="btn btn-danger mx-3" href="./logout.php">Déconnexion</a></li>';
                 } else {
                  echo '<li><a href="./login.php">Se connecter</a></li>';
