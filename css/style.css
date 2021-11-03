@@ -1,15 +1,7 @@
-
-.text-grey{
-    color:rgb(65, 77, 95)
-}
-
 /* Form of the create ad page, careful to the others. */
 form{
     width: 30vw;
 }
-/* div{
-    border: 1px red solid;
-} */
 
 input, select{
     margin-bottom : 1rem;

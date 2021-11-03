@@ -19,8 +19,10 @@
     require_once('../class/Annonce.php');
     require_once('../class/Utilisateur.php');
     $ad = new Annonce();
+    // I use the ID I put in the URL previously to get the id of the ad
     $adInfo = $ad->fetchOneAd($_GET['id']);
     $user = new Utilisateur();
+    // Same here but to get the id of the user
     $userInfo = $user->fetchOneUser($_GET['user']);
     ?>
     <nav class="d-flex justify-content-evenly align-items-center">
@@ -46,6 +48,7 @@
             <div id="img-wrapper" class="justify-content-center d-flex flex-column p-3">
                 <img src="https://via.placeholder.com/600x400.png" alt="" class="img-fluid">
                 <div>
+                    <!-- Doing a lot of little of echo to get my datas -->
                     <h1 class="main-color"><?php echo $adInfo['title_annonce']; ?></h1>
                     <p class="main-color"><?php echo ''.$adInfo['prix_annonce'].'€ TTC'?></p>
                 </div>
@@ -62,6 +65,7 @@
                     <div class="d-flex flex-column">
                         <form action="" method="post" class="d-flex flex-column contact-form">
                             <label for="mail">Votre mail</label>
+                            <!-- If the user is logged in the mail input is already filled -->
                             <input type="mail" name="mail"
                                 value="<?php if(isset($_SESSION['goodcorner_connected'])){echo $_SESSION['my_mail'];} if(isset($_POST['mail'])){echo $_POST['mail'];} ?>"
                                 required>
@@ -104,11 +108,12 @@
 </body>
 
 </html>
+<!-- Code for the form -->
 <?php
 if(isset($_POST['send-message'])){
     if(!empty($_POST['mail']) && !empty($_POST['message'])){
         $header="MIME-Version: 1.0\r\n";
-        $header.='From:"nom_d\'expediteur"<votre@mail.com>'."\n";
+        $header.='From:"The Good Corner"<dylan@good.corner>'."\n";
         $header.='Content-Type:text/html; charset="uft-8"'."\n";
         $header.='Content-Transfer-Encoding: 8bit';
         $message='

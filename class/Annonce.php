@@ -10,13 +10,14 @@ class Annonce extends Database
     private $localisation;
 
     public function createAnnonce($title, $description, $price, $localisation, $category, $id){
+      // I start the request here
         $create = "INSERT INTO annonces (title_annonce, desc_annonce, prix_annonce, loc_annonce, categorie_annonce, id_user, ";
 
         if(isset($_POST['submitImmo'])){
           $typeImmo = strip_tags($_POST['type-choice']);
           $surface = strip_tags($_POST['surface']);
           $rooms = strip_tags($_POST['rooms']);
-
+          // I finish the request here, only when the condition is chosen, since I generate several submit buttons so I only get the datas I want
           $create .= " type_immo, surface_immo, rooms_immo) VALUES (:titre, :desc, :price, :localisation, :categorie, :user , :typeimmo, :surface, :rooms)";
 
           $sql = $this->connect()->prepare($create);
@@ -81,7 +82,7 @@ class Annonce extends Database
           $sql->execute();
 
         }
-
+        // Here I don't make any difference between the categories and the sub-categories since the sub-categories will automatically be linked with the big category
         if(isset($_POST['submitGaming'])){
           $type = strip_tags($_POST['type-gaming']);
           $brand = strip_tags($_POST['brand-gaming']);
@@ -137,6 +138,7 @@ class Annonce extends Database
     }
 
     public function display($ads){
+      // Classic foreach loop the display the ads properly
         foreach($ads as $ad)
         echo ' <div class="card mx-3 pb-3 my-2" style="width: 20rem;">
                 <img src="https://via.placeholder.com/400x300.png" class="card-img-top" alt="main image of the ad">
@@ -153,6 +155,7 @@ class Annonce extends Database
 
     }
     public function displayMyAds($ads){
+      // That function is made only for the My Account page and has a Delete button
       foreach($ads as $ad)
         echo ' <div class="card mx-3 pb-3 my-2" style="width: 20rem;">
                 <img src="https://via.placeholder.com/400x300.png" class="card-img-top" alt="main image of the ad">
@@ -173,6 +176,8 @@ class Annonce extends Database
                 </div>
               </div>';
     }
+
+    // Here I simply get all the entries in my database
     public function allAds(){
       $sql=$this->connect()->prepare("SELECT * FROM annonces ORDER BY id_annonce DESC");
       $sql->execute();
@@ -180,6 +185,7 @@ class Annonce extends Database
       return $results;
 
     }
+    // Here I get the entries that belongs to the current user
     public function myAds($id){
       $sql=$this->connect()->prepare("SELECT * FROM annonces WHERE id_user = :id");
       $sql->bindValue(":id", $id);
@@ -196,17 +202,20 @@ class Annonce extends Database
     }
 
     public function searchAnnonce($keywords, $category, $localisation){
+      // Starting the request that will be completed according to the conditions filled
       $select = "SELECT * FROM annonces WHERE 1=1";
+      // Declaring an array that will be filled later so I can put it in the ->execute()
       $param = array();
 // If my two prices fields aren't empty, I'll trigger a research between the first and the second input
       if(!empty($_POST['minprice']) && (!empty($_POST['maxprice']))){
         $min = $_POST['minprice'];
         $max = $_POST['maxprice'];
         $select .= "&& prix_annonce BETWEEN ? AND ?";
+        // array_push() allows me to push the parameter in the array
         array_push($param, $min);
         array_push($param, $max);
       }
-      // The next 3 fields are the main fields
+      // The category condition contains all the conditions related to categories, just in case.
       if(!empty($category)){
         $select .= " && categorie_annonce = ?";
         array_push($param, $category);
@@ -343,9 +352,10 @@ class Annonce extends Database
         $select.= " && loc_annonce LIKE ?";
         array_push($param, '%'.$localisation.'%');
       }
-      // Now I start the advanced search engine
       
+      // 
       $sql = $this->connect()->prepare($select);
+      // I put the array in the execute()
       $sql->execute($param);
       $result = $sql->fetchAll(PDO::FETCH_ASSOC);
       
@@ -355,7 +365,7 @@ class Annonce extends Database
     }
 
     public function fetchOneAd($id){
-      
+      // Here I get the ad I clicked on
       $sql = $this->connect()->prepare("SELECT * FROM annonces WHERE id_annonce = :id");
       $sql->bindValue(':id', $id);
       $sql->execute();
@@ -366,6 +376,7 @@ class Annonce extends Database
   }
   
   public function displayCarac($ad){
+    // That function allow me to display ONLY THE NON NULL variables in the ad page
     echo '<li> Catégorie : '.$ad['categorie_annonce'].'';
             if($ad['souscat_annonce'] !== null){
                 echo '<li> Sous-catégorie : '.$ad['souscat_annonce'].'';

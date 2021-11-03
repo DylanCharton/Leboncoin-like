@@ -77,6 +77,7 @@ class Utilisateur extends Database
 
 
     }
+    // Here I only want one user, the one corresponding to the id of the ad I target
     function fetchOneUser($user){
         $sql = $this->connect()->prepare("SELECT * FROM user WHERE id_user = :user");
         $sql->bindValue(':user', $user);

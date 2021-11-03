@@ -38,7 +38,9 @@ require_once("../class/Utilisateur.php");
         <div class="d-flex">
             <?php 
             $myAds = new Annonce();
+            // Calling the function to display my ads with the function that gets all the ads with the id of the user logged in
             $myAds->displayMyAds($myAds->myAds($_SESSION["id_user"]));
+            // Condition of execution
             if(isset($_GET["supprId"])){
                 $myAds->deleteAd($_GET["supprId"]);
             }
