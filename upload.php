@@ -13,7 +13,7 @@
 <form method="post" enctype="multipart/form-data">
   Selectionner une image a Télécharger :
   <input type="file" name="upload" id="upload" accept=".png,.gif,.jpg" required>
-  <input type="submit" name="submit" id="submit" value="Upload">
+  <input type="submit" name="submit" id="submit" value="Télécharger">
 </form>
 
 <!--SAVE IMAGE INTO DATABASE-->

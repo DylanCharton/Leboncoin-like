@@ -56,9 +56,9 @@
                 </div>
                 <br>
                 <!-- I will use that div to generate the buttons of criteria when the user choses a category -->
-               <p>Recherche avancée</p>
+                <p>Recherche avancée</p>
                 <div id="criteria-selector" class="d-flex flex-wrap">
-                
+
                     <input type="button" name="price-search" value="Prix" class="btn btn-outline-secondary"
                         id="price-search">
                     <!-- Buttons for immobilier -->
@@ -109,9 +109,9 @@
 
                 </div>
                 <!-- And in that div, it's the forms that are going to be generated -->
-                
+
                 <div id="display-criteria">
-                    
+
                     <!-- Price -->
                     <div id="price-search-div" class="d-none">
                         <label for="minprice">Prix entre</label>
@@ -143,7 +143,7 @@
                     <div id="storage-telephonie-div" class="d-flex flex-column"></div>
                     <!-- Advanced search MULTIMEDIA -->
                     <div id="state-multimedia-div" class="d-flex flex-column"></div>
-                    
+
 
                     <br />
                     <input type="submit" name="search-submit" value="Rechercher" class="btn btn-success">
@@ -165,10 +165,31 @@
             }
             ?>
         </div>
-        
+
     </section>
-    
+
     <a href="upload.php">Upload</a>
+
+ <?php 
+
+    // Include the database configuration file  
+    require_once 'class/Database.php'; 
+ 
+    // Get image data from database 
+    $bdd = new Database();
+    $result = $bdd->connect()->prepare("SELECT photos FROM leboncoin ORDER BY data_photo DESC"); 
+
+?>
+
+    <?php if($result-> rowCount() > 0){ ?>
+        <div class="gallery">
+            <?php while($row = $result-> fetch(PDO::FETCH_ASSOC)){ ?>
+                <img src="data:image/jpg;charset=utf8;base64, <?php echo base64_encode($row['photos']); ?> "/>
+            <?php } ?>
+        </div>
+    <?php }else{ ?>
+        <p class="status error">Image(s) not found...</p>
+    <?php } ?>
 
 
 
