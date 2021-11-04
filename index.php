@@ -15,7 +15,7 @@
         content="Quoi que vous cherchiez, vous le trouverez sur notre site web. Notre communauté grandit de jour en jour et donc le choix d'objets disponibles aussi.">
 </head>
 
-<body>
+<body id="annonce-page">
     <?php 
     require_once("class/Utilisateur.php");
     require_once("class/Annonce.php");
@@ -26,7 +26,7 @@
     ?>
     <section id="search-section" class="w-100 d-flex justify-content-center">
         <div id="search-engine" class="px-5 py-3 mt-5">
-            <h2 class="text-grey">Rechercher</h2>
+            <h2 class="main-color">Rechercher</h2>
             <form action="" method="post" id="search-form">
                 <div class="d-inline-flex flex-column">
                     <label for="keyword-field">Mot-clefs de l'annonce</label>
@@ -125,7 +125,7 @@
                     <!-- Advanced Research VOITURES -->
                     <div id="brand-car-div" class="d-flex flex-column"></div>
                     <div id="model-car-div" class="d-flex flex-column"></div>
-                    <div id="kilometres-car-div" class="d-flex flex-column"></div>
+                    <div id="kilometres-car-div"></div>
                     <div id="carburant-car-div"></div>
                     <div id="gearbox-car-div"></div>
                     <div id="color-car-div" class="d-flex flex-column"></div>
@@ -152,9 +152,10 @@
     </section>
 
     <section class="mt-3">
-        <h2 class="ms-3 text-grey">Nos dernières annonces...</h2>
+        <h2 class="ms-3 main-color">Nos dernières annonces...</h2>
         <div class="mx-4 d-flex flex-wrap justify-content-center">
             <?php 
+            // If the user clicked on the submit button, display the result, otherwise display all the ads
             if(isset($_POST['search-submit'])){
                 $allAds->display($allAds->searchAnnonce($_POST['keyword-field'], $_POST['category-search'], $_POST['localisation-search']));
 
