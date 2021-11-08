@@ -475,6 +475,18 @@ categories.addEventListener('change', ()=>{
     
 });
 
+// Locating the input where I upload images
+let image = document.querySelector('#image-uploader');
+// Function to limit the number of images
+image.addEventListener('change', ()=>{
+    // Interesting to see what returns the object created.
+    console.log(image.files[0]);
+    if(image.files.length > 10){
+        alert("Vous ne pouvez transférer que 10 photos maximum");
+        image.value= "";
+    }
+})
+
 
 
 

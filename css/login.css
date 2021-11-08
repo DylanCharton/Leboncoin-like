@@ -2,7 +2,7 @@
 
 body {
 
-    background-image: url('../assets/img/backg.png');
+    background-image: url('../assets/img/background.png');
     padding: 30px;
     font-family: 'Numans', sans-serif;
 }
@@ -20,7 +20,7 @@ form {
     width: 100%;
     padding: 30px;
     border: 1px solid #f1f1f1;
-    background: #fff;
+    background: #fefdec;
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
     border-radius: 50px;
 
@@ -38,27 +38,34 @@ input[type=password], input[type=mail] {
     border: 1px solid #ccc;
     box-sizing: border-box;
     border-radius: 10px;
+    background-color: #fefdec;
 }
 
 /* Set a style for all buttons */
 input[type=submit] {
 
-    background-color: #252525;
-    color: white;
-    
-    
-    border: none;
+    background-color: #fefdec;
+    color: #e3b100;
     cursor: pointer;
     width: fit-content;
     border-radius: 20px;
-    border: 1px solid #2e302e;
+    border: 1px solid #e3b100;
     transition: 0.3s;
 }
 
 input[type=submit]:hover {
 
-    background-color: white;
-    color: #000000;
-    border: 1px solid #2e302e;
+    background-color: #e3b100;
+    color: #fefdec;
+    border: 1px solid #e3b100;
     transition : 0.3s;
+}
+
+.password-conditions{
+    font-size: 0.8rem;
+    color: rgb(92, 92, 92);
+}
+#sign-in-or-up{
+    text-decoration: none;
+    color : #e3b100;
 }

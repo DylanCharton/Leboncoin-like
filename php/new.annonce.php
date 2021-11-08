@@ -22,7 +22,7 @@
         
     ?>
     <nav class="d-flex justify-content-evenly align-items-center">
-        <a href="../index.php" class="site-name">The Good Corner</a>
+        <a href="../index.php" class="site-name"><img src="../assets/img/logo_small.png" alt="logo" id="logo" class=></a>
         <ul class="d-flex align-items-center mt-3">
             <li class="mx-3"><a href=<?php if(isset($_SESSION['goodcorner_connected'])){echo './new.annonce.php';} else {echo './login.php';} ?>>Créer une annonce</a></li>
             
@@ -48,6 +48,8 @@
             <input type="text" name="title" required>
             <label for="desc" required>Description</label>
             <textarea name="desc" id="desc" cols="30" rows="10" required></textarea>
+            <label for="image">Photos</label>
+            <input type="file" name="image" id="image-uploader" multiple accept=".png, .jpeg, .jpg">
             <label for="price">Prix</label>
             <input type="number" name="price" required>
             <label for="localisation">Localisation</label>

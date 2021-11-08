@@ -138,7 +138,7 @@ class Annonce extends Database
     }
 
     public function display($ads){
-      // Classic foreach loop the display the ads properly
+      // Classic foreach loop to display the ads properly
         foreach($ads as $ad)
         echo ' <div class="card mx-3 pb-3 my-2" style="width: 20rem;">
                 <img src="https://via.placeholder.com/400x300.png" class="card-img-top" alt="main image of the ad">

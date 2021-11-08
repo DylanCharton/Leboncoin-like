@@ -26,7 +26,7 @@
     $userInfo = $user->fetchOneUser($_GET['user']);
     ?>
     <nav class="d-flex justify-content-evenly align-items-center">
-        <a href="../index.php" class="site-name">The Good Corner</a>
+        <a href="../index.php" class="site-name"><img src="../assets/img/logo_small.png" alt="logo" id="logo" class=></a>
         <ul class="d-flex align-items-center mt-3">
             <li class="mx-3"><a
                     href=<?php if(isset($_SESSION['goodcorner_connected'])){echo './new.annonce.php';} else {echo './login.php';} ?>>Créer
@@ -60,23 +60,23 @@
                     <hr>
                     <div class="justify-content-center d-flex">
                         <p class="main-color">S'il vous intéresse n'hésitez pas à le contacter</p>
-                        <input type="button" value="Contacter" class="btn btn-success">
+                        <input type="button" id="contact-button" value="Contacter" class="btn btn-success">
                     </div>
-                    <div class="d-flex flex-column">
+                    <div class="d-flex flex-column d-none" id="contact-form">
                         <form action="" method="post" class="d-flex flex-column contact-form">
-                            <label for="mail">Votre mail</label>
-                            <!-- If the user is logged in the mail input is already filled -->
-                            <input type="mail" name="mail"
-                                value="<?php if(isset($_SESSION['goodcorner_connected'])){echo $_SESSION['my_mail'];} if(isset($_POST['mail'])){echo $_POST['mail'];} ?>"
-                                required>
-                            <label for="message">Votre message</label>
-                            <textarea name="message" cols="30" rows="10"
-                                required><?php if(isset($_POST['message'])) { echo $_POST['message']; } ?></textarea>
-                            <input type="submit" name="send-message" value="Envoyer" class="btn btn-success mt-3">
-                            <?php if(isset($msg)) {
+                        <?php if(isset($msg)) {
                                 echo $msg;
                                  }
                             ?>
+                            <label for="mail">Votre mail</label>
+                            <!-- If the user is logged in the mail input is already filled -->
+                            <input type="mail" name="mail"
+                                value="<?php if(isset($_SESSION['goodcorner_connected'])){echo $_SESSION['my_mail'];}?>"
+                                <?php if(isset($_SESSION['goodcorner_connected'])){echo "disabled ";}?>required>
+                            <label for="message">Votre message</label>
+                            <textarea name="message" cols="30" rows="5"
+                                required><?php if(isset($_POST['message'])) { echo $_POST['message']; } ?></textarea>
+                            <input type="submit" name="send-message" value="Envoyer" class="btn btn-success mt-3">
                         </form>
                     </div>
                 </aside>
@@ -105,6 +105,7 @@
         <!-- aside for the seller's informations -->
 
     </section>
+    <script src="../js/annonce.js"></script>
 </body>
 
 </html>
@@ -130,7 +131,7 @@ if(isset($_POST['send-message'])){
             </body>
         </html>
         ';
-        mail("d.charton@codeur.online", "Quelqu'un vous contacte sur The Good Corner", $message, $header);
+        mail("d.charton@codeur.online", "Quelqu'un est intéressé par votre ".$adInfo['title_annonce']."", $message, $header);
         $msg="Votre message a bien été envoyé !";
     } else {
         $msg="Tous les champs doivent être complétés !";
