@@ -1,5 +1,5 @@
 <nav class="d-flex justify-content-evenly align-items-center">
-        <a href="#" class="site-name">The Good Corner</a>
+        <a href="#"><img src="../assets/img/logo_small.png" alt="logo" id="logo" class=></a>
         <ul class="d-flex align-items-center mt-3">
             <!-- If the user is logged in, they can access the creation of ads, otherwise they have to log in -->
             <li class="mx-3"><a href=<?php if(isset($_SESSION['goodcorner_connected'])){echo './php/new.annonce.php';} else {echo './php/login.php';} ?>>Créer une annonce</a></li>

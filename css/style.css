@@ -1,11 +1,15 @@
 /* Form of the create ad page, careful to the others. */
-form {
+
+form{
     width: 30vw;
 }
 
-input,
-select {
-    margin-bottom: 1rem;
+input, select, textarea{
+    margin-bottom : 1rem;
+    background-color: #fefdec;
+    border : 1px solid #1D213F;
+    border-radius : 0.3rem;
+    padding : 0.3rem;
 }
 
 /* Index elements */
@@ -16,20 +20,24 @@ li {
 
 li>a {
     text-decoration: none;
-    color: #fff;
+    color: #fefdec;
+    font-weight: 500;
 }
-
-li>a:hover {
-
-    color: #fff;
+li > a:hover {
+    
+    color: #fefdec;
 }
 
 nav {
-    background-color: rgb(65, 77, 95);
+    background-color: #1d213f;
 }
 
-h1 {
-    color: #fff;
+h1{
+    color: #fefdec;
+}
+
+nav > .btn-danger {
+    background-color: #E3B100;
 }
 
 /* search engine */
@@ -38,7 +46,7 @@ h1 {
     width: 56vw;
     border-radius: 1rem;
     box-shadow: 0px 0px 15px -8px rgb(133, 133, 133);
-    background-color: #fff;
+    background-color: #fefdec;
 }
 
 #search-form {
@@ -46,16 +54,8 @@ h1 {
 
 }
 
-.site-name{
-    font-size: 3rem;
-    text-decoration: none;
-    color : #fff;
-}
-.site-name:hover{
-    color: #fff;
-}
-.site-name:visited{
-    color: #fff;
+.card{
+    background-color: #fefdec;
 }
 
 /* Number inputs */
@@ -80,20 +80,17 @@ input[name='keyword-field'] {
     width: 26vw;
 }
 
-.btn-success {
-    background-color: rgb(65, 77, 95);
-    border: 1px solid rgb(65, 77, 95);
+.btn-success{
+    background-color: #E3B100;
+    border : 1px solid #E3B100;
 }
-
-.btn-success:hover,
-.btn-success:active {
-    background-color: rgb(42, 52, 66);
-    border: 1px solid rgb(42, 52, 66);
+.btn-success:hover, .btn-success:active{
+    background-color: #E3B100;
+    border : 1px solid #E3B100;
 }
-
-.btn-success:focus {
-    background-color: rgb(42, 52, 66);
-    border: 1px solid rgb(42, 52, 66);
+.btn-success:focus{
+    background-color: #E3B100;
+    border : 1px solid #E3B100;
     box-shadow: 0 0 0 0.25rem rgb(65 77 95 / 50%);
 }
 
@@ -107,7 +104,7 @@ input[name='keyword-field'] {
     border-radius: 0.5rem;
     padding: 2rem;
     box-shadow: 0px 0px 15px -8px rgb(133, 133, 133);
-    background-color: #fff;
+    background-color: #fefdec;
 }
 
 input[name="modal-trigger"] {
@@ -117,15 +114,14 @@ input[name="modal-trigger"] {
     margin-left: 0.5rem;
     padding-top: 3px;
     padding-bottom: 3px;
-    border: 1px solid rgb(65, 77, 95);
-    color: rgb(65, 77, 95);
-
-
+    border: 1px solid #E3B100;
+    color: #E3B100;
+    
+    
 }
-
-input[name="modal-trigger"]:hover {
-    background-color: rgb(65, 77, 95);
-    border: 1px solid rgb(65, 77, 95);
+input[name="modal-trigger"]:hover{
+    background-color: #E3B100;
+    border: 1px solid #E3B100;
 }
 
 input[name="modal-trigger"]:focus,
@@ -156,6 +152,13 @@ input[name="modal-trigger"]:active {
     border-radius: 1rem;
     margin-left: 0.3rem;
     margin-right: 0.3rem;
+    border: 1px solid #E3B100;
+    color: #E3B100;
+}
+.btn-outline-secondary:hover{
+    color:#fefdec;
+    background-color: #E3B100;
+    border-color: #E3B100;
 }
 
 
@@ -163,8 +166,8 @@ input[name="modal-trigger"]:active {
 
 #img-wrapper{
     max-width: 40rem;
-    max-height: 40rem; 
-    background-color: #fff;
+    max-height: fit-content; 
+    background-color: #fefdec;
     border-radius: 1rem;
     box-shadow: 0px 0px 15px -8px rgb(133, 133, 133);
 }
@@ -173,17 +176,20 @@ input[name="modal-trigger"]:active {
     height : fit-content;
     border-radius: 1rem;
     box-shadow: 0px 0px 15px -8px rgb(133, 133, 133);
-    background-color: #fff;
+    background-color: #fefdec;
     width : 27rem;
 }
 
 #annonce-page{
-    background-image: url(../assets/img/bg3.jpg);
+    background-image: url(../assets/img/background.png);
     background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+    
 }
 .caracteristics-div{
     border-radius: 1rem;
-    background-color: #fff ;
+    background-color: #fefdec ;
     box-shadow: 0px 0px 15px -8px rgb(133, 133, 133);
 }
 
@@ -191,11 +197,11 @@ input[name="modal-trigger"]:active {
     font-size : 2rem;
     font-weight: 700;
     text-decoration: none;
-    color:rgba(65, 77, 95, 0.750);
+    color:#E3B100;
     transition: 0.3s
 }
 .user-link:hover{
-    color:rgba(65, 77, 95);
+    color:#af8900;
     transition: 0.3s;
 }
 
@@ -206,3 +212,4 @@ input[name="modal-trigger"]:active {
 .contact-form{
     width : 100%;
 }
+

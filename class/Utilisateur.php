@@ -16,24 +16,22 @@ class Utilisateur extends Database
        
         // Regex to check the format of the password
         if (preg_match('/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!?@#$%^&*-])[\da-zA-Z!?@#$%^&*-]{8,50}$/', $password)){
-            echo 'Mot de passe conforme';
             $password = password_hash($password, PASSWORD_DEFAULT);
+            $sql = $this->connect()->prepare("INSERT INTO user(name_user, pass_user, mail_user) VALUES (:name, :pass, :mail)");
+            $sql->bindValue(":name", $username); 
+            $sql->bindValue(":pass", $password); 
+            $sql->bindValue(":mail", $mail); 
+            $sql->execute();
+            echo '<div class"alert alert-success mt-3"role="alert">
+            Votre compte a bien été créé, vous pouvez désormais vous connecter.
+            </div>';
+            header('Refresh:2; url=../php/login.php');
+            // If the user is created, redirect them to the login
         }else {
-            echo 'Mot de passe non conforme';
-            die;  
+            echo '<div class="alert alert-danger">Mot de passe non conforme</div>';
+          
 
         }
-
-        $sql = $this->connect()->prepare("INSERT INTO user(name_user, pass_user, mail_user) VALUES (:name, :pass, :mail)");
-        $sql->bindValue(":name", $username); 
-        $sql->bindValue(":pass", $password); 
-        $sql->bindValue(":mail", $mail); 
-        $sql->execute();
-        echo '<div class"alert alert-success mt-3"role="alert">
-        Votre compte a bien été créé, vous pouvez désormais vous connecter.
-        </div>';
-        header('Refresh:2; url=../php/login.php');
-        // If the user is created, redirect them to the login
 
     }
 

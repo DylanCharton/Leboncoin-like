@@ -21,7 +21,6 @@
     require_once("class/Annonce.php");
     $user = new Utilisateur();
     $allAds = new Annonce(); 
-
     require_once('php/navbar.php');
     ?>
     <section id="search-section" class="w-100 d-flex justify-content-center">

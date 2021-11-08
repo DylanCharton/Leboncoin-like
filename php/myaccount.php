@@ -19,7 +19,7 @@ require_once("../class/Utilisateur.php");
 ?>
 <body id="annonce-page">
     <nav class="d-flex justify-content-evenly align-items-center">
-        <a href="../index.php" class="site-name">The Good Corner</a>
+        <a href="../index.php" class="site-name"><img src="../assets/img/logo_small.png" alt="logo" id="logo" class=></a>
         <ul class="d-flex align-items-center mt-3">
             <li class="mx-3"><a href=<?php if(isset($_SESSION['goodcorner_connected'])){echo './new.annonce.php';} else {echo './login.php';} ?>>Créer une annonce</a></li>
             
@@ -38,11 +38,18 @@ require_once("../class/Utilisateur.php");
         <div class="d-flex">
             <?php 
             $myAds = new Annonce();
-            // Calling the function to display my ads with the function that gets all the ads with the id of the user logged in
-            $myAds->displayMyAds($myAds->myAds($_SESSION["id_user"]));
+            
+            
             // Condition of execution
             if(isset($_GET["supprId"])){
                 $myAds->deleteAd($_GET["supprId"]);
+            }
+            
+            // If the user hasn't published any ad, a message will tell him, and invite him to post one
+            if($myAds->myAds($_SESSION["id_user"]) == null){
+                echo 'Vous n\'avez pas d\'annonce publiée, pour en publier une, cliquez-ici.';
+            } else {
+                $myAds->displayMyAds($myAds->myAds($_SESSION["id_user"]));
             }
 
             

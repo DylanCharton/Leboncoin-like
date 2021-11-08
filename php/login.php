@@ -9,6 +9,10 @@
     <link rel="stylesheet" href="../css/login.css" media="screen" type="text/css" />
     <title>The Good Corner - Connexion</title>
 </head>
+<?php 
+    session_start();
+    require_once "../class/Utilisateur.php";
+    ?>
     
 <body>
     <div id="container">
@@ -16,19 +20,26 @@
 
         <form action="#" method="POST" class="d-flex justify-content-center flex-column align-items-center">
             <h1 class="pb-2">Connexion</h1>
+            <?php 
+                if(isset($_POST['username']) && isset($_POST['password']) && (!empty($_POST['username'])) && (!empty($_POST['password']))){
+                    $utilisateur = new Utilisateur();
+                    $utilisateur->login($_POST ['username'] , $_POST['password']);
+                };
 
-            <label><b>Nom d'utilisateur : </b></label>
-            <input type="text" placeholder="Entrer le nom d'utilisateur" name="username" required>
+                    ?>
 
-            <label><b>Mot de passe : </b></label>
+            <label>Nom d'utilisateur : </label>
+            <input type="text" placeholder="Entrer le nom d'utilisateur" name="username" value="<?php if (isset($_POST['username'])){echo $_POST['username'];} ?>" required>
+
+            <label>Mot de passe : </label>
         
-            <input type="password" placeholder="Entrer le mot de passe" name="password" required>
+            <input type="password" placeholder="Entrer le mot de passe" name="password" value="<?php if (isset($_POST['password'])){echo $_POST['password'];} ?>" required>
 
             <input type="submit" id='submit' value='Se connecter' class="px-3 py-2">
 
             <div class="d-flex justify-content-center links flex-column">
             <p class="pt-3 pb-0">Vous n'avez pas de compte ?</p>
-            <a href="signin.php">Inscrivez-vous</a>
+            <a href="signin.php" id="sign-in-or-up">Inscrivez-vous</a>
 		    </div>
 	
         </form>     
@@ -36,13 +47,3 @@
         
 
     </div>        
-<?php session_start();
-                require_once "../class/Utilisateur.php";
-                
-
-                if(isset($_POST['username']) && isset($_POST['password']) && (!empty($_POST['username'])) && (!empty($_POST['password']))){
-                    $utilisateur = new Utilisateur();
-                    $utilisateur->login($_POST ['username'] , $_POST['password']);
-                };
-
-                    ?>
