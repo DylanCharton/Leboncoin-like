@@ -171,27 +171,13 @@
 
     <a href="upload.php">Upload</a>
 
- <?php 
+    <?php 
 
     // Include the database configuration file  
     require_once 'class/Database.php'; 
  
-    // Get image data from database 
-    $bdd = new Database();
-    $result = $bdd->connect()->prepare("SELECT photos FROM leboncoin ORDER BY data_photo DESC"); 
 
 ?>
-
-    <?php if($result-> rowCount() > 0){ ?>
-        <div class="gallery">
-            <?php while($row = $result-> fetch(PDO::FETCH_ASSOC)){ ?>
-                <img src="data:image/jpg;charset=utf8;base64, <?php echo base64_encode($row['photos']); ?> "/>
-            <?php } ?>
-        </div>
-    <?php }else{ ?>
-        <p class="status error">Image(s) not found...</p>
-    <?php } ?>
-
 
 
 
