@@ -44,7 +44,7 @@
 
     <section class="d-flex flex-column align-items-center text-grey">
         <!-- The big form that is going to be cut in my conditions -->
-        <form action="" method="POST" enctype="multipart/form-data" class="d-flex flex-column mt-5" id="create-ad-form">
+         
             <h2>Créer une annonce</h2>
             <label for="title">Titre</label>
             <input type="text" name="title" required>
