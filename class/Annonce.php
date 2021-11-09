@@ -3,12 +3,6 @@ require_once('Database.php');
 
 class Annonce extends Database
 {   
-    private $title;
-    private $category;
-    private $description;
-    private $price;
-    private $localisation;
-
     public function createAnnonce($title, $description, $price, $localisation, $category, $id){
       // I start the request here
         $create = "INSERT INTO annonces (title_annonce, desc_annonce, prix_annonce, loc_annonce, categorie_annonce, id_user, ";
@@ -154,6 +148,23 @@ class Annonce extends Database
               </div>';
 
     }
+    public function displayFromUser($ads){
+      // Classic foreach loop to display the ads properly
+        foreach($ads as $ad)
+        echo ' <div class="card mx-3 pb-3 my-2" style="width: 20rem;">
+                <img src="https://via.placeholder.com/400x300.png" class="card-img-top" alt="main image of the ad">
+                <div class="card-body">
+                  <h5 class="card-title text-grey">'.$ad['title_annonce'].'</h5>
+                  <p class="card-text mb-0 text-grey">'.$ad['loc_annonce'].'</p>
+                  <p class="card-text text-black-50">'.$ad['desc_annonce'].'</p>
+                  <div class="d-flex justify-content-evenly pt-5 card-bottom">
+                  <h5 class="text-grey">'.$ad['prix_annonce'].'€</h5>
+                    <a href="./annonce.php?id='.$ad['id_annonce'].'&user='.$ad['id_user'].'" class="btn btn-success">Voir</a>
+                  </div>
+                </div>
+              </div>';
+
+    }
     public function displayMyAds($ads){
       // That function is made only for the My Account page and has a Delete button
       foreach($ads as $ad)
@@ -185,7 +196,7 @@ class Annonce extends Database
       return $results;
 
     }
-    // Here I get the entries that belongs to the current user
+    // Here I get the entries that belongs to the current user or the user whose profile has been clicked
     public function myAds($id){
       $sql=$this->connect()->prepare("SELECT * FROM annonces WHERE id_user = :id");
       $sql->bindValue(":id", $id);
