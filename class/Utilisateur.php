@@ -2,11 +2,6 @@
     require_once("Database.php");
 class Utilisateur extends Database
 {
-    private $connexion;
-    private $username;
-    private $password;
-    private $mail;
-
     public function addUser($username, $password, $mail){
         // The strip_tags method helps me secure my fields by removing the script and html tags.
         $username = strip_tags($username);

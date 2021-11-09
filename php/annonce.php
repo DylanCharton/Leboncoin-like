@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
     <!-- BOOTSTRAP & CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
@@ -48,7 +50,7 @@
             <div id="img-wrapper" class="justify-content-center d-flex flex-column p-3">
                 <img src="https://via.placeholder.com/600x400.png" alt="" class="img-fluid">
                 <div>
-                    <!-- Doing a lot of little of echo to get my datas -->
+                    
                     <h1 class="main-color"><?php echo $adInfo['title_annonce']; ?></h1>
                     <p class="main-color"><?php echo ''.$adInfo['prix_annonce'].'€ TTC'?></p>
                 </div>
@@ -56,7 +58,7 @@
             <div>
                 <aside id="seller-info" class="p-3">
                     <p class="mb-0 main-color">Ce produit vous est proposé par</p>
-                    <a href="#" class="user-link"><?php echo $userInfo['name_user']?></a>
+                    <a href="profil.php?user=<?= $userInfo['id_user']?>" class="user-link"><?php echo $userInfo['name_user']?></a>
                     <hr>
                     <div class="justify-content-center d-flex">
                         <p class="main-color">S'il vous intéresse n'hésitez pas à le contacter</p>
