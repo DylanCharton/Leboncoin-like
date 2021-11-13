@@ -41,16 +41,17 @@
                 } else {
                  echo '<li><a href="./login.php">Se connecter</a></li>';
                  }
+                 
                   ?>
+                  <?php $adresseImg = $ad->fetchMainImage($_GET['id'])['photo_path']; ?>
         </ul>
     </nav>
 
     <section class="container mt-5">
         <div class="d-flex justify-content-between mb-3">
             <div id="img-wrapper" class="justify-content-center d-flex flex-column p-3">
-                <img src="https://via.placeholder.com/600x400.png" alt="" class="img-fluid">
-                <div>
-                    
+                <img src=<?php echo '../uploads/'.$adresseImg ?> alt="Image de l'annonce" class="img-fluid">
+                <div>                    
                     <h1 class="main-color"><?php echo $adInfo['title_annonce']; ?></h1>
                     <p class="main-color"><?php echo ''.$adInfo['prix_annonce'].'€ TTC'?></p>
                 </div>

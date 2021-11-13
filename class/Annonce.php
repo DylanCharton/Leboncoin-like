@@ -1,12 +1,24 @@
 <?php 
 require_once('Database.php');
 
-class Annonce extends Database
-{   
+class Annonce extends Database {   
+
+    public function getLastId(){
+
+      $getLast = "SELECT id_annonce FROM annonces ORDER BY id_annonce DESC LIMIT 0, 1";
+      $sql = $this->connect()->prepare($getLast);
+      $sql->execute();
+      $result = $sql->fetch(PDO::FETCH_ASSOC);
+
+      return $result;
+
+    }
+
     public function createAnnonce($title, $description, $price, $localisation, $category, $id){
       // I start the request here
         $create = "INSERT INTO annonces (title_annonce, desc_annonce, prix_annonce, loc_annonce, categorie_annonce, id_user, ";
-
+        
+        
         if(isset($_POST['submitImmo'])){
           $typeImmo = strip_tags($_POST['type-choice']);
           $surface = strip_tags($_POST['surface']);
@@ -125,28 +137,29 @@ class Annonce extends Database
           $sql->bindValue(":storage", $storage);
           $sql->bindValue(":etat", $etat);
           $sql->execute();
-
         }
-        header('Refresh: 2; ../index.php');
+        //header('Refresh: 2; ../index.php');
         echo '<div class="alert alert-success">Votre annonce a bien été créée, je vous ramène à l\'accueil</div>';
-    }
+        }
+      
+  
 
+    
     public function display($ads){
       // Classic foreach loop to display the ads properly
         foreach($ads as $ad)
         echo ' <div class="card mx-3 pb-3 my-2" style="width: 20rem;">
-                <img src="https://via.placeholder.com/400x300.png" class="card-img-top" alt="main image of the ad">
+                <img src="uploads/'.$ad['photo_path'].'" class="card-img-top" alt="main image of the ad">
                 <div class="card-body">
-                  <h5 class="card-title text-grey">'.$ad['title_annonce'].'</h5>
-                  <p class="card-text mb-0 text-grey">'.$ad['loc_annonce'].'</p>
+                  <h5 class="card-title main-color">'.$ad['title_annonce'].'</h5>
+                  <p class="card-text mb-0 main-color">'.$ad['loc_annonce'].'</p>
                   <p class="card-text text-black-50">'.$ad['desc_annonce'].'</p>
                   <div class="d-flex justify-content-evenly pt-5 card-bottom">
-                  <h5 class="text-grey">'.$ad['prix_annonce'].'€</h5>
+                  <h5 class="main-color">'.$ad['prix_annonce'].'€</h5>
                     <a href="./php/annonce.php?id='.$ad['id_annonce'].'&user='.$ad['id_user'].'" class="btn btn-success">Voir</a>
                   </div>
                 </div>
               </div>';
-
     }
     public function displayFromUser($ads){
       // Classic foreach loop to display the ads properly
@@ -154,11 +167,11 @@ class Annonce extends Database
         echo ' <div class="card mx-3 pb-3 my-2" style="width: 20rem;">
                 <img src="https://via.placeholder.com/400x300.png" class="card-img-top" alt="main image of the ad">
                 <div class="card-body">
-                  <h5 class="card-title text-grey">'.$ad['title_annonce'].'</h5>
-                  <p class="card-text mb-0 text-grey">'.$ad['loc_annonce'].'</p>
+                  <h5 class="card-title main-color">'.$ad['title_annonce'].'</h5>
+                  <p class="card-text mb-0 main-color">'.$ad['loc_annonce'].'</p>
                   <p class="card-text text-black-50">'.$ad['desc_annonce'].'</p>
                   <div class="d-flex justify-content-evenly pt-5 card-bottom">
-                  <h5 class="text-grey">'.$ad['prix_annonce'].'€</h5>
+                  <h5 class="main-color">'.$ad['prix_annonce'].'€</h5>
                     <a href="./annonce.php?id='.$ad['id_annonce'].'&user='.$ad['id_user'].'" class="btn btn-success">Voir</a>
                   </div>
                 </div>
@@ -171,11 +184,11 @@ class Annonce extends Database
         echo ' <div class="card mx-3 pb-3 my-2" style="width: 20rem;">
                 <img src="https://via.placeholder.com/400x300.png" class="card-img-top" alt="main image of the ad">
                 <div class="card-body">
-                  <h5 class="card-title text-grey">'.$ad['title_annonce'].'</h5>
-                  <p class="card-text mb-0 text-grey">'.$ad['loc_annonce'].'</p>
+                  <h5 class="card-title main-color">'.$ad['title_annonce'].'</h5>
+                  <p class="card-text mb-0 main-color">'.$ad['loc_annonce'].'</p>
                   <p class="card-text text-black-50">'.$ad['desc_annonce'].'</p>
                   <div class="d-flex justify-content-evenly pt-5 card-bottom">
-                  <h5 class="text-grey">'.$ad['prix_annonce'].'€</h5>
+                  <h5 class="main-color">'.$ad['prix_annonce'].'€</h5>
                   <div class="mx-3">
                     <a href="./annonce.php?id='.$ad['id_annonce'].'&user='.$ad['id_user'].'" class="btn btn-success">Voir</a>
                   </div>
@@ -186,11 +199,13 @@ class Annonce extends Database
                   </div>
                 </div>
               </div>';
+              
+              
     }
 
     // Here I simply get all the entries in my database
     public function allAds(){
-      $sql=$this->connect()->prepare("SELECT * FROM annonces ORDER BY id_annonce DESC");
+      $sql=$this->connect()->prepare("SELECT * FROM annonces INNER JOIN photos WHERE annonces.id_annonce = photos.id_annonce");
       $sql->execute();
       $results = $sql->fetchAll(PDO::FETCH_ASSOC);
       return $results;
@@ -454,9 +469,56 @@ class Annonce extends Database
             }
   }
 
-    /////////////////////--WHAT WE HAVE TO CREATE--///////////////////////
- 
-    // A function so each user can delete his own ads //
+    public function insertImages($id){
+      // Count total files
+      $countfiles = count($_FILES['files']['name']);
+      // I use this syntax of prepared statement because I don't know precisely what the user will put, so I use the "?" syntax
+      $query = "INSERT INTO photos (name_photo, photo_path, id_annonce) VALUES(?, ?, ?)";
+      $stmt = $this->connect()->prepare($query);
+      
+        // Looping on all the files, my script limits it to 10.
+      for($i = 0; $i < $countfiles; $i++) {
+        // File name
+        $filename = $_FILES['files']['name'][$i];
+        // Location
+        $target_file = $filename;
+        // file extension
+        $file_extension = pathinfo($target_file, PATHINFO_EXTENSION);      
+        $file_extension = strtolower($file_extension);
+        // Valid image extension
+        $valid_extension = array("png","jpeg","jpg");
+       
+        if(in_array($file_extension, $valid_extension)){
+    
+            // I'm checking if the file has been correctly uploaded
+            if(move_uploaded_file($_FILES['files']['tmp_name'][$i], $target_file)){}
+                
+                $stmt->execute(array($filename,$target_file, $id));
+            }
+        }
+     
+    echo "Photo envoyée";
+    }
+    
+
+    public function fetchMainImage($id){
+      $sql = $this->connect()->prepare("SELECT * FROM photos WHERE id_annonce = :id");
+      $sql-> bindValue(":id", $id);
+      $sql->execute();
+      $result = $sql->fetch(PDO::FETCH_ASSOC);
+
+      return $result;
+
+    }
+
+    public function getAllImages(){
+      $sql = $this->connect()->prepare("SELECT * FROM photos");
+      
+      $sql->execute();
+      $result = $sql->fetchAll(PDO::FETCH_ASSOC);
+
+      return $result;
+    }
 
 }
 

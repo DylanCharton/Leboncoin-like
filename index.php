@@ -152,8 +152,10 @@
         </div>
     </section>
 
-    <section class="mt-3">
-        <h2 class="ms-3 main-color">Nos dernières annonces...</h2>
+    <section class="mt-5">
+        <div class="container mb-4">
+        <h2 class="main-color">Nos dernières annonces...</h2>
+        </div>
         <div class="mx-4 d-flex flex-wrap justify-content-center">
             <?php 
             // If the user clicked on the submit button, display the result, otherwise display all the ads
@@ -163,9 +165,10 @@
             } else {
             
             $allAds->display($allAds->allAds());
-
             }
             ?>
+            
+
         </div>
 
     </section>
