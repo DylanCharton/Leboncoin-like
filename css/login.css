@@ -17,7 +17,8 @@ body {
 /* Bordered form */
 form {
 
-    width: 100%;
+    width: 30%;
+    margin:auto;
     padding: 30px;
     border: 1px solid #f1f1f1;
     background: #fefdec;
@@ -70,3 +71,8 @@ input[type=submit]:hover {
     color : #e3b100;
 }
 
+@media screen and (max-width:576px){
+    form{
+        width:100%;
+    }
+}

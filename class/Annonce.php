@@ -139,7 +139,7 @@ class Annonce extends Database {
           $sql->bindValue(":etat", $etat);
           $sql->execute();
         }
-        //header('Refresh: 2; ../index.php');
+        header('Refresh: 2; ../index.php');
         echo '<div class="alert alert-success">Votre annonce a bien été créée, je vous ramène à l\'accueil</div>';
         }
       
@@ -150,7 +150,9 @@ class Annonce extends Database {
       // Classic foreach loop to display the ads properly
         foreach($ads as $ad)
         echo ' <div class="card mx-3 pb-3 my-2" style="width: 20rem;">
-                <img src="uploads/'.$ad['photo_path'].'" class="card-img-top" alt="main image of the ad">
+                  <div id="thumbnail">
+                    <img src="uploads/'.$ad['photo_path'].'" class="card-img-top" alt="main image of the ad">
+                  </div>
                 <div class="card-body">
                   <h5 class="card-title main-color">'.$ad['title_annonce'].'</h5>
                   <p class="card-text mb-0 main-color">'.$ad['loc_annonce'].'</p>
@@ -497,8 +499,6 @@ class Annonce extends Database {
                 $stmt->execute(array($filename,$target_file, $id));
             }
         }
-     
-    echo "Photo envoyée";
     }
     
 

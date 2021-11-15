@@ -90,7 +90,7 @@
                     <hr>
                     <div class="justify-content-center d-flex">
                         <p class="main-color">S'il vous intéresse n'hésitez pas à le contacter</p>
-                        <input type="button" id="contact-button" value="Contacter" class="btn btn-success">
+                        <input type="button" id="contact-button" value="Contacter" class="btn btn-success" id="contact-user-btn">
                     </div>
                     <div class="d-flex flex-column d-none" id="contact-form">
                         <form action="" method="post" class="d-flex flex-column contact-form">
