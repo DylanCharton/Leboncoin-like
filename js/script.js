@@ -482,7 +482,8 @@ image.addEventListener('change', ()=>{
     // Interesting to see what returns the object created.
     console.log(image.files[0]);
     if(image.files.length > 10){
-        alert("Vous ne pouvez transférer que 10 photos maximum");
+        let warning = document.querySelector('.photo-warning');
+        warning.classList.replace("d-none", "d-block");
         image.value= "";
     }
 })

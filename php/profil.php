@@ -35,7 +35,8 @@
                 <?php 
                 if(isset($_SESSION['goodcorner_connected'])){
                     echo '<li class="mx-3"><a href="myaccount.php">Mon Compte</a></li>';
-                    echo '<li><a class="btn btn-danger mx-3" href="./logout.php">Déconnexion</a></li>';
+                    echo '<li><a class="btn btn-danger mx-3 d-none d-sm-block" href="./logout.php">Déconnexion</a></li>';
+                    echo '<li><a class="btn btn-danger mx-3 d-block d-sm-none" href="./logout.php">X</a></li>';
                     } else {
                     echo '<li><a href="./login.php">Se connecter</a></li>';
                     }
@@ -44,6 +45,7 @@
     </nav>
 
     <div class="container mt-5 d-flex flex-column align-items-center">
+        <div class="flex-column flex-lg-row">
         <?php 
         //var_dump();
             if($userAds->myAds($_GET["user"]) == null){
@@ -55,6 +57,7 @@
                 echo'</div>';
             }
         ?>
+        </div>
     </div>
     
 </body>

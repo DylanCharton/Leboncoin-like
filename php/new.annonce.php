@@ -6,10 +6,10 @@
         // If any of the submit buttons is clicked
         if(isset($_POST['submitImmo']) || isset($_POST['submitCar']) || isset($_POST['submitInfo']) || isset($_POST['submitGaming']) || isset($_POST['submitTelephonie'])){
             // Create an ad
-            $lastId = $annonce->getLastId();
+            
             $annonce->createAnnonce($_POST['title'], $_POST['desc'], $_POST['price'], $_POST['localisation'], $_POST['category'], $_SESSION['id_user']);
             // And insert the images
-            echo $lastId['id_annonce'];
+            $lastId = $annonce->getLastId();
             $annonce->insertImages($lastId['id_annonce']);
         }      
         
@@ -45,7 +45,8 @@
             <?php 
             if(isset($_SESSION['goodcorner_connected'])){
                 echo '<li class="mx-3"><a href="myaccount.php">Mon Compte</a></li>';
-                echo '<li><a class="btn btn-danger mx-3" href="./logout.php">Déconnexion</a></li>';
+                echo '<li><a class="btn btn-danger mx-3 d-none d-sm-block" href="./logout.php">Déconnexion</a></li>';
+                echo '<li><a class="btn btn-danger mx-3 d-block d-sm-none" href="./logout.php">X</a></li>';
                 } else {
                 echo '<li><a href="./login.php">Se connecter</a></li>';
                 }
@@ -65,7 +66,8 @@
             <label for="desc" required>Description</label>
             <textarea name="desc" id="desc" cols="30" rows="10" required></textarea>
             <label for="image">Photos</label>
-            <input type="file" name="files[]" id="image-uploader" multiple accept=".png, .jpeg, .jpg">
+            <input type="file" name="files[]" id="image-uploader" multiple accept=".png, .jpeg, .jpg" required>
+            <span class="photo-warning d-none alert alert-danger">Vous ne pouvez fournir que 10 photos maximum.</span>
             <label for="price">Prix</label>
             <input type="number" name="price" required>
             <label for="localisation">Localisation</label>

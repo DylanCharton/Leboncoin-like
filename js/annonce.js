@@ -1,5 +1,3 @@
-console.log("yo");
-
 let contactForm = document.querySelector('#contact-form');
 let contactButton = document.querySelector('#contact-button');
 

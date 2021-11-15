@@ -8,7 +8,8 @@
             if(isset($_SESSION['goodcorner_connected'])){
                 // If the user is logged in, they can access the My Account page and they can log out of course
                 echo '<li class="mx-3"><a href="php/myaccount.php">Mon Compte</a></li>';
-                echo '<li><a class="btn btn-danger mx-3" href="php/logout.php">Déconnexion</a></li>';
+                echo '<li><a class="btn btn-danger mx-3 d-none d-sm-block" href="./php/logout.php">Déconnexion</a></li>';
+                echo '<li><a class="btn btn-danger mx-3 d-block d-sm-none" href="./php/logout.php">X</a></li>';
                 } else {
                  echo '<li><a href="./php/login.php">Se connecter</a></li>';
                  }

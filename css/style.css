@@ -32,7 +32,7 @@ h5{
 /* Form of the create ad page, careful to the others. */
 
 form{
-    width: 30vw;
+    width: 35vw;
 }
 
 input, select, textarea{
@@ -111,6 +111,7 @@ input[name='keyword-field']{
 .btn-success:hover, .btn-success:active{
     background-color: #E3B100;
     border : 1px solid #E3B100;
+    height:3rem;
 }
 .btn-success:focus{
     background-color: #E3B100;
@@ -198,7 +199,7 @@ input[name="modal-trigger"]:focus, input[name="modal-trigger"]:active{
     border-radius: 1rem;
     box-shadow: 0px 0px 15px -8px rgb(133, 133, 133);
     background-color: #fefdec;
-    width : 27rem;
+    width : fit-content;
 }
 
 #annonce-page{
@@ -212,6 +213,7 @@ input[name="modal-trigger"]:focus, input[name="modal-trigger"]:active{
     border-radius: 1rem;
     background-color: #fefdec ;
     box-shadow: 0px 0px 15px -8px rgb(133, 133, 133);
+    width : 100%
 }
 
 .user-link{
@@ -234,3 +236,54 @@ input[name="modal-trigger"]:focus, input[name="modal-trigger"]:active{
     width : 100%;
 }
 
+#mini-photos{
+    height : fit-content;
+    width : 100%;
+    overflow-x : scroll;
+    overflow-y: hidden;
+}
+
+#mini-photos > img{
+    height : 4rem;
+}
+
+::-webkit-scrollbar{
+    width:7px;
+}
+::-webkit-scrollbar-track{
+    background: #fefdec;
+}
+::-webkit-scrollbar-thumb{
+    background : #E3B100;
+    border-radius: 5px;
+    
+}
+
+@media screen and (max-width:576px){
+    input[name='keyword-field']{
+        width : 52vw;
+    }
+    #search-engine{
+        width: calc(100vw - 1rem);
+    }
+    #seller-info{
+        width:calc(100vw - 1rem);
+        margin-top : 1rem;
+        
+    }
+    .container{
+        padding: 0;
+    }
+    #img-wrapper{
+        max-width: calc(100vw - 1rem);
+    }
+    .caracteristics-div{
+        width:calc(100vw - 1rem);
+    }
+}
+
+@media screen and (max-width: 992px){
+    #create-ad-form {
+        width:75vw;
+    }
+}

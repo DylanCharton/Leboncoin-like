@@ -3,6 +3,7 @@ require_once('Database.php');
 
 class Annonce extends Database {   
 
+  // A method to get the last ID implemented so I can get it and link it to the good photo.
     public function getLastId(){
 
       $getLast = "SELECT id_annonce FROM annonces ORDER BY id_annonce DESC LIMIT 0, 1";
@@ -165,7 +166,7 @@ class Annonce extends Database {
       // Classic foreach loop to display the ads properly
         foreach($ads as $ad)
         echo ' <div class="card mx-3 pb-3 my-2" style="width: 20rem;">
-                <img src="https://via.placeholder.com/400x300.png" class="card-img-top" alt="main image of the ad">
+                <img src="../uploads/'.$ad['photo_path'].'" class="card-img-top" alt="main image of the ad">
                 <div class="card-body">
                   <h5 class="card-title main-color">'.$ad['title_annonce'].'</h5>
                   <p class="card-text mb-0 main-color">'.$ad['loc_annonce'].'</p>
@@ -182,7 +183,7 @@ class Annonce extends Database {
       // That function is made only for the My Account page and has a Delete button
       foreach($ads as $ad)
         echo ' <div class="card mx-3 pb-3 my-2" style="width: 20rem;">
-                <img src="https://via.placeholder.com/400x300.png" class="card-img-top" alt="main image of the ad">
+                <img src="../uploads/'.$ad['photo_path'].'" class="card-img-top" alt="main image of the ad">
                 <div class="card-body">
                   <h5 class="card-title main-color">'.$ad['title_annonce'].'</h5>
                   <p class="card-text mb-0 main-color">'.$ad['loc_annonce'].'</p>
@@ -205,7 +206,7 @@ class Annonce extends Database {
 
     // Here I simply get all the entries in my database
     public function allAds(){
-      $sql=$this->connect()->prepare("SELECT * FROM annonces INNER JOIN photos WHERE annonces.id_annonce = photos.id_annonce");
+      $sql=$this->connect()->prepare("SELECT * FROM annonces INNER JOIN photos WHERE annonces.id_annonce = photos.id_annonce GROUP BY annonces.id_annonce");
       $sql->execute();
       $results = $sql->fetchAll(PDO::FETCH_ASSOC);
       return $results;
@@ -213,7 +214,7 @@ class Annonce extends Database {
     }
     // Here I get the entries that belongs to the current user or the user whose profile has been clicked
     public function myAds($id){
-      $sql=$this->connect()->prepare("SELECT * FROM annonces WHERE id_user = :id");
+      $sql=$this->connect()->prepare("SELECT * FROM annonces INNER JOIN photos WHERE annonces.id_annonce = photos.id_annonce AND id_user = :id GROUP BY annonces.id_annonce");
       $sql->bindValue(":id", $id);
       $sql->execute();
       $results = $sql->fetchAll(PDO::FETCH_ASSOC);
@@ -481,7 +482,7 @@ class Annonce extends Database {
         // File name
         $filename = $_FILES['files']['name'][$i];
         // Location
-        $target_file = $filename;
+        $target_file = "../uploads/".$_FILES['files']['name'][$i];
         // file extension
         $file_extension = pathinfo($target_file, PATHINFO_EXTENSION);      
         $file_extension = strtolower($file_extension);
@@ -510,6 +511,16 @@ class Annonce extends Database {
       return $result;
 
     }
+    // Method to get all the images linked to an id so I can display them in the ad page.
+    public function multipleImagesOfAd($id){
+      $sql = $this->connect()->prepare("SELECT * FROM photos WHERE id_annonce = :id");
+      $sql-> bindValue(":id", $id);
+      $sql->execute();
+      $result = $sql->fetchAll(PDO::FETCH_ASSOC);
+
+      return $result;
+    }
+    
 
     public function getAllImages(){
       $sql = $this->connect()->prepare("SELECT * FROM photos");
@@ -519,7 +530,30 @@ class Annonce extends Database {
 
       return $result;
     }
-
+    public function photoCarousel($photos){
+      foreach($photos as $key => $photo){
+          // Condition to isolate the first occurence and put the "active" class only on this one
+          if($key === array_key_first($photos)){
+              echo '
+          <div class="carousel-item active">
+              <img src='.$photo['photo_path'].' class="d-block w-100" alt="photos supplémentaires">
+          </div>
+          ';
+          } else {
+          echo '
+          <div class="carousel-item">
+              <img src='.$photo['photo_path'].' class="d-block w-100" alt="photos supplémentaires">
+          </div>
+          ';
+          }
+      }
+    }
+    public function displayphotos($photos){
+      foreach($photos as $photo){
+          echo '<img src='.$photo['photo_path'].' alt="Photo supplémentaire" class="img-fluid me-2">';
+          
+      }
+  }
 }
 
 ?>

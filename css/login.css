@@ -9,7 +9,7 @@ body {
 
 #container {
 
-    width: 400px;
+    width: 100%;
     margin: 0 auto;
     margin-top: 10%;
 }
@@ -69,3 +69,4 @@ input[type=submit]:hover {
     text-decoration: none;
     color : #e3b100;
 }
+

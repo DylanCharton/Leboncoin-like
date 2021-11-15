@@ -28,16 +28,17 @@ require_once("../class/Utilisateur.php");
             <?php 
             if(isset($_SESSION['goodcorner_connected'])){
                 echo '<li class="mx-3"><a href="">Mon Compte</a></li>';
-                echo '<li><a class="btn btn-danger mx-3" href="./logout.php">Déconnexion</a></li>';
+                echo '<li><a class="btn btn-danger mx-3 d-none d-sm-block" href="./logout.php">Déconnexion</a></li>';
+                echo '<li><a class="btn btn-danger mx-3 d-block d-sm-none" href="./logout.php">X</a></li>';
                 } else {
                  echo '<li><a href="./login.php">Se connecter</a></li>';
                  }
                   ?>
         </ul>
     </nav>
-    <section class="container">
-    <h1 class="main-color">Mes annonces</h1>
-        <div class="d-flex">
+    <section class="container mt-5 d-flex flex-column align-items-center">
+    <h2 class="main-color">Mes annonces</h1>
+        <div class="d-flex flex-column flex-lg-row">
             <?php 
             $myAds = new Annonce();
             
